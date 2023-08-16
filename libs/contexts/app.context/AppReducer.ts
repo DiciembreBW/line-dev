@@ -14,25 +14,7 @@ export type AppActionType = {
 };
 
 export function AppReducer(app: AppType, action: AppActionType): AppType {
-	// switch (action.text.type) {
-	// 	case "edit": {
-	// 		return app;
-	// 	}
-	// 	default: {
-	// 		return app;
-	// 	}
-	// }
-
 	const {user, text} = action;
-	// if (text) {
-	// 	switch (text.type) {
-	// 		case "edit": {
-	// 			return app;
-	// 		}
-	// 		default:
-	// 			return app;
-	// 	}
-	// }
 
 	if (user) {
 		switch (user.type) {
