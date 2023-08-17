@@ -1,5 +1,6 @@
 "use client";
 import {useAppContext} from "@/libs/contexts/app.context/AppContext";
+import Image from "next/image";
 import React from "react";
 
 type Props = {};
@@ -10,8 +11,8 @@ export default function UserAvatar({}: Props) {
 
 	return (
 		<div className="">
-			<img
-				src={user?.pictureUrl}
+			<Image
+				src={JSON.stringify(user?.pictureUrl)}
 				className="aspect-square h-12 rounded-full"
 				alt=""
 			/>

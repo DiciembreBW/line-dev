@@ -1,5 +1,8 @@
 import TitleComponent from "@/libs/components/TitleComponent";
-import {useOrderDispatchContext} from "@/libs/contexts/order.context/OrderContext";
+import {
+	useOrderContext,
+	useOrderDispatchContext,
+} from "@/libs/contexts/order.context/OrderContext";
 import useNeck from "@/libs/hooks/useNeck";
 import useNeck2 from "@/libs/hooks/useNeck";
 import {NeckLists, NeckType} from "@/libs/types/neck_type";
@@ -8,16 +11,26 @@ import React, {useEffect, useState} from "react";
 type Props = {};
 
 export default function Neck({}: Props) {
-	const {neck, necks, handle} = useNeck2();
 	const dispatch = useOrderDispatchContext();
+	const order = useOrderContext();
 
-	useEffect(() => {
+	const [necks, setNecks] = useState<NeckType[]>(NeckLists);
+	const [neck, setNeck] = useState<NeckType>();
+
+	function handle(item: NeckType) {
 		dispatch({
-			neck,
+			neck: {
+				type: "update",
+				value: item,
+			},
 		});
 
-		dispatch({option_value: {type: "update"}});
-	}, [neck]);
+		dispatch({
+			option_value: {type: "update"},
+		});
+
+		setNeck(item);
+	}
 
 	return (
 		<div>
@@ -35,8 +48,6 @@ export default function Neck({}: Props) {
 					</div>
 				))}
 			</div>
-
-			{/* <pre>{JSON.stringify(neck, null, 3)}</pre> */}
 		</div>
 	);
 }

@@ -1,27 +1,35 @@
 "use client";
 import React from "react";
-import ShowText from "../components/showText";
-import EditText from "../components/edit";
 import Material from "../components/Material";
-import Parts from "../components/Parts";
 import Neck from "../components/Neck";
 import Sleeve from "../components/Sleeve";
 import Items from "../components/Items";
-import User from "../components/User";
-import Link from "next/link";
-import Action from "../components/Action";
+import OrderDebug from "../components/OrderDebug";
+import Model3D from "../components/Model3D";
+import Drawer from "../components/Drawer";
 
 type Props = {};
 
 export default function CreateOrderPage({}: Props) {
 	return (
-		<div className="grid grid-cols-1 gap-6">
-			<Material />
+		<div className="grid grid-cols-1 gap-3">
+			<div className="">
+				<Model3D />
+			</div>
+			<div className="flex justify-between px-3 py-2">
+				<Drawer />
+			</div>
+			<div className="px-3 py-2">
+				<Material />
+			</div>
+			<div>{/* <OrderDebug /> */}</div>
+			{/* <Material />
 			<Neck />
 			<Sleeve />
-			<Items />
-			<ShowText />
-			<Action />
+			<OrderDebug />
+			<Items /> */}
+			{/* <ShowText /> */}
+			{/* <Action /> */}
 		</div>
 	);
 }

@@ -1,21 +1,12 @@
 "use client";
-import {OrderActionType, OrderType} from "@/libs/types/order_type";
+import {
+	OrderActionType,
+	OrderType,
+	intial_order_value,
+} from "@/libs/types/order_type";
 import {Dispatch, createContext, useContext} from "react";
 
-export const OrderContext = createContext<OrderType>({
-	id: "",
-	rate: {
-		quantity: 0,
-		price: 0,
-		get: 0,
-	},
-	text: "",
-	option_value: 0,
-	sleeve: {
-		price: 0,
-		label: [],
-	},
-});
+export const OrderContext = createContext<OrderType>(intial_order_value);
 export const OrderDispatchContext = createContext<Dispatch<OrderActionType>>(
 	() => {}
 );

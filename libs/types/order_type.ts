@@ -6,21 +6,18 @@ import {UserProfileType} from "./user_profile_type";
 
 export type OrderType = {
 	text?: string;
-	material?: MaterialType;
-	neck?: NeckType;
+	material: MaterialType;
+	neck: NeckType;
 	sleeve: SleeveType;
 	option_value: number;
 	rate: PriceListType;
-	id: string;
+	id?: string;
 	user?: UserProfileType;
 };
 
 export type OrderActionType = {
 	// text: string;
-	text?: string;
-	material?: MaterialType;
-	neck?: NeckType;
-	sleeve?: SleeveType;
+
 	item?: {
 		// onchange?: LabelType;
 		get?: {};
@@ -29,14 +26,48 @@ export type OrderActionType = {
 		// order?: OrderType;
 		value?: string;
 	};
+
 	rate?: {
 		type: "set";
 		value: PriceListType;
 	};
-	type?: "update";
+
 	option_value?: {
 		type: "update";
 		sleeve?: SleeveType;
 		neck?: NeckType;
 	};
+
+	neck?: {
+		type: "update";
+		value: NeckType;
+	};
+
+	sleeve?: {
+		type: "update";
+		value: SleeveType;
+	};
+
+	material?: {
+		type: "update";
+		value: MaterialType;
+	};
+};
+
+export const intial_order_value: OrderType = {
+	id: "",
+	neck: {name: "", price: 0},
+	material: {name: "", price: 0},
+	rate: {
+		quantity: 0,
+		price: 0,
+		get: 0,
+	},
+	text: "",
+	option_value: 0,
+	sleeve: {
+		name: "",
+		price: 0,
+		label: [],
+	},
 };

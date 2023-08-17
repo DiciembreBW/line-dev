@@ -8,8 +8,8 @@ export type LabelType = {
 };
 
 export type SleeveType = {
-	name?: string;
-	price?: number;
+	name: string;
+	price: number;
 	label: LabelType[];
 };
 

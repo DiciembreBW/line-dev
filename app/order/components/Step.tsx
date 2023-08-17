@@ -56,7 +56,6 @@ export function Onchange({label, children}: Props) {
 		}
 
 		setAmont(label.amont);
-		update();
 	}, [label, amont, order.sleeve]);
 
 	// handle whene user change amont each label
@@ -70,6 +69,8 @@ export function Onchange({label, children}: Props) {
 	function handle(value: string, label: LabelType) {
 		setAmont(value);
 		dispatch({item: {type: "onchange", label, value}});
+
+		update();
 	}
 	return (
 		//

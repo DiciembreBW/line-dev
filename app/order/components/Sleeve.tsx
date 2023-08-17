@@ -2,21 +2,33 @@ import TitleComponent from "@/libs/components/TitleComponent";
 import {useOrderDispatchContext} from "@/libs/contexts/order.context/OrderContext";
 import usePrice from "@/libs/hooks/usePrice";
 import useSleeve2 from "@/libs/hooks/useSleeve";
-import React, {useEffect} from "react";
+import {SleeveLists, SleeveType} from "@/libs/types/sleeve_type";
+import React, {useEffect, useState} from "react";
 
 type Props = {};
 
 export default function Sleeve({}: Props) {
-	const {sleeve, sleeves, handle} = useSleeve2();
+	// const {sleeve, sleeves, handle} = useSleeve2();
 	const dispatch = useOrderDispatchContext();
+
+	const [sleeves, setSleeves] = useState<SleeveType[]>(SleeveLists);
+	const [sleeve, setSleeve] = useState<SleeveType>();
 	const {update} = usePrice();
 
-	useEffect(() => {
-		dispatch({sleeve});
-		dispatch({option_value: {type: "update"}});
-		update();
-	}, [sleeve]);
+	function handle(item: SleeveType) {
+		dispatch({
+			sleeve: {
+				type: "update",
+				value: item,
+			},
+		});
 
+		dispatch({
+			option_value: {type: "update"},
+		});
+
+		setSleeve(item);
+	}
 	return (
 		<div>
 			<TitleComponent>Sleeve</TitleComponent>

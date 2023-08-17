@@ -7,6 +7,7 @@ import React, {useEffect, useState} from "react";
 import {Down, Onchange, Up} from "./Step";
 import Price from "@/libs/utilities/Price";
 import TitleComponent from "@/libs/components/TitleComponent";
+import OrderDebug from "./OrderDebug";
 
 type Props = {};
 
@@ -24,7 +25,7 @@ export default function Items({}: Props) {
 			<TitleComponent>จำนวน {total}</TitleComponent>
 
 			{/* <pre>{JSON.stringify(order.sleeve.label[0], null, 3)}</pre> */}
-			<pre>{JSON.stringify(order.rate, null, 3)}</pre>
+			{/* <pre>{JSON.stringify(order.rate, null, 3)}</pre> */}
 			<div className="grid grid-cols-1 ">
 				{order &&
 					order.sleeve?.label?.map((item, index) => (

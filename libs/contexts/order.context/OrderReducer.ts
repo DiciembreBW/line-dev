@@ -5,36 +5,13 @@ export default function OrderReducer(
 	order: OrderType,
 	action: OrderActionType
 ): OrderType {
-	if (action.text) {
-		const text = action.text;
-		return {...order, text: text};
-	}
-
-	if (action.material) {
-		return {...order, material: action.material};
-	}
-
-	if (action.neck) {
-		return {...order, neck: action.neck};
-	}
-
-	if (action.sleeve) {
-		return {...order, sleeve: action.sleeve};
-	}
-
-	if (action.item?.get) {
-		const {get} = action.item;
-		console.log(get);
-
-		return {...order};
-	}
-
 	// update option value
 	const {option_value} = action;
 	if (option_value?.type == "update") {
 		const sleeve_price = order.sleeve?.price || 0;
 		const neck_price = order.neck?.price || 0;
 		const material_price = order.material?.price || 0;
+
 		// sum of option
 		const _total = sleeve_price + neck_price + material_price;
 
@@ -42,8 +19,9 @@ export default function OrderReducer(
 		return {...order, option_value: _total};
 	}
 
+	// ********************************
 	// update item label[]
-	const {item, rate} = action;
+	const {item, rate, neck, sleeve, material} = action;
 
 	// item case
 	switch (item?.type) {
@@ -91,17 +69,41 @@ export default function OrderReducer(
 	// rate case
 	switch (rate?.type) {
 		case "set": {
-			// return {...order, rate: rate.value};
-			// console.log(rate);
 			if (rate.value == undefined) return order;
 
 			return {...order, rate: rate.value};
 		}
 	}
 
-	// throw new Error("error");
+	// neck case
+	switch (neck?.type) {
+		case "update": {
+			if (!action.neck?.value) return order;
 
-	// return order;
+			return {...order, neck: action.neck?.value};
+		}
+	}
+
+	// sleeve case
+	switch (sleeve?.type) {
+		case "update": {
+			if (!action.sleeve?.value) return order;
+
+			console.log(action.sleeve.value);
+
+			return {...order, sleeve: action.sleeve?.value};
+		}
+	}
+
+	switch (material?.type) {
+		case "update": {
+			if (!action.material?.value) return order;
+
+			console.log(action.material.value);
+
+			return {...order, material: action.material?.value};
+		}
+	}
 
 	return order;
 }

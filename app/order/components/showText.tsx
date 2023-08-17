@@ -31,28 +31,26 @@ export default function ShowText({}: Props) {
 	}
 
 	function createOrder() {
-		Order.createOrder({id: order.id, data: order}).then((r) => {
-			// console.log(r);
-			// liff.sendMessages()
-
-			const liffUrl = "https://liff.line.me/2000394306-EVnwMxlm";
-			liff
-				.sendMessages([{type: "text", text: `${liffUrl}/id=${order.id}`}])
-				.then(() => {
-					liff.closeWindow();
-				});
-		});
+		// Order.createOrder({id: order.id, data: order}).then((r) => {
+		// 	// console.log(r);
+		// 	// liff.sendMessages()
+		// 	const liffUrl = "https://liff.line.me/2000394306-EVnwMxlm";
+		// 	liff
+		// 		.sendMessages([{type: "text", text: `${liffUrl}/id=${order.id}`}])
+		// 		.then(() => {
+		// 			liff.closeWindow();
+		// 		});
+		// });
 	}
 	return (
 		<div className="sticky bottom-0 px-3 py-2 bg-neutral-50">
-			<div className="grid grid-cols-1 ">
+			{/* <div className="grid grid-cols-1 ">
 				<div className="flex justify-between px-3 py-2">
 					<div>{order.id}</div>
 				</div>
 
 				<div className="flex justify-between px-3 py-2">
 					<div>ทั้งหมด</div>
-					{/* <div>{total_labels} ตัว</div> */}
 					<div>{total_labels} ตัว</div>
 				</div>
 
@@ -66,8 +64,12 @@ export default function ShowText({}: Props) {
 				<div className="flex justify-center px-3 py-2">
 					<Secondary onclick={createOrder}>Create Order</Secondary>
 				</div>
-			</div>
-			{/* <pre>{JSON.stringify(order.sleeve.name, null, 3)}</pre> */}
+			</div> */}
+			{/* <pre>{JSON.stringify(order.option_value, null, 3)}</pre>
+			<pre>{JSON.stringify(order.material, null, 3)}</pre>
+			<pre>{JSON.stringify(order.neck, null, 3)}</pre>
+			<pre>{JSON.stringify(order.sleeve.name, null, 3)}</pre>
+			<pre>{JSON.stringify(order.sleeve.price, null, 3)}</pre> */}
 		</div>
 	);
 }

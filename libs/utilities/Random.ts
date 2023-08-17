@@ -14,6 +14,10 @@ const Random = {
 	name(): string {
 		return chance.name();
 	},
+
+	avatar(): string {
+		return chance.avatar({fileExtension: "jpg", protocal: "https"});
+	},
 };
 
 export default Random;

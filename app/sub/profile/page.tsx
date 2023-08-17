@@ -7,6 +7,7 @@ import {
 } from "@/libs/contexts/app.context/AppContext";
 import {UserProfileType} from "@/libs/contexts/app.context/AppReducer";
 import Request from "@/libs/utilities/Request";
+import Image from "next/image";
 import React, {useEffect, useState} from "react";
 
 type Props = {};
@@ -50,10 +51,14 @@ export default function ProfilePage({}: Props) {
 	return (
 		<div className="flex flex-col gap-6 justify-center items-center">
 			<div className="w-6/12">
-				<img
+				{/* <img
 					src={user?.pictureUrl}
-					className="rounded-full aspect-square "
 					alt=""
+				/> */}
+				<Image
+					src={JSON.stringify(user.pictureUrl)}
+					alt=""
+					className="rounded-full aspect-square "
 				/>
 			</div>
 

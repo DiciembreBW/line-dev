@@ -2,6 +2,8 @@ import TitleComponent from "@/libs/components/TitleComponent";
 import {useOrderDispatchContext} from "@/libs/contexts/order.context/OrderContext";
 import useMaterial from "@/libs/hooks/useMaterial";
 import {MaterialType} from "@/libs/types/material_type";
+import Random from "@/libs/utilities/Random";
+import Image from "next/image";
 import React from "react";
 
 type Props = {};
@@ -14,7 +16,7 @@ export default function Material({}: Props) {
 	function handleMaterial(item: MaterialType) {
 		handle(item);
 		dispatch({
-			material: item,
+			material: {type: "update", value: item},
 		});
 
 		dispatch({option_value: {type: "update"}});
@@ -23,27 +25,40 @@ export default function Material({}: Props) {
 	return (
 		<div className="">
 			<TitleComponent> เนื้อผ้า </TitleComponent>
-			<div className="w-full flex overflow-x-auto snap-x px-3 py-2 snap-mandatory ">
+			<div className="w-full flex overflow-x-auto snap-x snap-mandatory p-1 ">
 				{materials.map((item, index) => (
 					<div
 						key={index}
-						className={` flex shrink-0 w-full h-auto px-3 py-2
-						snap-center hover:cursor-pointer snap-always rounded
-						${item.name == material?.name && "ring"}`}
+						className={`basis-full flex shrink-0 gap-2 h-auto 
+						snap-center hover:cursor-pointer snap-always rounded mx-1 p-1
+						${item.name == material?.name && "bg-neutral-100"}`}
 						onClick={() => handleMaterial(item)}>
-						<div className="basis-auto">
+						<div className="basis-6/12">
+							<Image
+								src={""}
+								// width={12}
+								// height={12}
+								alt=""
+								className="aspect-square h-full bg-neutral-200 w-full"
+							/>
+						</div>
+
+						<div className="basis-6/12">
 							<div className="font-bold">
 								{item.name} | {item.price}
 							</div>
-							<div className="py-1 text-sm">{item.description}</div>
+							<div className="py-1 text-sm">
+								<div>{item.description}</div>
+
+								{item.price !== 0 && (
+									<div className="">
+										<i> +{item.price} .-</i>
+									</div>
+								)}
+							</div>
 						</div>
-						<div className="basis-4/12 flex justify-end items-end text-xl">
-							{item.price !== 0 && (
-								<div className="">
-									<i>+{item.price}</i>.-
-								</div>
-							)}
-						</div>
+						{/* detail */}
+						{/* <div className="basis-2/12 flex justify-end items-end text-xl"></div> */}
 					</div>
 				))}
 			</div>
