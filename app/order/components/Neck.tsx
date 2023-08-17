@@ -34,17 +34,18 @@ export default function Neck({}: Props) {
 
 	return (
 		<div>
-			<TitleComponent>Neck</TitleComponent>
-			<div className="grid grid-cols-4 gap-2">
+			<TitleComponent>คอ</TitleComponent>
+			<div className="grid grid-cols-4 gap-2 px-3 py-2">
 				{necks.map((item, index) => (
 					<div
 						key={index}
-						className={`px-3 py-2 aspect-square justify-center items-center flex flex-col rounded border select-none cursor-pointer ${
+						className={`px-3 py-2 aspect-square justify-center items-center
+						flex flex-col rounded border select-none cursor-pointer ${
 							item.name == neck?.name && "ring"
 						}`}
 						onClick={() => handle(item)}>
 						{item.name}
-						<div>{item.price}</div>
+						{/* <div>{item.price}</div> */}
 					</div>
 				))}
 			</div>

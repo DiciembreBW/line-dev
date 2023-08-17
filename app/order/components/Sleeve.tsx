@@ -31,8 +31,8 @@ export default function Sleeve({}: Props) {
 	}
 	return (
 		<div>
-			<TitleComponent>Sleeve</TitleComponent>
-			<div className="grid grid-cols-4 gap-2">
+			<TitleComponent>แขน</TitleComponent>
+			<div className="grid grid-cols-4 gap-2 px-3 py-2">
 				{sleeves.map((item, index) => (
 					<div
 						key={index}
@@ -40,7 +40,8 @@ export default function Sleeve({}: Props) {
 							item.name == sleeve?.name && "ring"
 						}`}
 						onClick={() => handle(item)}>
-						{item.name} {item.price}
+						{item.name}
+						{/* {item.price} */}
 					</div>
 				))}
 			</div>

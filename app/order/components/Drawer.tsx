@@ -3,7 +3,9 @@ import React, {useState} from "react";
 import Neck from "./Neck";
 import Sleeve from "./Sleeve";
 import {useOrderContext} from "@/libs/contexts/order.context/OrderContext";
-import {Edit} from "@mui/icons-material";
+// import {Edit} from "@mui/icons-material";
+import Items from "./Items";
+import ShowText from "./showText";
 
 type Props = {};
 
@@ -29,8 +31,10 @@ export default function Drawer({}: Props) {
 				{/* {order.neck.name == "" && "เลือกแบบเสื้อ"} */}
 				{order.neck.name} {order.sleeve.name}
 			</div>
-			<div className="" onClick={() => toggleDrawer("bottom", true)}>
-				<Edit fontSize="medium" />
+			<div
+				className="hover:cursor-pointer hover:bg-neutral-100 px-3 py-2"
+				onClick={() => toggleDrawer("bottom", true)}>
+				{/* <Edit fontSize="medium" /> */}x
 			</div>
 
 			<SwipeableDrawer
@@ -39,9 +43,23 @@ export default function Drawer({}: Props) {
 				onClose={() => toggleDrawer("bottom", false)}
 				onOpen={() => toggleDrawer("bottom", true)}
 				className="">
-				<div className="px-3 py-2">
+				<div className="px-3 py-2 grid grid-cols-1 gap-3">
 					<Neck />
 					<Sleeve />
+					<Items />
+					{/* <ShowText /> */}
+				</div>
+
+				<div className="sticky px-3 py-2 bottom-0 bg-lime-400">
+					<div className="flex justify-center items-center">
+						<div className="p-1">
+							<button
+								onClick={() => toggleDrawer("bottom", false)}
+								className="px-3 py-2 border rounded border-neutral-800">
+								x
+							</button>
+						</div>
+					</div>
 				</div>
 			</SwipeableDrawer>
 		</React.Fragment>
