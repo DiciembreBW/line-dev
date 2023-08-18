@@ -13,7 +13,6 @@ export default function Sleeve({}: Props) {
 
 	const [sleeves, setSleeves] = useState<SleeveType[]>(SleeveLists);
 	const [sleeve, setSleeve] = useState<SleeveType>();
-	const {update} = usePrice();
 
 	function handle(item: SleeveType) {
 		dispatch({
