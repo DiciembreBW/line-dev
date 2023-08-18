@@ -11,7 +11,8 @@ const order: OrderType = intial_order_value;
 export default function CreateOrderPageLayout({children}: Props) {
 	return (
 		<div className="px-3 py-2">
-			<OrderProvider order={order}>{children}</OrderProvider>
+			{/* <OrderProvider order={order}>{children}</OrderProvider> */}
+			{children}
 		</div>
 	);
 }

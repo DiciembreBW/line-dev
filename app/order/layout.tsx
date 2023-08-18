@@ -10,15 +10,15 @@ import React from "react";
 type Props = {children: React.ReactNode};
 
 export default function OrderLayout({children}: Props) {
-	// const {user} = useLiff({liffId: "2000394306-EVnwMxlm"});
+	const {user} = useLiff({liffId: "2000394306-EVnwMxlm"});
 
-	// if (user == undefined)
-	// 	return (
-	// 		<div className="grid grid-cols-1 h-screen justify-items-center items-center">
-	// 			loading...
-	// 		</div>
-	// 	);
+	if (user == undefined)
+		return (
+			<div className="grid grid-cols-1 h-screen justify-items-center items-center">
+				loading...
+			</div>
+		);
 
-	// return <AppProvider value={{user}}>{children}</AppProvider>;
-	return <div>{children}</div>;
+	return <AppProvider value={{user}}>{children}</AppProvider>;
+	// return <div>{children}</div>;
 }

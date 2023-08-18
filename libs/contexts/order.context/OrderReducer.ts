@@ -69,9 +69,9 @@ export default function OrderReducer(
 	// rate case
 	switch (rate?.type) {
 		case "set": {
-			if (rate.value == undefined) return order;
+			if (!action.rate?.value) return order;
 
-			return {...order, rate: rate.value};
+			return {...order, rate: action.rate?.value};
 		}
 	}
 
@@ -89,8 +89,6 @@ export default function OrderReducer(
 		case "update": {
 			if (!action.sleeve?.value) return order;
 
-			console.log(action.sleeve.value);
-
 			return {...order, sleeve: action.sleeve?.value};
 		}
 	}
@@ -98,8 +96,6 @@ export default function OrderReducer(
 	switch (material?.type) {
 		case "update": {
 			if (!action.material?.value) return order;
-
-			console.log(action.material.value);
 
 			return {...order, material: action.material?.value};
 		}

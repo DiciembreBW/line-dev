@@ -1,23 +1,40 @@
-import {PriceLists} from "@/libs/types/price_type";
+import {PriceListType, PriceLists} from "@/libs/types/price_type";
 import Price from "@/libs/utilities/Price";
 import {
 	useOrderContext,
 	useOrderDispatchContext,
 } from "../contexts/order.context/OrderContext";
+import {useEffect, useState} from "react";
 
 export default function usePrice() {
 	const order = useOrderContext();
 	const dispatch = useOrderDispatchContext();
+	const [rate, setRate] = useState<PriceListType>();
 
-	function update() {
-		const amont = order.sleeve.label.reduce((period, current) => {
-			return period + current.amont;
+	useEffect(() => {
+		handleRate();
+	}, [order.sleeve.label]);
+
+	function handleRate() {
+		// get all items
+		const itemTotal = order.sleeve.label.reduce((period, item) => {
+			return period + item.amont;
 		}, 0);
 
-		const rate = Price.get(amont, PriceLists);
-		dispatch({rate: {type: "set", value: rate}});
+		// get context
+		const rate = Price.get(itemTotal, PriceLists);
+
+		// update context
+		dispatch({
+			rate: {
+				type: "set",
+				value: rate,
+			},
+		});
+
+		// update rate state
+		setRate(rate);
 	}
-	return {
-		update: () => update(),
-	};
+
+	return {rate};
 }

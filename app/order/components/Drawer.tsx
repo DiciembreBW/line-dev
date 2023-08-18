@@ -46,7 +46,6 @@ export default function Drawer({}: Props) {
 				<div className="px-3 py-2 grid grid-cols-1 gap-3">
 					<Neck />
 					<Sleeve />
-					<Items />
 					{/* <ShowText /> */}
 				</div>
 
@@ -56,7 +55,7 @@ export default function Drawer({}: Props) {
 							<button
 								onClick={() => toggleDrawer("bottom", false)}
 								className="px-3 py-2 border rounded border-neutral-800">
-								x
+								บันทึก
 							</button>
 						</div>
 					</div>

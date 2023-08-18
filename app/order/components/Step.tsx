@@ -10,11 +10,8 @@ type Props = {label: LabelType; children?: React.ReactNode};
 
 export function Up({label, children}: Props) {
 	const dispatch = useOrderDispatchContext();
-	const {update} = usePrice();
-
 	function handle() {
 		dispatch({item: {type: "increase", label}});
-		update();
 	}
 	return (
 		<div
@@ -27,11 +24,10 @@ export function Up({label, children}: Props) {
 
 export function Down({label, children}: Props) {
 	const dispatch = useOrderDispatchContext();
-	const {update} = usePrice();
+	usePrice();
 
 	function handle() {
 		dispatch({item: {type: "decrease", label}});
-		update();
 	}
 	return (
 		<div
@@ -45,7 +41,6 @@ export function Down({label, children}: Props) {
 export function Onchange({label, children}: Props) {
 	const dispatch = useOrderDispatchContext();
 	const order = useOrderContext();
-	const {update} = usePrice();
 	const [amont, setAmont] = useState<string | number>("");
 
 	useEffect(() => {
@@ -69,8 +64,6 @@ export function Onchange({label, children}: Props) {
 	function handle(value: string, label: LabelType) {
 		setAmont(value);
 		dispatch({item: {type: "onchange", label, value}});
-
-		update();
 	}
 	return (
 		//

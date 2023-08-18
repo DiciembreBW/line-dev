@@ -1,34 +1,37 @@
-"use client";
-import TitleComponent from "@/libs/components/TitleComponent";
-import {useOrderContext} from "@/libs/contexts/order.context/OrderContext";
+import {
+	useOrderContext,
+	useOrderDispatchContext,
+} from "@/libs/contexts/order.context/OrderContext";
+import {PriceLists} from "@/libs/types/price_type";
+import Price from "@/libs/utilities/Price";
 import React, {useEffect, useState} from "react";
 
 type Props = {};
 
 export default function TotalPrice({}: Props) {
-	const order = useOrderContext();
-	const [total, setTotal] = useState<number>();
 	// const {option_value, rate, sleeve} = order;
+	const order = useOrderContext();
+	const [state, setState] = useState<number>();
+
+	useEffect(() => {
+		const PPE = order.option_value + order.rate.price;
+		// console.log(PPE);
+
+		const totalPrice = order.sleeve.label.reduce((period, item) => {
+			return period + item.amont * (PPE + item.price);
+		}, 0);
+
+		setState(totalPrice);
+	}, [order]);
+
 	return (
-		<div className="">
-			<TitleComponent>สรุปราคา</TitleComponent>
-			<div className="grid grid-cols-1 gap-2 px-3 py-2">
-				<div className="px-3 flex justify-between">
-					<div>จำนวนทั้งหมด</div>
-					<div>76 ตัว</div>
-				</div>
+		<>
+			{/* <pre>total price neck : {JSON.stringify(order.neck.price, null, 3)}</pre>
+			<pre>sleeve : {JSON.stringify(order.sleeve.price, null, 3)}</pre>
+			<pre>material : {JSON.stringify(order.material.price, null, 3)}</pre>
+			<pre>rate : {JSON.stringify(order.rate, null, 3)}</pre> */}
 
-				<div className="px-3 flex justify-between">
-					<div>ราคา</div>
-					<div>23,560 บาท</div>
-				</div>
-
-				<div className="px-3 flex justify-center">
-					<div className="p-1">
-						<button className="px-3 py-2 rounded border">เปิดออเดอร์</button>
-					</div>
-				</div>
-			</div>
-		</div>
+			{state}
+		</>
 	);
 }

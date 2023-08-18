@@ -8,25 +8,22 @@ import {Down, Onchange, Up} from "./Step";
 import Price from "@/libs/utilities/Price";
 import TitleComponent from "@/libs/components/TitleComponent";
 import OrderDebug from "./OrderDebug";
+import {Secondary} from "@/libs/components/Button";
+import {Handlee} from "next/font/google";
+import TotalItems from "./TotalItems";
 
 type Props = {};
 
 export default function Items({}: Props) {
 	const order = useOrderContext();
-	const [quantity, setQuantity] = useState<number>(0);
-	const [total, setTotal] = useState<number>(0);
-
-	useEffect(() => {
-		setTotal(Price.sumOfAmont({lists: order.sleeve.label}));
-	}, [order]);
 
 	return (
-		<div>
-			<TitleComponent>จำนวน {total}</TitleComponent>
+		<>
+			{/* <TitleComponent>จำนวน {total}</TitleComponent> */}
 
 			{/* <pre>{JSON.stringify(order.sleeve.label[0], null, 3)}</pre> */}
 			{/* <pre>{JSON.stringify(order.rate, null, 3)}</pre> */}
-			<div className="grid grid-cols-1 ">
+			<div className="grid grid-cols-1 px-3 py-2">
 				{order &&
 					order.sleeve?.label?.map((item, index) => (
 						<div
@@ -43,7 +40,7 @@ export default function Items({}: Props) {
 								<div>รอบอก {item.chest}</div>
 								<div>ความยาว {item.length}</div>
 								<div className="font-bold">
-									{item.price + order.option_value + order.rate?.price}
+									{item.price + order.option_value + order.rate?.price} .-
 								</div>
 							</div>
 
@@ -56,7 +53,16 @@ export default function Items({}: Props) {
 						</div>
 					))}
 			</div>
+
+			<div className="sticky bottom-0 px-3 py-2 bg-neutral-200">
+				<div className="flex justify-between px-3 py-2">
+					<div>จำนวนทั้งหมด</div>
+					<div>
+						<TotalItems /> ตัว
+					</div>
+				</div>
+			</div>
 			{/* <pre>{JSON.stringify(order, null, 3)}</pre> */}
-		</div>
+		</>
 	);
 }
