@@ -60,8 +60,8 @@ export default function page({}: Props) {
 				{/* <ModelSample /> */}
 
 				<Stage
-					adjustCamera={1}
-					intensity={1.5}
+					adjustCamera={0}
+					intensity={2}
 					shadows={{type: "contact", colorBlend: 1, opacity: 0.5}}>
 					<Model />
 				</Stage>
