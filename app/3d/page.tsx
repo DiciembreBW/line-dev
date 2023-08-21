@@ -17,6 +17,8 @@ import {
 } from "@react-three/drei";
 
 import {Model} from "@/libs/components/my_models/Po";
+import {ModelCloth} from "@/libs/components/my_models/Cloth";
+import {ModelPillow} from "@/libs/components/my_models/Pillow";
 
 type Props = {};
 // https://codesandbox.io/s/qyz5r?file=/src/App.js
@@ -63,7 +65,9 @@ export default function page({}: Props) {
 					adjustCamera={0}
 					intensity={2}
 					shadows={{type: "contact", colorBlend: 1, opacity: 0.5}}>
-					<Model />
+					{/* <Model /> */}
+					{/* <ModelCloth /> */}
+					<ModelPillow />
 				</Stage>
 			</Canvas>
 		</div>
