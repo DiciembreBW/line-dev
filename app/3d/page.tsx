@@ -18,7 +18,9 @@ import {
 
 import {Model} from "@/libs/components/my_models/Po";
 import {ModelCloth} from "@/libs/components/my_models/Cloth";
-import {ModelPillow} from "@/libs/components/my_models/Pillow";
+// import {ModelPillow} from "@/libs/components/my_models/Pillow";
+import {ModelShirt} from "@/libs/components/my_models/Shirt";
+import {ModelZip} from "@/libs/components/my_models/Zip";
 
 type Props = {};
 // https://codesandbox.io/s/qyz5r?file=/src/App.js
@@ -46,7 +48,7 @@ export default function page({}: Props) {
 					minPolarAngle={Math.PI / 2.5}
 					maxPolarAngle={Math.PI / 2}
 					autoRotate
-					autoRotateSpeed={0.4}
+					autoRotateSpeed={1}
 				/>
 				{/* </TransformControls> */}
 				{/* <ambientLight intensity={0.5} /> */}
@@ -63,11 +65,13 @@ export default function page({}: Props) {
 
 				<Stage
 					adjustCamera={0}
-					intensity={2}
+					intensity={0.5}
 					shadows={{type: "contact", colorBlend: 1, opacity: 0.5}}>
 					{/* <Model /> */}
 					{/* <ModelCloth /> */}
-					<ModelPillow />
+					{/* <ModelPillow /> */}
+					{/* <ModelShirt /> */}
+					<ModelZip />
 				</Stage>
 			</Canvas>
 		</div>
