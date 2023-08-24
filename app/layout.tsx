@@ -12,10 +12,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
 	return (
-		<html lang="en">
+		<html lang="en" className="bg-zinc-900 text-zinc-400">
 			<body className={inter.className}>
 				<div className="flex justify-between">
 					<div className="flex px-3 py-2 gap-4">
+						<Link href={"/timeline"}>Timeline</Link>
+						<Link href={"/design"}>Design</Link>
 						{/* <Link href="/order">Order</Link>
 						<Link href="/sub">Sub</Link> */}
 						{/* <Link href="/price">Price</Link>

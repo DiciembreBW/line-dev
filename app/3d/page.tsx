@@ -21,6 +21,7 @@ import {ModelCloth} from "@/libs/components/my_models/Cloth";
 // import {ModelPillow} from "@/libs/components/my_models/Pillow";
 import {ModelShirt} from "@/libs/components/my_models/Shirt";
 import {ModelZip} from "@/libs/components/my_models/Zip";
+import {Model4D} from "@/libs/components/my_models/4d";
 
 type Props = {};
 // https://codesandbox.io/s/qyz5r?file=/src/App.js
@@ -71,7 +72,8 @@ export default function page({}: Props) {
 					{/* <ModelCloth /> */}
 					{/* <ModelPillow /> */}
 					{/* <ModelShirt /> */}
-					<ModelZip />
+					{/* <ModelZip /> */}
+					<Model4D />
 				</Stage>
 			</Canvas>
 		</div>
