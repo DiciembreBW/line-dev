@@ -1,4 +1,5 @@
 "use client";
+import Swipe from "@/libs/components/Swipe";
 import {Divider, SwipeableDrawer, getFabUtilityClass} from "@mui/material";
 import React, {useEffect, useState} from "react";
 
@@ -87,19 +88,27 @@ export default function ItemDetial({}: Props) {
 	}
 	// console.log(12);
 
-	return (
-		<React.Fragment key={"bottomx"}>
-			<button className="text-lime-400" onClick={() => handleSwipe(true)}>
+	function label() {
+		return (
+			<button
+				className="text-lime-400 select-none focus:outline-none"
+				onClick={() => handleSwipe(true)}>
 				ดูรายละเอียด
 			</button>
-			<SwipeableDrawer
-				open={status}
-				anchor="bottom"
-				onClose={() => handleSwipe(false)}
-				onOpen={() => handleSwipe(true)}
-				disableSwipeToOpen={true}
-				transitionDuration={120}>
-				{/* <div className="rounded-full bg-zinc-900 rounded-b">dada</div> */}
+		);
+	}
+
+	return (
+		<React.Fragment key={"bottomx"}>
+			{/* <button className="text-lime-400" onClick={() => handleSwipe(true)}>
+				ดูรายละเอียด
+			</button> */}
+			<Swipe
+				anchor="right"
+				label={label()}
+				isolateKey="detail"
+				state={status}
+				setState={setStatus}>
 				<div className="bg-zinc-900 h-screen text-zinc-400 px-3 py-2 ">
 					<div className="flex justify-between items-center">
 						<div className="px-3 py-2 text-lime-400 font-bold">แขนสั้น คอกลม</div>
@@ -166,7 +175,6 @@ export default function ItemDetial({}: Props) {
 					<div className="px-3 py-2">
 						<div className="px-3 py-2 text-zinc-500">จำนวน</div>
 						<div className="grid grid-cols-9 content-center items-center">
-							{/* input */}
 							<div className="col-span-6 flex items-center">
 								<div className="m-1">
 									<button className="px-3 py-2" onClick={stepDown}>
@@ -188,7 +196,6 @@ export default function ItemDetial({}: Props) {
 								</div>
 							</div>
 
-							{/* PPE */}
 							<div className="col-span-2 justify-self-end">
 								<div className="text-2xl ">356.-</div>
 							</div>
@@ -216,10 +223,6 @@ export default function ItemDetial({}: Props) {
 						</div>
 					</div>
 
-					{/* <div className="px-3 py-2">
-						<pre>{JSON.stringify(items, null, 3)}</pre>
-					</div> */}
-
 					<div className="px-3 py-2">
 						<div className="flex justify-center">
 							<div className="m-1">
@@ -232,7 +235,7 @@ export default function ItemDetial({}: Props) {
 						</div>
 					</div>
 				</div>
-			</SwipeableDrawer>
+			</Swipe>
 		</React.Fragment>
 	);
 }

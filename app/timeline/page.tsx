@@ -7,6 +7,7 @@ import {CollectionType} from "./context/collection.context/types";
 import Items from "./comp/collection/Items";
 import CreateItem from "./comp/collection/CreateItem";
 import End from "./comp/collection/End";
+import Swipe from "@/libs/components/Swipe";
 
 type Props = {};
 
@@ -35,11 +36,15 @@ export default function TimelinePage({}: Props) {
 					],
 				}}>
 				<Name />
-				{/* <CreateItem /> */}
+				<CreateItem />
 				<Items />
-				<End />
+
 				{/* <PreCollection /> */}
 			</CollectionProvider>
 		</div>
 	);
+}
+
+function L() {
+	return <div className="px-3 py-2">click dadwaw</div>;
 }
