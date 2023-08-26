@@ -1,8 +1,10 @@
 "use client";
-import Swipe from "@/libs/components/Swipe";
+// import Swipe from "@/libs/components/Swipe";
+import useSwipe from "@/libs/hooks/useSwipe";
 import {Divider, SwipeableDrawer, getFabUtilityClass} from "@mui/material";
 import React, {useEffect, useState} from "react";
 
+// console.log("123");
 type Props = {};
 
 type LabelType = {
@@ -39,9 +41,26 @@ export default function ItemDetial({}: Props) {
 	const [items, setItem] = useState<SleeveType>(SleeveLists);
 	const [select, setSelect] = useState<LabelType>();
 	const [status, setStatus] = useState<boolean>(false);
-
+	const total = items.label.reduce((period, current) => {
+		return period + current.amont;
+	}, 0);
 	useEffect(() => {
-		UpdateLabel();
+		// console.log(1234);
+		if (select?.amont !== 0) {
+			// console.log(1234);
+
+			const mylabel = items.label.map((i, k) => {
+				if (i.label == select?.label) {
+					i = select;
+				}
+
+				return i;
+			});
+
+			setItem((value) => {
+				return {...value, label: mylabel};
+			});
+		}
 	}, [select?.amont]);
 
 	function handleSwipe(status: boolean) {
@@ -61,8 +80,11 @@ export default function ItemDetial({}: Props) {
 	function stepUp() {
 		// console.log(select);
 		if (select == undefined) return;
-		setSelect({...select, amont: select?.amont + 1});
-		// UpdateLabel();
+		// setSelect({...select, amont: select?.amont + 1});
+		setSelect((value) => {
+			if (value == undefined) return;
+			return {...value, amont: value.amont + 1};
+		});
 	}
 
 	function stepDown() {
@@ -86,39 +108,26 @@ export default function ItemDetial({}: Props) {
 			return {...value, label: mylabel};
 		});
 	}
-	// console.log(12);
-
-	function label() {
-		return (
-			<button
-				className="text-lime-400 select-none focus:outline-none"
-				onClick={() => handleSwipe(true)}>
+	return (
+		<React.Fragment key={"Item"}>
+			<button className="text-lime-400" onClick={() => handleSwipe(true)}>
 				ดูรายละเอียด
 			</button>
-		);
-	}
-
-	return (
-		<React.Fragment key={"bottomx"}>
-			{/* <button className="text-lime-400" onClick={() => handleSwipe(true)}>
-				ดูรายละเอียด
-			</button> */}
-			<Swipe
+			<SwipeableDrawer
 				anchor="right"
-				label={label()}
-				isolateKey="detail"
-				state={status}
-				setState={setStatus}>
+				open={status}
+				onClose={() => handleSwipe(false)}
+				onOpen={() => handleSwipe(true)}
+				disableSwipeToOpen={true}>
 				<div className="bg-zinc-900 h-screen text-zinc-400 px-3 py-2 ">
 					<div className="flex justify-between items-center">
-						<div className="px-3 py-2 text-lime-400 font-bold">แขนสั้น คอกลม</div>
-						<div className="m-1">
-							<button
+						<Navbar>
+							{/* <button
 								className="w-6 h-6 bg-lime-400 rounded-full text-zinc-800 font-bold"
 								onClick={() => handleSwipe(false)}>
 								X
-							</button>
-						</div>
+							</button> */}
+						</Navbar>
 					</div>
 
 					<div className="px-3 py-2">
@@ -128,7 +137,7 @@ export default function ItemDetial({}: Props) {
 								<div
 									key={index}
 									className={` w-12 aspect-square flex  relative
-                hover:bg-zinc-800 hover:rounded-lg hover:cursor-pointer select-none `}
+                 hover:rounded-lg hover:cursor-pointer select-none `}
 									onClick={() => handleSelected(item)}>
 									<div className="flex justify-start items-end">
 										<div
@@ -174,17 +183,19 @@ export default function ItemDetial({}: Props) {
 
 					<div className="px-3 py-2">
 						<div className="px-3 py-2 text-zinc-500">จำนวน</div>
-						<div className="grid grid-cols-9 content-center items-center">
-							<div className="col-span-6 flex items-center">
+						<div className="grid grid-cols-9 content-center gap-2 items-center">
+							{/* handle amont */}
+							<div className="col-span-9 flex items-center">
 								<div className="m-1">
 									<button className="px-3 py-2" onClick={stepDown}>
 										-
 									</button>
 								</div>
-								<div className="m-1">
+								<div className="m-1 w-full">
 									<input
 										type="text"
 										className="border bg-transparent rounded-full border-zinc-700 p-2 focus:outline-none text-center w-full"
+										// value={select?.amont || 0}
 										value={select?.amont || 0}
 										onChange={(e) => handleOnchangeSelect(e.target.value)}
 									/>
@@ -196,7 +207,8 @@ export default function ItemDetial({}: Props) {
 								</div>
 							</div>
 
-							<div className="col-span-2 justify-self-end">
+							{/* price */}
+							<div className="col-span-9 justify-self-center">
 								<div className="text-2xl ">356.-</div>
 							</div>
 						</div>
@@ -216,7 +228,7 @@ export default function ItemDetial({}: Props) {
 						<div className="px-3 py-2 text-zinc-500">รายละเอียด</div>
 						<div className="grid grid-cols-6 px-3">
 							<div className="col-span-4">จำนวน</div>
-							<div className="col-span-2 justify-self-end">34 ตัว</div>
+							<div className="col-span-2 justify-self-end">{total.toString()} ตัว</div>
 
 							<div className="col-span-4">ราคา</div>
 							<div className="col-span-2 justify-self-end">25,260 บาท</div>
@@ -235,7 +247,18 @@ export default function ItemDetial({}: Props) {
 						</div>
 					</div>
 				</div>
-			</Swipe>
+			</SwipeableDrawer>
 		</React.Fragment>
+	);
+}
+
+function Navbar({children}: {children?: React.ReactNode}) {
+	return (
+		<>
+			<div className="px-3 py-2 text-lime-400 font-bold text-xl">
+				แขนสั้น คอกลม
+			</div>
+			<div className="m-1">{children}</div>
+		</>
 	);
 }
