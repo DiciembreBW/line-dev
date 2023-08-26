@@ -119,7 +119,7 @@ export default function ItemDetial({}: Props) {
 				onClose={() => handleSwipe(false)}
 				onOpen={() => handleSwipe(true)}
 				disableSwipeToOpen={true}>
-				<div className="bg-zinc-900 h-screen text-zinc-400 px-3 py-2 ">
+				<div className="bg-zinc-900  text-zinc-400 px-3 py-2 ">
 					<div className="flex justify-between items-center">
 						<Navbar>
 							{/* <button
