@@ -1,5 +1,6 @@
 export type CollectionType = {
 	name: string;
+	status: number;
 	item: ItemType[];
 };
 
@@ -11,6 +12,10 @@ export type CollectionActionType = {
 	item?: {
 		type: "create";
 		value: ItemType;
+	};
+	status?: {
+		type: "onchange";
+		value: number;
 	};
 };
 
@@ -26,6 +31,7 @@ export type ItemType = {
 export const initCollectionValue: CollectionType = {
 	name: "",
 	item: [],
+	status: 0,
 };
 
 export const initValue: ItemType = {

@@ -44,24 +44,8 @@ export default function ItemDetial({}: Props) {
 	const total = items.label.reduce((period, current) => {
 		return period + current.amont;
 	}, 0);
+
 	useEffect(() => {
-		// console.log(1234);
-		// if (select?.amont !== 0) {
-		// 	// console.log(1234);
-
-		// 	const mylabel = items.label.map((i, k) => {
-		// 		if (i.label == select?.label) {
-		// 			i = select;
-		// 		}
-
-		// 		return i;
-		// 	});
-
-		// 	setItem((value) => {
-		// 		return {...value, label: mylabel};
-		// 	});
-		// }
-
 		UpdateLabel();
 	}, [select]);
 
@@ -120,16 +104,22 @@ export default function ItemDetial({}: Props) {
 				open={status}
 				onClose={() => handleSwipe(false)}
 				onOpen={() => handleSwipe(true)}
-				disableSwipeToOpen={true}>
-				<div className="bg-zinc-900  text-zinc-400 px-3 py-2 ">
-					<div className="flex justify-between items-center">
-						<Navbar>
-							{/* <button
-								className="w-6 h-6 bg-lime-400 rounded-full text-zinc-800 font-bold"
-								onClick={() => handleSwipe(false)}>
-								X
-							</button> */}
-						</Navbar>
+				disableSwipeToOpen={true}
+				className="">
+				<div className="bg-zinc-900 h-max text-zinc-400 px-3 py-2 ">
+					<div className="px-3 py-2 flex justify-between items-center">
+						{/* <Navbar> */}
+
+						<button
+							className="w-6 h-6 bg-lime-400 rounded-full text-zinc-800 font-bold"
+							onClick={() => handleSwipe(false)}>
+							{` <- `}
+						</button>
+
+						<div className="px-3 py-2 text-lime-400 font-bold text-xl">
+							แขนสั้น คอกลม
+						</div>
+						{/* </Navbar> */}
 					</div>
 
 					<div className="px-3 py-2">

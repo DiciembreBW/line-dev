@@ -20,6 +20,7 @@ export default function TimelinePage({}: Props) {
 			<CollectionProvider
 				initValue={{
 					name: "รันนิ่ง 2023",
+					status: 1,
 					item: [
 						{
 							text: "woradet",

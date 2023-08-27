@@ -23,6 +23,12 @@ function handle(
 		}
 	}
 
+	switch (action.status?.type) {
+		case "onchange": {
+			return {...collection, status: action.status.value};
+		}
+	}
+
 	return collection;
 }
 

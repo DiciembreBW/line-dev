@@ -24,6 +24,10 @@ import {
 } from "@mui/material";
 import {root} from "postcss";
 import React, {useState} from "react";
+import {
+	useCollectionContext,
+	useCollectionDispatchContext,
+} from "../../context/collection.context/CollectionReducer";
 
 type Props = {};
 
@@ -34,18 +38,29 @@ const steps = ["Read", "สรุปแบบ", "ผลิต", "จัดส่
 // https://mui.com/material-ui/react-stepper/#api
 
 export default function WorkTimeline({}: Props) {
+	const app = useCollectionContext();
+	const dispatch = useCollectionDispatchContext();
+
 	const [state, setState] = useState<number>(0);
 
-	function next() {
-		// console.log(steps.length);
-		if (steps.length == state) return;
-
-		setState(state + 1);
+	function add() {
+		if (app.status == 4) return;
+		dispatch({
+			status: {
+				type: "onchange",
+				value: app.status + 1,
+			},
+		});
 	}
 
-	function previous() {
-		if (state == 0) return;
-		setState(state - 1);
+	function minus() {
+		if (app.status <= 0) return;
+		dispatch({
+			status: {
+				type: "onchange",
+				value: app.status - 1,
+			},
+		});
 	}
 
 	return (
@@ -53,8 +68,21 @@ export default function WorkTimeline({}: Props) {
 		// </>
 		<div className="px-3 py-2  ">
 			<div className=" text-zinc-600 text-sm px-2 py-1">Order No. aj1234a</div>
+			{/* 
+			<pre>{JSON.stringify(app.status, null, 3)}</pre>
+			<div className="m-1">
+				<button onClick={add} className="px-3 py-2 border rounded">
+					+
+				</button>
+			</div>
+
+			<div className="m-1">
+				<button onClick={minus} className="px-3 py-2 border rounded">
+					-
+				</button>
+			</div> */}
 			<Stepper
-				activeStep={state}
+				activeStep={app.status}
 				alternativeLabel
 				className="px-3 py-2"
 				connector={<QontoConnector />}>
