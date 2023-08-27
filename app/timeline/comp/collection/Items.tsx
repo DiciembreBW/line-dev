@@ -14,12 +14,9 @@ export default function Items({}: Props) {
 
 	return (
 		// <div className=" text-sm text-zinc-400">
-		<div className="grid grid-cols-1 gap-2 px-3 py-2 m-1 text-sm text-zinc-400">
+		<div className="grid grid-cols-1 gap-2 text-sm text-zinc-400 mt-3">
 			{collections.item.map((item, index) => (
-				<div className="rounded-lg bg-zinc-800/50  py-4  p-3" key={index}>
-					<div className="mt-2 my-5">
-						<WorkTimeline />
-					</div>
+				<div className="rounded-lg px-3 py-2 bg-zinc-800/50" key={index}>
 					<div className="flex gap-3 mb-2">
 						<div className="basis-3/4 aspect-square rounded-lg bg-zinc-800 flex justify-center items-center">
 							image
@@ -53,21 +50,8 @@ export default function Items({}: Props) {
 						<div>12,254 บาท</div>
 					</div>
 
-					{/* <Divider className="bg-zinc-700/50" /> */}
 					<div className="flex justify-center py-1">
 						<ItemDetial />
-					</div>
-
-					{/* <Divider className="bg-zinc-700/50" /> */}
-					<div className="py-1 flex justify-between gap-3">
-						<div>x</div>
-						<div>
-							<div>จัดส่ง</div>
-							<div className="text-sm text-zinc-600">
-								330 ถ.เชียงใหม่-ลำปาง ต.ป่าตัน อ.เมือง รหัสไปรษณีย์ 50300
-								โทร.086-1651345
-							</div>
-						</div>
 					</div>
 				</div>
 			))}

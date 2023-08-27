@@ -8,6 +8,8 @@ import Items from "./comp/collection/Items";
 import CreateItem from "./comp/collection/CreateItem";
 import End from "./comp/collection/End";
 import Swipe from "@/libs/components/Swipe";
+import WorkTimeline from "./comp/collection/WorkTimeline";
+import AddressPicker from "./comp/collection/AddressPicker";
 
 type Props = {};
 
@@ -17,7 +19,7 @@ export default function TimelinePage({}: Props) {
 			{/* <div className="text-xl font-bold">TimelinePage</div> */}
 			<CollectionProvider
 				initValue={{
-					name: "สามพรานรันนิ่ง 2023",
+					name: "รันนิ่ง 2023",
 					item: [
 						{
 							text: "woradet",
@@ -36,8 +38,14 @@ export default function TimelinePage({}: Props) {
 					],
 				}}>
 				<Name />
-				<CreateItem />
-				<Items />
+
+				{/* <CreateItem /> */}
+				<div className="px-4 grid grid-cols-1 gap-2">
+					<WorkTimeline />
+					<AddressPicker />
+					<Items />
+					<End />
+				</div>
 
 				{/* <PreCollection /> */}
 			</CollectionProvider>

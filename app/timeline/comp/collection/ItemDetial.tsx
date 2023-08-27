@@ -46,22 +46,24 @@ export default function ItemDetial({}: Props) {
 	}, 0);
 	useEffect(() => {
 		// console.log(1234);
-		if (select?.amont !== 0) {
-			// console.log(1234);
+		// if (select?.amont !== 0) {
+		// 	// console.log(1234);
 
-			const mylabel = items.label.map((i, k) => {
-				if (i.label == select?.label) {
-					i = select;
-				}
+		// 	const mylabel = items.label.map((i, k) => {
+		// 		if (i.label == select?.label) {
+		// 			i = select;
+		// 		}
 
-				return i;
-			});
+		// 		return i;
+		// 	});
 
-			setItem((value) => {
-				return {...value, label: mylabel};
-			});
-		}
-	}, [select?.amont]);
+		// 	setItem((value) => {
+		// 		return {...value, label: mylabel};
+		// 	});
+		// }
+
+		UpdateLabel();
+	}, [select]);
 
 	function handleSwipe(status: boolean) {
 		setStatus(status);

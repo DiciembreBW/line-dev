@@ -1,3 +1,4 @@
+"use client";
 import styled from "@emotion/styled";
 import {
 	Check,
@@ -48,29 +49,22 @@ export default function WorkTimeline({}: Props) {
 	}
 
 	return (
-		<>
+		// <>
+		// </>
+		<div className="px-3 py-2  ">
+			<div className=" text-zinc-600 text-sm px-2 py-1">Order No. aj1234a</div>
 			<Stepper
 				activeStep={state}
 				alternativeLabel
-				className=""
+				className="px-3 py-2"
 				connector={<QontoConnector />}>
 				{steps.map((label, index) => (
 					<Step key={index} className="">
-						{/* <StepButton>sda</StepButton> */}
-						{/* <StepConnector s /> */}
 						<StepLabel StepIconComponent={MyIcon} />
-						{/* <span className="flex justify-center my-2">{state}</span> */}
 					</Step>
 				))}
 			</Stepper>
-
-			{/* <button className="px-3 py-2 m-1 border" onClick={previous}>
-				Left
-			</button>
-			<button className="px-3 py-2 m-1 border" onClick={next}>
-				Right
-			</button> */}
-		</>
+		</div>
 	);
 }
 
@@ -134,27 +128,10 @@ function IconCondition({props}: {props: StepIconProps}) {
 	const {active, completed, className, icon} = props;
 	return (
 		<>
-			{icon == 1 && (
-				<>
-					<StartOutlined />
-				</>
-			)}
-
-			{icon == 2 && (
-				<>
-					<DrawOutlined />
-				</>
-			)}
-			{icon == 3 && (
-				<>
-					<PrecisionManufacturingOutlined />
-				</>
-			)}
-			{icon == 4 && (
-				<>
-					<DeliveryDiningOutlined />
-				</>
-			)}
+			{icon == 1 && <>{/* <StartOutlined /> */}S</>}
+			{icon == 2 && <>{/* <DrawOutlined /> */}X</>}
+			{icon == 3 && <>{/* <PrecisionManufacturingOutlined /> */}P</>}
+			{icon == 4 && <>{/* <DeliveryDiningOutlined /> */}D</>}
 		</>
 	);
 }
