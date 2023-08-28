@@ -10,6 +10,8 @@ import End from "./comp/collection/End";
 import Swipe from "@/libs/components/Swipe";
 import WorkTimeline from "./comp/collection/WorkTimeline";
 import AddressPicker from "./comp/collection/AddressPicker";
+import Reserve from "./comp/collection/Reserve";
+import Price from "./comp/collection/Price";
 
 type Props = {};
 
@@ -21,6 +23,8 @@ export default function TimelinePage({}: Props) {
 				initValue={{
 					name: "รันนิ่ง 2023",
 					status: 1,
+					address:
+						"Office Of the University Building 2, 239 Huay Kaew Road, Suthep Subdistrict, Muang District, Chiang Mai Province Postal Code 50200",
 					item: [
 						{
 							text: "woradet",
@@ -42,6 +46,7 @@ export default function TimelinePage({}: Props) {
 
 				{/* <CreateItem /> */}
 				<div className="px-4 grid grid-cols-1 gap-2">
+					{/* <Reserve /> */}
 					<WorkTimeline />
 					<AddressPicker />
 					<Items />

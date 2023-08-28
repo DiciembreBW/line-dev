@@ -29,6 +29,12 @@ function handle(
 		}
 	}
 
+	switch (action.address?.type) {
+		case "onchange": {
+			return {...collection, address: action.address.value};
+		}
+	}
+
 	return collection;
 }
 

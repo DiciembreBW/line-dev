@@ -1,6 +1,7 @@
 export type CollectionType = {
 	name: string;
 	status: number;
+	address: string;
 	item: ItemType[];
 };
 
@@ -17,6 +18,11 @@ export type CollectionActionType = {
 		type: "onchange";
 		value: number;
 	};
+
+	address?: {
+		type: "onchange";
+		value: string;
+	};
 };
 
 export type ItemType = {
@@ -30,6 +36,7 @@ export type ItemType = {
 // *****************************
 export const initCollectionValue: CollectionType = {
 	name: "",
+	address: "",
 	item: [],
 	status: 0,
 };

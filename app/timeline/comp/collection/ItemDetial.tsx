@@ -3,6 +3,7 @@
 import useSwipe from "@/libs/hooks/useSwipe";
 import {Divider, SwipeableDrawer, getFabUtilityClass} from "@mui/material";
 import React, {useEffect, useState} from "react";
+import Price from "./Price";
 
 // console.log("123");
 type Props = {};
@@ -44,6 +45,8 @@ export default function ItemDetial({}: Props) {
 	const total = items.label.reduce((period, current) => {
 		return period + current.amont;
 	}, 0);
+
+	const price = Price.get({amont: total});
 
 	useEffect(() => {
 		UpdateLabel();
@@ -201,7 +204,7 @@ export default function ItemDetial({}: Props) {
 
 							{/* price */}
 							<div className="col-span-9 justify-self-center">
-								<div className="text-2xl ">356.-</div>
+								<div className="text-2xl ">{price.price}</div>
 							</div>
 						</div>
 					</div>
@@ -223,7 +226,7 @@ export default function ItemDetial({}: Props) {
 							<div className="col-span-2 justify-self-end">{total.toString()} ตัว</div>
 
 							<div className="col-span-4">ราคา</div>
-							<div className="col-span-2 justify-self-end">25,260 บาท</div>
+							<div className="col-span-2 justify-self-end">{price.total} บาท</div>
 						</div>
 					</div>
 
