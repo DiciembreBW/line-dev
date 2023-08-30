@@ -98,54 +98,55 @@ export default function ItemDetial({}: Props) {
 		});
 	}
 	return (
-		<React.Fragment key={"Item"}>
-			<button className="text-lime-400" onClick={() => handleSwipe(true)}>
-				ดูรายละเอียด
-			</button>
-			<SwipeableDrawer
-				anchor="right"
-				open={status}
-				onClose={() => handleSwipe(false)}
-				onOpen={() => handleSwipe(true)}
-				disableSwipeToOpen={true}
-				className="">
-				<div className="bg-zinc-900 h-max text-zinc-400 px-3 py-2 ">
-					<div className="px-3 py-2 flex justify-between items-center">
-						{/* <Navbar> */}
+		<div className="flex justify-center py-1">
+			<React.Fragment key={"Item"}>
+				<button className="text-lime-400" onClick={() => handleSwipe(true)}>
+					ดูรายละเอียด
+				</button>
+				<SwipeableDrawer
+					anchor="right"
+					open={status}
+					onClose={() => handleSwipe(false)}
+					onOpen={() => handleSwipe(true)}
+					disableSwipeToOpen={true}
+					className="">
+					<div className="bg-zinc-900 h-max text-zinc-400 px-3 py-2 ">
+						<div className="px-3 py-2 flex justify-between items-center">
+							{/* <Navbar> */}
 
-						<button
-							className="w-6 h-6 bg-lime-400 rounded-full text-zinc-800 font-bold"
-							onClick={() => handleSwipe(false)}>
-							{` <- `}
-						</button>
+							<button
+								className="w-6 h-6 bg-lime-400 rounded-full text-zinc-800 font-bold"
+								onClick={() => handleSwipe(false)}>
+								{` <- `}
+							</button>
 
-						<div className="px-3 py-2 text-lime-400 font-bold text-xl">
-							แขนสั้น คอกลม
+							<div className="px-3 py-2 text-lime-400 font-bold text-xl">
+								แขนสั้น คอกลม
+							</div>
+							{/* </Navbar> */}
 						</div>
-						{/* </Navbar> */}
-					</div>
 
-					<div className="px-3 py-2">
-						<div className="px-3 py-2 text-zinc-500">ไซส์</div>
-						<div className="px-3 py-2 grid grid-cols-5 gap-5">
-							{items.label.map((item, index) => (
-								<div
-									key={index}
-									className={` w-12 aspect-square flex  relative
+						<div className="px-3 py-2">
+							<div className="px-3 py-2 text-zinc-500">ไซส์</div>
+							<div className="px-3 py-2 grid grid-cols-5 gap-5">
+								{items.label.map((item, index) => (
+									<div
+										key={index}
+										className={` w-12 aspect-square flex  relative
                  hover:rounded-lg hover:cursor-pointer select-none `}
-									onClick={() => handleSelected(item)}>
-									<div className="flex justify-start items-end">
-										<div
-											className={`border w-12 h-12 rounded-full flex justify-center items-center ${
-												item.label == select?.label && "border-lime-400 text-lime-400"
-											}`}>
-											{item.label}
+										onClick={() => handleSelected(item)}>
+										<div className="flex justify-start items-end">
+											<div
+												className={`border w-12 h-12 rounded-full flex justify-center items-center ${
+													item.label == select?.label && "border-lime-400 text-lime-400"
+												}`}>
+												{item.label}
+											</div>
 										</div>
-									</div>
 
-									{item.amont !== 0 && (
-										<div
-											className={`
+										{item.amont !== 0 && (
+											<div
+												className={`
                     ${
 																					item.label == select?.label &&
 																					"bg-lime-400 border-zinc-800 text-zinc-800"
@@ -156,94 +157,97 @@ export default function ItemDetial({}: Props) {
 																																								}
                      text-zinc-400 border border-zine-400 rounded-full p-1 absolute
                     -right-2 -top-3 flex justify-center items-center z-50 text-xs `}>
-											{item.amont}
-										</div>
-									)}
+												{item.amont}
+											</div>
+										)}
+									</div>
+								))}
+							</div>
+						</div>
+
+						<div className="px-3 py-2">
+							<div className="px-3 py-2 text-sm">
+								<div>
+									รอบออก {select?.chest} นิ้ว | ความยาว {select?.length} นิ้ว
+									<span className="text-lime-400"> (วิธีวัดขนาด)</span>
 								</div>
-							))}
-						</div>
-					</div>
-
-					<div className="px-3 py-2">
-						<div className="px-3 py-2 text-sm">
-							<div>
-								รอบออก {select?.chest} นิ้ว | ความยาว {select?.length} นิ้ว
-								<span className="text-lime-400"> (วิธีวัดขนาด)</span>
-							</div>
-							<div className="text-xs/loose text-zinc-600">
-								<i>*** มีค่าความคลาดเคลื่อน บวก/ลบ 1-2นิ้ว</i>
+								<div className="text-xs/loose text-zinc-600">
+									<i>*** มีค่าความคลาดเคลื่อน บวก/ลบ 1-2นิ้ว</i>
+								</div>
 							</div>
 						</div>
-					</div>
 
-					<div className="px-3 py-2">
-						<div className="px-3 py-2 text-zinc-500">จำนวน</div>
-						<div className="grid grid-cols-9 content-center gap-2 items-center">
-							{/* handle amont */}
-							<div className="col-span-9 flex items-center">
+						<div className="px-3 py-2">
+							<div className="px-3 py-2 text-zinc-500">จำนวน</div>
+							<div className="grid grid-cols-9 content-center gap-2 items-center">
+								{/* handle amont */}
+								<div className="col-span-9 flex items-center">
+									<div className="m-1">
+										<button className="px-3 py-2" onClick={stepDown}>
+											-
+										</button>
+									</div>
+									<div className="m-1 w-full">
+										<input
+											type="text"
+											className="border bg-transparent rounded-full border-zinc-700 p-2 focus:outline-none text-center w-full"
+											// value={select?.amont || 0}
+											value={select?.amont || 0}
+											onChange={(e) => handleOnchangeSelect(e.target.value)}
+										/>
+									</div>
+									<div className="m-1">
+										<button className="px-3 py-2" onClick={stepUp}>
+											+
+										</button>
+									</div>
+								</div>
+
+								{/* price */}
+								<div className="col-span-9 justify-self-center">
+									<div className="text-2xl ">{price.price}</div>
+								</div>
+							</div>
+						</div>
+
+						<div className="px-3 py-2">
+							<div className="px-3 py-2 text-sm">
+								<div>ราคาคำนวนจากจำนวนทั้งหมดในออเดอร์</div>
+								<div className="text-xs/loose text-lime-400">
+									<i>เช็คตารางราคา</i>
+								</div>
+							</div>
+						</div>
+
+						<Divider className="bg-neutral-700 my-6" />
+						<div className="px-3 py-2">
+							<div className="px-3 py-2 text-zinc-500">รายละเอียด</div>
+							<div className="grid grid-cols-6 px-3">
+								<div className="col-span-4">จำนวน</div>
+								<div className="col-span-2 justify-self-end">
+									{total.toString()} ตัว
+								</div>
+
+								<div className="col-span-4">ราคา</div>
+								<div className="col-span-2 justify-self-end">{price.total} บาท</div>
+							</div>
+						</div>
+
+						<div className="px-3 py-2">
+							<div className="flex justify-center">
 								<div className="m-1">
-									<button className="px-3 py-2" onClick={stepDown}>
-										-
+									<button
+										className="px-6 py-2 border-lime-500 text-lime-400 border rounded-full"
+										onClick={() => handleSwipe(false)}>
+										บันทึก
 									</button>
 								</div>
-								<div className="m-1 w-full">
-									<input
-										type="text"
-										className="border bg-transparent rounded-full border-zinc-700 p-2 focus:outline-none text-center w-full"
-										// value={select?.amont || 0}
-										value={select?.amont || 0}
-										onChange={(e) => handleOnchangeSelect(e.target.value)}
-									/>
-								</div>
-								<div className="m-1">
-									<button className="px-3 py-2" onClick={stepUp}>
-										+
-									</button>
-								</div>
-							</div>
-
-							{/* price */}
-							<div className="col-span-9 justify-self-center">
-								<div className="text-2xl ">{price.price}</div>
 							</div>
 						</div>
 					</div>
-
-					<div className="px-3 py-2">
-						<div className="px-3 py-2 text-sm">
-							<div>ราคาคำนวนจากจำนวนทั้งหมดในออเดอร์</div>
-							<div className="text-xs/loose text-lime-400">
-								<i>เช็คตารางราคา</i>
-							</div>
-						</div>
-					</div>
-
-					<Divider className="bg-neutral-700 my-6" />
-					<div className="px-3 py-2">
-						<div className="px-3 py-2 text-zinc-500">รายละเอียด</div>
-						<div className="grid grid-cols-6 px-3">
-							<div className="col-span-4">จำนวน</div>
-							<div className="col-span-2 justify-self-end">{total.toString()} ตัว</div>
-
-							<div className="col-span-4">ราคา</div>
-							<div className="col-span-2 justify-self-end">{price.total} บาท</div>
-						</div>
-					</div>
-
-					<div className="px-3 py-2">
-						<div className="flex justify-center">
-							<div className="m-1">
-								<button
-									className="px-6 py-2 border-lime-500 text-lime-400 border rounded-full"
-									onClick={() => handleSwipe(false)}>
-									บันทึก
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</SwipeableDrawer>
-		</React.Fragment>
+				</SwipeableDrawer>
+			</React.Fragment>
+		</div>
 	);
 }
 

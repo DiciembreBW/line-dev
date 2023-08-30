@@ -12,36 +12,43 @@ import WorkTimeline from "./comp/collection/WorkTimeline";
 import AddressPicker from "./comp/collection/AddressPicker";
 import Reserve from "./comp/collection/Reserve";
 import Price from "./comp/collection/Price";
+import Create from "./comp/collection/Create";
 
 type Props = {};
+
+const init = {
+	name: "รันนิ่ง 2023",
+	status: 0,
+	address:
+		"Office Of the University Building 2, 239 Huay Kaew Road, Suthep Subdistrict, Muang District, Chiang Mai Province Postal Code 50200",
+	items: [
+		{
+			neck: {name: "คอกลม"},
+			sleeve: {name: "แขนสั้น"},
+			Category: {type: "short", price: 10, labels: []},
+		},
+		{
+			neck: {name: "คอวี"},
+			sleeve: {name: "กล้าม"},
+			Category: {type: "curve", price: 0, labels: []},
+		},
+	],
+};
 
 export default function TimelinePage({}: Props) {
 	return (
 		<div className="">
 			{/* <div className="text-xl font-bold">TimelinePage</div> */}
 			<CollectionProvider
-				initValue={{
-					name: "รันนิ่ง 2023",
-					status: 1,
-					address:
-						"Office Of the University Building 2, 239 Huay Kaew Road, Suthep Subdistrict, Muang District, Chiang Mai Province Postal Code 50200",
-					item: [
-						{
-							text: "woradet",
-							title: "title-1",
-							neck: {name: "คอกลม"},
-							sleeve: {name: "แขนสั้น"},
-							amont: 3,
-						},
-						{
-							text: "boonstat",
-							title: "title-2",
-							neck: {name: "คอวี"},
-							sleeve: {name: "กล้าม"},
-							amont: 12,
-						},
-					],
-				}}>
+				initValue={
+					// {...init}
+					{
+						name: "",
+						address: "",
+						status: 0,
+						items: [],
+					}
+				}>
 				<Name />
 
 				{/* <CreateItem /> */}
@@ -50,6 +57,8 @@ export default function TimelinePage({}: Props) {
 					<WorkTimeline />
 					<AddressPicker />
 					<Items />
+					{/* <CreateItem /> */}
+					<Create />
 					<End />
 				</div>
 
@@ -59,6 +68,6 @@ export default function TimelinePage({}: Props) {
 	);
 }
 
-function L() {
-	return <div className="px-3 py-2">click dadwaw</div>;
-}
+// function CreateItem() {
+// 	return <div className="px-3 py-2">click dadwaw</div>;
+// }

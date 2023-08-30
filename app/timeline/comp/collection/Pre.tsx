@@ -12,7 +12,7 @@ export default function PreCollection({}: Props) {
 	const collections = useCollectionContext();
 	return (
 		<div>
-			<pre>{JSON.stringify(collections.item, null, 3)}</pre>
+			<pre>{JSON.stringify(collections, null, 3)}</pre>
 		</div>
 	);
 }

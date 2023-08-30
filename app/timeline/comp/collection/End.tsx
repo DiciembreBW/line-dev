@@ -1,5 +1,4 @@
 import React from "react";
-import CreateItemWithIcon from "./CreateItemWithIcon";
 import {Divider} from "@mui/material";
 
 type Props = {};
