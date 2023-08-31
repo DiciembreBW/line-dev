@@ -7,7 +7,7 @@ import {
 
 type Props = {};
 
-export default function PreCollection({}: Props) {
+export default function Pre({}: Props) {
 	//  const useCollectionDispatchContext()
 	const collections = useCollectionContext();
 	return (

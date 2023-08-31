@@ -14,6 +14,7 @@ import {
 	materialValue,
 } from "../../context/collection.context/types";
 import MaterialUI from "./MaterialUI";
+import Item from "./Item";
 
 type Props = {};
 
@@ -21,12 +22,11 @@ export default function Items({}: Props) {
 	const collection = useCollectionContext();
 
 	return (
-		// <div className=" text-sm text-zinc-400">
 		<div className="grid grid-cols-1 gap-2 text-sm text-zinc-400 mt-3">
-			{/* <pre>{JSON.stringify(collection, null, 4)}</pre> */}
 			{collection.items.map((item, index) => (
 				<div className="rounded-lg px-3 py-2 bg-zinc-800/50 " key={index}>
-					<div className="mb-2 grid grid-cols-9 gap-3">
+					<Item item={item} />
+					{/* <div className="mb-2 grid grid-cols-9 gap-3">
 						<div className="col-span-4">
 							<ImageUI />
 						</div>
@@ -37,11 +37,10 @@ export default function Items({}: Props) {
 					</div>
 
 					<PriceAndAmontUI />
-					<ItemDetial />
+					<ItemDetial /> */}
 				</div>
 			))}
 		</div>
-		// </div>
 	);
 }
 

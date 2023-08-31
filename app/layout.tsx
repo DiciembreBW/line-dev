@@ -12,7 +12,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
 	return (
-		<html lang="en" className="bg-zinc-900 text-zinc-400">
+		// <html lang="en" className="bg-zinc-900 text-zinc-400">
+		<html lang="en" className="">
 			<body className={inter.className}>
 				<div className="flex justify-between">
 					<div className="flex px-3 py-2 gap-4">
