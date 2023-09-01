@@ -13,31 +13,21 @@ const Price = {
 			// return item;
 		});
 
+		const nextPrices = PriceLists.filter((item, index) => {
+			if (amont < item.quantity) {
+				return item;
+			}
+			// return item;
+		});
+
 		const rate = prices[prices.length - 1];
+		const nextRate = nextPrices[0];
 
 		// if (rate == undefined) return;
 		const price = rate == undefined ? 0 : rate.price;
 		const total = price * amont;
 
-		// console.log(rate);
-
-		// function onchange(value: string) {
-		// 	const v = parseInt(value);
-		// 	const _amont = isNaN(v) ? 0 : v;
-		// 	// console.log(_amont);
-
-		// 	setAmont(_amont);
-		// }
-
-		// return (
-		// 	<>
-		// 		<div>{amont}</div>
-		// 		<pre>{JSON.stringify(rate, null, 3)}</pre>
-		// 		<pre>{JSON.stringify(total, null, 3)}</pre>
-		// 	</>
-		// );
-
-		return {price, total, rate};
+		return {price, total, rate, nextRate};
 	},
 };
 
