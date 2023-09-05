@@ -8,6 +8,7 @@ import {
 	sleeveValue,
 } from "../../context/collection.context/types";
 import {useCollectionDispatchContext} from "../../context/collection.context/CollectionReducer";
+import Random from "@/libs/utilities/Random";
 
 type Props = {};
 
@@ -34,11 +35,15 @@ export default function Create({}: Props) {
 
 		// console.log(neck);
 		// console.log(sleeve);
+		const id = Random.id();
 
 		dispatch({
 			item: {
 				type: "create",
 				value: {
+					counter: 0,
+					lists: [],
+					id,
 					neck,
 					sleeve,
 					material: {name: "", description: "", price: 0},

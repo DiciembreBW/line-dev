@@ -1,22 +1,7 @@
 import React, {useState} from "react";
 // import {ItemsType} from "./types";
 import CollectionProvider from "./context/collection.context/CollectionProvider";
-import PreCollection from "./comp/collection/Pre";
-import Name from "./comp/collection/Name";
-import {CollectionType} from "./context/collection.context/types";
-import Items from "./comp/collection/Items";
-import CreateItem from "./comp/collection/CreateItem";
-import End from "./comp/collection/End";
-import Swipe from "@/libs/components/Swipe";
-import WorkTimeline from "./comp/collection/WorkTimeline";
-import AddressPicker from "./comp/collection/AddressPicker";
-import Reserve from "./comp/collection/Reserve";
-import Pre from "./comp/collection/Pre";
-import Price from "./comp/collection/Price";
-import Create from "./comp/collection/Create";
 import ItemPicker from "./comp/collection/ItemPicker";
-import {ListItem, SwipeableDrawer} from "@mui/material";
-import SwipeItem from "./comp/collection/SwipeItem";
 import ListItems from "./comp/collection/ListItems";
 
 type Props = {};
@@ -58,18 +43,18 @@ export default function TimelinePage({}: Props) {
 					<div className="p-3 border-b border-zinc-200 h-fit">
 						<div className="my-2 text-xl">รายการเสื้อ</div>
 						<ListItems />
+						{/* <SwipeItem /> */}
 					</div>
 
-					<Node />
-
 					<div className="p-3 h-fit grid gap-2">
-						<button className="text-center px-3 py-2 rounded-full">
+						{/* <button className="text-center px-3 py-2 rounded-full">
 							สรุปรายละเอียด
 						</button>
 
 						<button className="text-center px-12 py-2 rounded-full border bg-zinc-700 text-zinc-200">
 							สั่งผลิต
-						</button>
+						</button> */}
+						{/* <Preview /> */}
 					</div>
 				</div>
 				{/*  price*/}
@@ -84,24 +69,6 @@ export default function TimelinePage({}: Props) {
 				{/* <End /> */}
 				{/* <PreCollection /> */}
 			</CollectionProvider>
-		</div>
-	);
-}
-
-function Node() {
-	return (
-		<div className="p-3 border-b border-zinc-200 h-fit">
-			<div className="my-2 text-xl">สรุป</div>
-			<div className="grid grid-cols-1 gap-2">
-				<div className="flex pl-3  justify-between">
-					<div>ราคา</div>
-					<div>32,460.-</div>
-				</div>
-				<div className="flex pl-3 justify-between">
-					<div>ระยะเวลาผลิต</div>
-					<div>ประมาณ 15 วัน</div>
-				</div>
-			</div>
 		</div>
 	);
 }

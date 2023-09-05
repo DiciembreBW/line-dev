@@ -12,7 +12,7 @@ export type CollectionActionType = {
 	};
 
 	item?: {
-		type: "create";
+		type: "create" | "update";
 		value: ItemType;
 	};
 
@@ -31,12 +31,22 @@ export type CollectionActionType = {
 		value: MaterialType;
 		index: number;
 	};
+
+	sleeve?: {
+		type: "update";
+		id: string;
+		label: LabelType;
+		value: LabelType[]
+	};
 };
 
 export type ItemType = {
+	id: string;
 	neck: NeckType;
 	sleeve: SleeveType;
 	material: MaterialType;
+	lists: LabelType[];
+	counter: number;
 };
 
 // *****************************
@@ -75,9 +85,12 @@ export type MaterialType = {
 
 // intial value
 export const initValue: ItemType = {
+	counter: 0,
+	id: "",
 	neck: {name: "", price: 0},
 	sleeve: {name: "", price: 0, labels: []},
 	material: {name: "", description: "", price: 0},
+	lists: [],
 };
 
 export const neckValue: NeckType[] = [

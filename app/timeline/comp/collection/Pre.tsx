@@ -5,14 +5,14 @@ import {
 	useCollectionDispatchContext,
 } from "../../context/collection.context/CollectionReducer";
 
-type Props = {};
+type Props = {item?: any};
 
-export default function Pre({}: Props) {
+export default function Pre({item}: Props) {
 	//  const useCollectionDispatchContext()
 	const collections = useCollectionContext();
 	return (
 		<div>
-			<pre>{JSON.stringify(collections, null, 3)}</pre>
+			<pre>{JSON.stringify(item || collections, null, 3)}</pre>
 		</div>
 	);
 }
