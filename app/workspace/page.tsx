@@ -1,12 +1,15 @@
+"use client";
+import Label from "@/components/app/LabelDIalog";
 import WorkspaceNav from "@/components/app/Navbar/WorkspaceNav";
 import Preview from "@/components/app/Preview";
 import PreviewJSON from "@/components/app/PreviewJSON";
 import AppProvider from "@/context/app/AppProvider";
 import {Dialog} from "@mui/material";
 import Link from "next/link";
+import {useSearchParams} from "next/navigation";
 import React, {useState} from "react";
 
-type Props = {};
+type Props = {params: {id: string}};
 
 export default function page({}: Props) {
 	return (
@@ -35,28 +38,6 @@ function Item({name}: {name: string}) {
 			</div>
 
 			<div className="flex justify-center text-xl font-bold">{name}</div>
-		</div>
-	);
-}
-
-function Label(name: string) {
-	return (
-		<div className="grid grid-rows-6 h-full">
-			<div className="row-span-5 p-3">
-				<div className="border rounded-lg h-full flex justify-center items-center">
-					Model {name}
-				</div>
-			</div>
-			{/* <div className="ring px-3 py-2 flex">adad</div> */}
-
-			<div className="row-span-1 px-3 py-4 flex justify-center">
-				<Link
-					href={`/workspace/lists/${name}`}
-					className="px-4 py-2 rounded-full bg-zinc-800 text-zinc-300 h-fit">
-					{/* <div className="ring h-fit"></div> */}
-					ดูรายละเอียด
-				</Link>
-			</div>
 		</div>
 	);
 }

@@ -1,3 +1,3 @@
-export type AppType = {text: string};
+export type AppType = {id: string};
 export type AppActionType = {};
-export const init: AppType = {text: "test"};
+export const init: AppType = {id: "my_id"};

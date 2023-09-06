@@ -1,12 +1,14 @@
+"use client";
 import ListNav from "@/components/app/Navbar/ListNav";
-import Preview from "@/components/app/Preview";
-import PreviewJSON from "@/components/app/PreviewJSON";
+import {useAppContext} from "@/context/app/AppReducer";
 import Link from "next/link";
 import React from "react";
 
 type Props = {params: {type: string}};
 
-export default function page({params}: Props) {
+export default function Page({params}: Props) {
+	const app = useAppContext();
+	const {id} = app;
 	return (
 		<div className="flex flex-col h-screen">
 			{/* <ListNav /> */}
@@ -48,7 +50,9 @@ export default function page({params}: Props) {
 			{/* Description */}
 			<div className="grid content-end bg-zinc-50 rounded-t-3xl shadow-2xl shadow-black px-5 py-4">
 				{/* title */}
-				<div className="text-xl font-bold">{params.type}</div>
+				<div className="text-xl font-bold">
+					{params.type} | id :{id}
+				</div>
 
 				{/* material */}
 				<div className="my-2">
@@ -75,12 +79,14 @@ export default function page({params}: Props) {
 					<Label />
 				</div>
 
+				<div className="p-4 flex flex-wrap gap-2 justify-center">Total 36 ตัว</div>
+
 				{/* action */}
 				<div className="flex gap-6 justify-center items-center ">
 					<div className="text-2xl">฿9,560.00</div>
 					<div className="">
 						<button className="px-3 py-2 rounded-xl bg-zinc-800 text-zinc-300">
-							<Link href="/workspace/lists">ตกลง</Link>
+							<Link href={`/workspace/lists?id=${id}`}>ตกลง</Link>
 						</button>
 					</div>
 				</div>

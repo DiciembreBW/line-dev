@@ -1,6 +1,9 @@
-import AppNav from "@/components/app/Navbar/AppNav";
+"use client";
+import Label from "@/components/app/LabelDIalog";
 import WorkspaceNav from "@/components/app/Navbar/WorkspaceNav";
 import Preview from "@/components/app/Preview";
+import PreviewJSON from "@/components/app/PreviewJSON";
+import {useAppContext} from "@/context/app/AppReducer";
 import Link from "next/link";
 import React from "react";
 
@@ -75,18 +78,22 @@ function Action() {
 					<button className="px-3 py-1">เปิดออเดอร์</button>
 				</div>
 			</div>
+
+			<PreviewJSON />
 		</div>
 	);
 }
 
 function Item({name}: {name: string}) {
+	const app = useAppContext();
+	const {id} = app;
 	return (
 		<div className="p-2 border rounded-lg shadow flex gap-2 justify-between">
 			<div className="basis-6/12 h-40 rounded-lg bg-zinc-200/50 flex justify-center items-center">
 				<Preview Content={Label(name)}>image</Preview>
 			</div>
 
-			<Link href={`/workspace/lists/${name}`} className="basis-6/12">
+			<Link href={`/workspace/lists/${name}?id=${id}`} className="basis-6/12">
 				<div className="">
 					<div>
 						<div className="text-xl">แขนสั้นคอกลม</div>
@@ -107,24 +114,24 @@ function Item({name}: {name: string}) {
 	);
 }
 
-function Label(name: string) {
-	return (
-		<div className="grid grid-rows-6 h-full">
-			<div className="row-span-5 p-3">
-				<div className="border rounded-lg h-full flex justify-center items-center">
-					Model {name}
-				</div>
-			</div>
-			{/* <div className="ring px-3 py-2 flex">adad</div> */}
+// function Label(name: string) {
+// 	return (
+// 		<div className="grid grid-rows-6 h-full">
+// 			<div className="row-span-5 p-3">
+// 				<div className="border rounded-lg h-full flex justify-center items-center">
+// 					Model {name}
+// 				</div>
+// 			</div>
+// 			{/* <div className="ring px-3 py-2 flex">adad</div> */}
 
-			<div className="row-span-1 px-3 py-4 flex justify-center">
-				<Link
-					href={`/workspace/lists/${name}`}
-					className="px-4 py-2 rounded-full bg-zinc-800 text-zinc-300 h-fit">
-					{/* <div className="ring h-fit"></div> */}
-					ดูรายละเอียด
-				</Link>
-			</div>
-		</div>
-	);
-}
+// 			<div className="row-span-1 px-3 py-4 flex justify-center">
+// 				<Link
+// 					href={`/workspace/lists/${name}`}
+// 					className="px-4 py-2 rounded-full bg-zinc-800 text-zinc-300 h-fit">
+// 					{/* <div className="ring h-fit"></div> */}
+// 					ดูรายละเอียด
+// 				</Link>
+// 			</div>
+// 		</div>
+// 	);
+// }
