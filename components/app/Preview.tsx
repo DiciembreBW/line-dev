@@ -17,14 +17,16 @@ export default function Preview({children, Content}: Props) {
 	}
 	return (
 		<>
-			<div onClick={open}>{children}</div>
+			<div onClick={open} className="">
+				{children}
+			</div>
 			<Dialog
 				open={state}
 				onClose={() => setState(false)}
 				fullScreen={true}
 				transitionDuration={0}>
-				<div className="flex justify-between px-3 py-2">
-					<div className="">{`<-`}</div>
+				<div className="flex justify-between px-3 py-2 font-bold text-2xl">
+					<div className="" onClick={close}>{`<-`}</div>
 					<div className="hover:cursor-pointer" onClick={close}>
 						x
 					</div>
