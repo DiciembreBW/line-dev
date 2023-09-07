@@ -15,7 +15,7 @@ export default function Page({}: Props) {
 	return (
 		<>
 			{/* <div className="flex justify-center px-3 py-2 items-center">Home page</div> */}
-			<WorkspaceNav />
+			{/* <WorkspaceNav />
 
 			<div className="px-3 py-2 grid gap-2 content-center  ">
 				<div className="flex snap-x snap-mandatory gap-2 overflow-x-scroll">
@@ -25,7 +25,8 @@ export default function Page({}: Props) {
 					<Item name="MD" />
 				</div>
 				<PreviewJSON />
-			</div>
+			</div> */}
+			xx
 		</>
 	);
 }
