@@ -15,7 +15,7 @@ const CallAPI = {
 	},
 
 	//  get workspace item
-	async getItem(id: string): Promise<AppType> {
+	async getItem(id: string) {
 		const response = await fetch(
 			`${process.env.HOST_URL || ""}/api/workspace?id=${id}`,
 			{cache: "no-cache"}

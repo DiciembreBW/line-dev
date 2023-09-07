@@ -1,14 +1,7 @@
-import CallAPI from "@/ultils/workspace-call-api";
 import React from "react";
 
-type Props = {params: {id: string}};
+type Props = {children: React.ReactNode};
 
-export default async function WorkspaceItemPageLayout({params}: Props) {
-	const item = await CallAPI.getItem(params.id);
-	return (
-		<div>
-			<pre>{JSON.stringify(item)}</pre>
-			<div>WorkspaceItemPageLayout</div>
-		</div>
-	);
+export default function WorkspaceItemPageLayout({children}: Props) {
+	return <>{children};</>;
 }
