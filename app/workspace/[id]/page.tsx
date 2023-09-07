@@ -6,7 +6,7 @@ type Props = {params: {id: string}};
 async function Get(id: string) {
 	const response = await fetch(
 		// `${process.env.HOST_URL || ""}/api/workspace?id=${id}`,
-		`${process.env.HOST_URL || ""}/api/workspace?id=${id}`,
+		`https://line-dev-smoky.vercel.app/api/workspace?id=${id}`,
 		{cache: "no-cache"}
 	);
 	return await response.json();
