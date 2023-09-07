@@ -1,9 +1,6 @@
 import AppProvider from "@/context/app/AppProvider";
-import {AppType} from "@/context/app/type";
-import Host from "@/libs/utilities/Host";
 import CallAPI from "@/ultils/workspace-call-api";
 import Link from "next/link";
-import {useRouter} from "next/navigation";
 import React from "react";
 
 type Props = {children: React.ReactNode; params: {id: string}};
@@ -37,8 +34,7 @@ export default async function Layout({children, params}: Props) {
 	// };
 	return (
 		<div className="">
-			<pre>{JSON.stringify(res)}</pre>
-			{/* <AppProvider value={init_value}>{children}</AppProvider> */}
+			<AppProvider value={res}>{children}</AppProvider>
 		</div>
 	);
 }
