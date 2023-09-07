@@ -1,27 +1,40 @@
+"use client";
+import Label from "@/components/app/LabelDIalog";
+import WorkspaceNav from "@/components/app/Navbar/WorkspaceNav";
+import Preview from "@/components/app/Preview";
+import PreviewJSON from "@/components/app/PreviewJSON";
+import {useAppContext} from "@/context/app/AppReducer";
 import React from "react";
-import CallAPI from "@/ultils/workspace-call-api";
 
-type Props = {params: {id: string}};
+type Props = {};
 
-async function Get(id: string) {
-	// const URL = `${process.env.HOST_URL || ""}/api/workspace?id=${id}`;
-	// const URL = `${process.env.HOST_URL}`;
-	const response = await fetch(
-		`${process.env.HOST_URL || ""}/api/workspace?id=${id}`,
-		// `https://line-dev-smoky.vercel.app/api/workspace?id=${id}`,
-		{cache: "no-cache"}
-	);
-	return await response.json();
-
-	// return URL;
-}
-export default async function WorkspaceItemPage({params}: Props) {
-	const item = await Get(params.id);
+export default function WorkspaceItemPage({}: Props) {
+	const app = useAppContext();
 	return (
-		<div>
-			{/* <pre>{JSON.stringify(`${process.env.HOST_URL || ""}`, null, 3)}</pre> */}
-			<pre>{JSON.stringify(item, null, 3)}</pre> adksakdjadj
-			<div className="text-xl font-bold">WorkspaceItemPage</div>
+		<>
+			{/* <WorkspaceNav /> */}
+			{/* <pre>{JSON.stringify(app, null, 3)}</pre> */}
+			<div className="px-3 py-2 grid gap-2 content-center  ">
+				{/* <div className="flex snap-x snap-mandatory gap-2 overflow-x-scroll">
+					<Item name="t_shirt" />
+					<Item name="Cxn" />
+					<Item name="Thailand" />
+					<Item name="MD" />
+				</div> */}
+				<PreviewJSON />
+			</div>
+		</>
+	);
+}
+
+function Item({name}: {name: string}) {
+	return (
+		<div className="shrink-0 w-full snap-center px-3 py-2 rounded-xl border bg-zinc-200/50">
+			<div className=" aspect-[3/4] flex justify-center items-center">
+				<Preview Content={Label(name)}>{name}</Preview>
+			</div>
+
+			<div className="flex justify-center text-xl font-bold">{name}</div>
 		</div>
 	);
 }
