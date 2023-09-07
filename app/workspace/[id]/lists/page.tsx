@@ -24,7 +24,7 @@ export default function page({}: Props) {
 				</div>
 			</div>
 
-			<ConditionTerm />
+			{/* <ConditionTerm /> */}
 			<CreateOrder />
 			<PreviewJSON />
 		</>

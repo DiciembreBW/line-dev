@@ -5,11 +5,6 @@ import React from "react";
 
 type Props = {children: React.ReactNode; params: {id: string}};
 
-// async function get(id: string) {
-// 	const res = await fetch(`${process.env.HOST_URL!}/api/workspace?id=${id}`);
-// 	return await res.json();
-// }
-
 export default async function Layout({children, params}: Props) {
 	// const id = await get(params.id);
 	// const init_value = await CallAPI.getItem(params.id)
@@ -33,8 +28,10 @@ export default async function Layout({children, params}: Props) {
 	// 	counter: 0,
 	// };
 	return (
-		<div className="">
-			<AppProvider value={res}>{children}</AppProvider>
-		</div>
+		// <div className="">
+		// 	{JSON.stringify(res)}
+		// 	<AppProvider value={res}>{children}</AppProvider>
+		// </div>
+		<>{children}</>
 	);
 }
