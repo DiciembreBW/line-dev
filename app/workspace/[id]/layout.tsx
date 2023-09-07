@@ -11,7 +11,6 @@ export default async function WorkspaceItemPageLayout({
 	const item = await CallAPI.getItem(params.id);
 	return (
 		<>
-			{/* <pre>{JSON.stringify(item, null, 3)}</pre> */}
 			<AppProvider value={item}>{children}</AppProvider>
 		</>
 	);

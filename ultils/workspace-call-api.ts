@@ -1,5 +1,6 @@
 import {AppType} from "@/context/app/type";
-const URL = "https://line-dev-smoky.vercel.app";
+const URL = "https://line-dev-smoky.vercel.app"; // production
+// const URL = "http://localhost:3000"; // dev
 
 const CallAPI = {
 	//  create workspace item
@@ -11,6 +12,12 @@ const CallAPI = {
 				"Content-Type": "application/json",
 			},
 		});
+
+		return await response.json();
+	},
+
+	async getItems(): Promise<AppType[]> {
+		const response = await fetch(`${URL}/api/workspace`, {cache: "no-store"});
 
 		return await response.json();
 	},

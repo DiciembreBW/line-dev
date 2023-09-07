@@ -86,7 +86,7 @@ export default function Page({params}: Props) {
 					<div className="text-2xl">฿9,560.00</div>
 					<div className="">
 						<button className="px-3 py-2 rounded-xl bg-zinc-800 text-zinc-300">
-							<Link href={`/workspace/lists?id=${id}`}>ตกลง</Link>
+							<Link href={`/workspace/${id}/lists`}>ตกลง</Link>
 						</button>
 					</div>
 				</div>

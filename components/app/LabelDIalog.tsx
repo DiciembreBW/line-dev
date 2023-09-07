@@ -17,7 +17,7 @@ export default function Label(name: string) {
 
 			<div className="row-span-1 px-3 py-4 flex justify-center">
 				<Link
-					href={`/workspace/${id}/lists/`}
+					href={`/workspace/${id}/lists/${name}`}
 					className="px-4 py-2 rounded-full bg-zinc-800 text-zinc-300 h-fit">
 					{/* <div className="ring h-fit"></div> */}
 					ดูรายละเอียด
