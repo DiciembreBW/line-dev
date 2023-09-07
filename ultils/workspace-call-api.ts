@@ -3,7 +3,7 @@ import {AppType} from "@/context/app/type";
 const CallAPI = {
 	//  create workspace item
 	async createItem(value: AppType) {
-		const response = await fetch(`/api/workspace/`, {
+		const response = await fetch(`${process.env.HOST_URL || ""}/api/workspace/`, {
 			method: "POST",
 			body: JSON.stringify(value),
 			headers: {
