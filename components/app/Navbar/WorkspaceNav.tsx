@@ -1,23 +1,19 @@
-"use client";
-import {useAppContext} from "@/context/app/AppReducer";
 import Link from "next/link";
 import React from "react";
 
 type Props = {};
 
 export default function WorkspaceNav({}: Props) {
-	const app = useAppContext();
-	const {id} = app;
-
 	return (
 		<div className="flex items-center px-3 py-2 justify-between">
-			<div className="">
-				<Link href={`/workspace?id=${id}`}> Design </Link>
+			<div className="flex gap-2">
+				{/* <Link href="/workspace">ค้นหา </Link> */}
+				<Link href="/workspace/create">สร้าง</Link>
 			</div>
 			<div className="">
-				<Link href={`/workspace/lists?id=${id}`}>List </Link>
+				<Link href="/">SNAP </Link>
 			</div>
-			<div className="">...</div>
+			{/* <div className="">...</div> */}
 		</div>
 	);
 }

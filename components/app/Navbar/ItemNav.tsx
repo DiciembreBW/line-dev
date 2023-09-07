@@ -5,16 +5,21 @@ import React from "react";
 
 type Props = {};
 
-export default function ListNav({}: Props) {
+export default function ItemNav({}: Props) {
 	const app = useAppContext();
 	const {id} = app;
+
 	return (
 		<div className="flex items-center px-3 py-2 justify-between">
 			<div className="">
-				<Link href={`/workspace/${app.id}/lists`}>{`<-`} </Link>
+				<Link href={`/workspace/${id}`}> Design </Link>
 			</div>
 			<div className="">
-				<Link href="/">SNAP </Link>
+				<Link href={`/workspace/${id}/lists`}>List </Link>
+			</div>
+
+			<div className="">
+				<Link href={`/workspace`}>Workspace</Link>
 			</div>
 		</div>
 	);

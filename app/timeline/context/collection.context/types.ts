@@ -36,7 +36,7 @@ export type CollectionActionType = {
 		type: "update";
 		id: string;
 		label: LabelType;
-		value: LabelType[]
+		value: LabelType[];
 	};
 };
 
