@@ -97,7 +97,7 @@ export default function Firebase<T>({colName}: {colName: string}) {
 
 		// get doc
 		GetDoc: async function ({docName}: {docName: string}): Promise<T> {
-			const docRef = doc(db, colName + docName);
+			const docRef = doc(db, colName + "/" + docName);
 			const docSnap = await getDoc(docRef);
 
 			// return docSnap.data();

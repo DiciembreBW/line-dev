@@ -10,7 +10,10 @@ export default function CreateOrder({}: Props) {
 
 	function handleCreate() {
 		distpatch({
-			id: {type: app.id},
+			app: {
+				type: "create",
+				value: app,
+			},
 		});
 	}
 
