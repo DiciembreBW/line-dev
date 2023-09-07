@@ -17,10 +17,24 @@ const CallAPI = {
 	//  get workspace item
 	async getItem(id: string): Promise<AppType> {
 		const response = await fetch(
-			`${process.env.HOST_URL || ""}/api/workspace?id=${id}`
+			`${process.env.HOST_URL || ""}/api/workspace?id=${id}`,
+			{cache: "no-cache"}
 		);
-		const data = await response.json();
-		return data;
+		return await response.json();
+
+		// return `${process.env.HOST_URL || ""}/api/workspace?id=${id}`;
+	},
+
+	async updateItem(value: AppType) {
+		const response = await fetch(`${process.env.HOST_URL || ""}/api/workspace`, {
+			method: "PATCH",
+			body: JSON.stringify(value),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		return await response.json();
 	},
 };
 

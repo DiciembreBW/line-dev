@@ -14,8 +14,13 @@ export default function ItemNav({}: Props) {
 			<div className="">
 				<Link href={`/workspace/${id}`}> Design </Link>
 			</div>
+
 			<div className="">
 				<Link href={`/workspace/${id}/lists`}>List </Link>
+			</div>
+
+			<div className="">
+				<Link href={`/workspace/${id}/item`}>Item </Link>
 			</div>
 
 			<div className="">

@@ -11,7 +11,7 @@ import React, {useState} from "react";
 
 type Props = {};
 
-export default function page({}: Props) {
+export default function Page({}: Props) {
 	return (
 		<>
 			{/* <div className="flex justify-center px-3 py-2 items-center">Home page</div> */}

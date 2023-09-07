@@ -12,6 +12,22 @@ function HandleReducer(app: AppType, action: AppActionType): AppType {
 		default: {
 		}
 	}
+
+	switch (action.counter?.type) {
+		case "up": {
+			return {...app, counter: app.counter + 1};
+		}
+
+		case "down": {
+			// if (app.counter)
+			const counter = app.counter < 1 ? 0 : app.counter - 1;
+			return {...app, counter: counter};
+		}
+
+		case "reset": {
+			return {...app, counter: 0};
+		}
+	}
 	return app;
 }
 

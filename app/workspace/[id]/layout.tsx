@@ -23,15 +23,11 @@ export default async function Layout({children, params}: Props) {
 			</div>
 		);
 	}
-	// const init_value: AppType = {
-	// 	id: params.id,
-	// 	counter: 0,
-	// };
+
 	return (
-		// <div className="">
-		// 	{JSON.stringify(res)}
-		// 	<AppProvider value={res}>{children}</AppProvider>
-		// </div>
-		<>{children}</>
+		<div className="">
+			{/* <pre>{JSON.stringify(res)}</pre> */}
+			<AppProvider value={res}>{children}</AppProvider>
+		</div>
 	);
 }

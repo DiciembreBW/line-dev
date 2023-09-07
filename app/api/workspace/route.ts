@@ -9,18 +9,6 @@ export async function GET(req: Request) {
 	const {searchParams} = new URL(req.url);
 	const id = searchParams.get("id");
 
-	// switch (id) {
-	// 	case null: {
-	// 		return NextResponse.json({value: "id is null"});
-	// 	}
-
-	// 	default: {
-	// 		return DB.GetDoc({docName: `/${id}`}).then((reponse) => {
-	// 			return NextResponse.json({name: "pass"});
-	// 		});
-	// 	}
-	// }
-
 	if (id == null) return NextResponse.json(id);
 
 	const response = await DB.GetDoc({docName: id});
@@ -30,7 +18,14 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
 	const body = await req.json();
 
-	const responze = DB.SetDoc({data: body, id: body.id});
+	const response = DB.SetDoc({data: body, id: body.id});
 
-	return NextResponse.json(responze);
+	return NextResponse.json(response);
+}
+
+export async function PATCH(req: Request) {
+	const body = await req.json();
+
+	const response = DB.SetDoc({data: body, id: body.id});
+	return NextResponse.json(response);
 }
