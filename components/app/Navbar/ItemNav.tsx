@@ -11,17 +11,16 @@ export default function ItemNav({}: Props) {
 
 	return (
 		<div className="flex items-center px-3 py-2 justify-between">
-			<div className="">
+			<div className="flex gap-3">
 				<Link href={`/workspace/${id}`}> Design </Link>
-			</div>
-
-			<div className="">
 				<Link href={`/workspace/${id}/lists`}>List </Link>
 			</div>
 
-			<div className="">
+			<div className=""></div>
+
+			{/* <div className="">
 				<Link href={`/workspace/${id}/item`}>Item </Link>
-			</div>
+			</div> */}
 
 			<div className="">
 				<Link href={`/workspace`}>Workspace</Link>

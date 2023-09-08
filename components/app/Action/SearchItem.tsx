@@ -11,14 +11,6 @@ export default function SearchItem({}: Props) {
 
 	async function onenter(e: React.KeyboardEvent<HTMLInputElement>) {
 		if (e.key == "Enter" && id !== "") {
-			// router.push(`/workspace/${id}`);
-
-			const response = await CallAPI.getItem(id);
-
-			// if response is null
-			if (response == null) return <div>no value</div>;
-
-			// else
 			router.replace(`/workspace/${id}`);
 		}
 	}

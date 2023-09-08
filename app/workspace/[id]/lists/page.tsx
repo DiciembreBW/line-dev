@@ -1,14 +1,15 @@
 "use client";
-import CreateOrder from "@/components/app/Action/CreateOrder";
 import Label from "@/components/app/LabelDIalog";
-import AppNav from "@/components/app/Navbar/AppNav";
 import ItemNav from "@/components/app/Navbar/ItemNav";
 import Preview from "@/components/app/Preview";
-import PreviewJSON from "@/components/app/PreviewJSON";
-import ConditionTerm from "@/components/app/ui/ConditionTerm";
 import {useAppContext} from "@/context/app/AppReducer";
 import Link from "next/link";
-import React from "react";
+import React, {useState} from "react";
+import AddressUI from "@/components/app/ui/AddressUI";
+import TermUI from "@/components/app/ui/TermUI";
+import CreateOrderUI from "@/components/app/ui/CreateOrderUI";
+import UpdateWorkspaceUI from "@/components/app/ui/UpdateWorkspaceUI";
+import CouterUI from "@/components/app/ui/CouterUI";
 
 type Props = {};
 
@@ -24,13 +25,17 @@ export default function page({}: Props) {
 				</div>
 			</div>
 
-			{/* <ConditionTerm /> */}
-			{/* <CreateOrder /> */}
-			<PreviewJSON />
+			<div className="px-3 py-2">
+				<TermUI />
+				<CreateOrderUI />
+				<AddressUI />
+				<CouterUI />
+				<UpdateWorkspaceUI />
+			</div>
+			{/* <PreviewJSON /> */}
 		</>
 	);
 }
-
 function Item({name}: {name: string}) {
 	const app = useAppContext();
 	const {id} = app;

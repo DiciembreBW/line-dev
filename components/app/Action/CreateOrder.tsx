@@ -1,5 +1,6 @@
 "use client";
 import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
+import {useRouter} from "next/navigation";
 import React from "react";
 
 type Props = {};
@@ -7,14 +8,18 @@ type Props = {};
 export default function CreateOrder({}: Props) {
 	const app = useAppContext();
 	const distpatch = useAppDispatchContext();
+	const router = useRouter();
 
 	function handleCreate() {
 		distpatch({
 			app: {
 				type: "create",
-				value: app,
+				value: {...app, init: true},
 			},
 		});
+
+		router.replace("/workspace");
+		router.refresh();
 	}
 
 	return (

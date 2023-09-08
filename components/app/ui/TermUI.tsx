@@ -1,8 +1,14 @@
-import React from "react";
+import {useAppContext} from "@/context/app/AppReducer";
 
-type Props = {};
+export default function TermUI() {
+	const app = useAppContext();
+	const {init} = app;
+	if (init == false) {
+		return <ConditionTerm />;
+	}
+}
 
-export default function ConditionTerm({}: Props) {
+function ConditionTerm() {
 	return (
 		<div className="px-3 py-2">
 			<div>เงื่อนไข</div>

@@ -3,7 +3,7 @@ import Firebase from "@/libs/firebase/firebase";
 import {NextApiRequest} from "next";
 import {NextResponse} from "next/server";
 
-const DB = Firebase<AppType>({colName: "worksplace"});
+const DB = Firebase<AppType>({colName: "workspace"});
 
 export async function GET(req: Request) {
 	const {searchParams} = new URL(req.url);

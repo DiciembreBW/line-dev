@@ -17,7 +17,7 @@ export default function Preview({children, Content}: Props) {
 	}
 	return (
 		<>
-			<div onClick={open} className="">
+			<div onClick={open} className=" hover:cursor-pointer hover:bg-zinc-200">
 				{children}
 			</div>
 			<Dialog

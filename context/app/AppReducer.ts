@@ -1,6 +1,5 @@
-import Random from "@/libs/utilities/Random";
 import {AppType, AppActionType, init} from "./type";
-import {CreateContext, CreateReducer} from "@/context/Context";
+import {CreateContext} from "@/context/Context";
 import CallAPI from "@/ultils/workspace-call-api";
 
 function HandleReducer(app: AppType, action: AppActionType): AppType {
@@ -8,6 +7,12 @@ function HandleReducer(app: AppType, action: AppActionType): AppType {
 		case "create": {
 			CallAPI.createItem(action.app.value);
 			return app;
+		}
+		case "update": {
+			return {
+				...app,
+				address: action.app.value.address,
+			};
 		}
 		default: {
 		}
