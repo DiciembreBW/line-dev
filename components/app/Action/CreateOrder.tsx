@@ -1,5 +1,6 @@
 "use client";
 import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
+import {useGlobalContext} from "@/context/global/GlobalReducer";
 import {useRouter} from "next/navigation";
 import React from "react";
 
@@ -7,6 +8,7 @@ type Props = {};
 
 export default function CreateOrder({}: Props) {
 	const app = useAppContext();
+	const global = useGlobalContext();
 	const distpatch = useAppDispatchContext();
 	const router = useRouter();
 
@@ -14,7 +16,7 @@ export default function CreateOrder({}: Props) {
 		distpatch({
 			app: {
 				type: "create",
-				value: {...app, init: true},
+				value: {...app, init: true, user: global.user},
 			},
 		});
 

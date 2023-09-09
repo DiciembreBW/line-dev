@@ -10,6 +10,9 @@ export default function AppNav({}: Props) {
 				<Link href="/workspace"> Workspace </Link>
 			</div>
 			<div className="">
+				<Link href="/test"> Test </Link>
+			</div>
+			<div className="">
 				<Link href="/">SNAP </Link>
 			</div>
 			{/* <div className="">...</div> */}

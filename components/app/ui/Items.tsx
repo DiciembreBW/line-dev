@@ -13,7 +13,7 @@ export default async function Items({id}: Props) {
 				<div
 					key={index}
 					className="flex rounded-lg border shadow px-3 py-2 justify-between">
-					<Link href={`/workspace/${item.id}`}>
+					<Link href={`/workspace/${item.id}/lists`}>
 						<div>{item.id}</div>
 					</Link>
 					<div>{item.counter}</div>

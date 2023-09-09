@@ -1,6 +1,7 @@
 import SearchItem from "@/components/app/Action/SearchItem";
 import WorkspaceNav from "@/components/app/Navbar/WorkspaceNav";
 import Items from "@/components/app/ui/Items";
+import UserUI from "@/components/global/ui/UserUI";
 import React from "react";
 
 type Props = {};

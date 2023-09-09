@@ -16,7 +16,12 @@ export default async function WorkspaceItemPageLayout({
 		return (
 			<>
 				<AppProvider
-					value={{counter: 0, id: Random.id(), init: false, address: ""}}>
+					value={{
+						counter: 0,
+						id: Random.id(),
+						init: false,
+						address: "",
+					}}>
 					{children}
 				</AppProvider>
 			</>

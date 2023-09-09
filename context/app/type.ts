@@ -1,8 +1,11 @@
+import {UserProfile} from "../global/GlobalType";
+
 export type AppType = {
 	id: string;
 	counter: number;
 	init: boolean;
 	address: string;
+	user?: UserProfile;
 };
 export type AppActionType = {
 	app?: {
@@ -19,4 +22,9 @@ export const init: AppType = {
 	counter: 0,
 	init: false,
 	address: "",
+	user: {
+		id: "",
+		name: "",
+		picture: "",
+	},
 };
