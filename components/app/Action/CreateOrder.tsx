@@ -1,6 +1,8 @@
 "use client";
 import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
 import {useGlobalContext} from "@/context/global/GlobalReducer";
+import {line} from "@/ultils/line";
+import CallAPI from "@/ultils/workspace-call-api";
 import {useRouter} from "next/navigation";
 import React from "react";
 
@@ -9,19 +11,19 @@ type Props = {};
 export default function CreateOrder({}: Props) {
 	const app = useAppContext();
 	const global = useGlobalContext();
-	const distpatch = useAppDispatchContext();
-	const router = useRouter();
+	// const distpatch = useAppDispatchContext();
+	// const router = useRouter();
 
 	function handleCreate() {
-		distpatch({
-			app: {
-				type: "create",
-				value: {...app, init: true, user: global.user},
-			},
+		const value = {...app, init: true, user: global.user};
+		CallAPI.createItem(value).then((id) => {
+			// const url = ``
+			const textMessage = {
+				link: `https://liff.line.me/2000394306-EVnwMxlm/${id}`,
+				create_at: Date.now(),
+			};
+			line.sendText([{type: "text", text: JSON.stringify(textMessage)}]);
 		});
-
-		router.replace("/workspace");
-		router.refresh();
 	}
 
 	return (

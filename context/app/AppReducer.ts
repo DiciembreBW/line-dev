@@ -1,11 +1,13 @@
 import {AppType, AppActionType, init} from "./type";
 import {CreateContext} from "@/context/Context";
-import CallAPI from "@/ultils/workspace-call-api";
+// import CallAPI from "@/ultils/workspace-call-api";
 
 function HandleReducer(app: AppType, action: AppActionType): AppType {
 	switch (action.app?.type) {
 		case "create": {
-			CallAPI.createItem(action.app.value);
+			// CallAPI.createItem(action.app.value);
+			console.log(action.app.value);
+
 			return app;
 		}
 		case "update": {
