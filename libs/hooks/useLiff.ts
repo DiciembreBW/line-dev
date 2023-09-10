@@ -27,7 +27,7 @@ export default function useLiff({liffId}: Props) {
 				// window.alert(user?.name);
 			});
 		});
-	});
+	}, []);
 
 	return {user, liff};
 }
