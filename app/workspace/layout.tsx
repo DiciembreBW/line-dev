@@ -10,7 +10,7 @@ export default function Layout({children}: Props) {
 
 	if (user == undefined)
 		return (
-			<div className="h-screen grid justify-items-center items-center">
+			<div className="h-screen grid justify-items-center items-center touch-none">
 				<CircularProgress className="text-zinc-400" color="inherit" size={100} />
 			</div>
 		);
