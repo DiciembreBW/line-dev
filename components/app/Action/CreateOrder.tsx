@@ -1,25 +1,22 @@
 "use client";
 import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
 import {useGlobalContext} from "@/context/global/GlobalReducer";
+// import useLiff from "@/libs/hooks/useLiff";
 import {line} from "@/ultils/line";
 import CallAPI from "@/ultils/workspace-call-api";
-import {useRouter} from "next/navigation";
-import React from "react";
-
+import liff from "@line/liff";
+import React, {useEffect} from "react";
 type Props = {};
 
 export default function CreateOrder({}: Props) {
 	const app = useAppContext();
 	const global = useGlobalContext();
-	// const distpatch = useAppDispatchContext();
-	// const router = useRouter();
 
-	function handleCreate() {
+	async function handleCreate() {
 		const value = {...app, init: true, user: global.user};
 		CallAPI.createItem(value).then((id) => {
-			// const url = ``
 			const textMessage = {
-				link: `https://liff.line.me/2000394306-EVnwMxlm/${id}`,
+				link: `https://liff.line.me/2000394306-EVnwMxlm/${id}/lists`,
 				create_at: Date.now(),
 			};
 			line.sendText([{type: "text", text: JSON.stringify(textMessage)}]);

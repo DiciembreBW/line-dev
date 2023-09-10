@@ -11,6 +11,7 @@ import CreateOrderUI from "@/components/app/ui/CreateOrderUI";
 import UpdateWorkspaceUI from "@/components/app/ui/UpdateWorkspaceUI";
 import CouterUI from "@/components/app/ui/CouterUI";
 import UserUI from "@/components/global/ui/UserUI";
+import PreviewJSON from "@/components/app/PreviewJSON";
 
 type Props = {};
 
@@ -19,7 +20,7 @@ export default function page({}: Props) {
 		<>
 			{/* <AppNav /> */}
 			<ItemNav />
-			<UserUI />
+			{/* <UserUI /> */}
 			<div className="px-3 py-2">
 				<div className="grid gap-2">
 					<Item name="T-shirt" />
@@ -29,10 +30,10 @@ export default function page({}: Props) {
 
 			<div className="px-3 py-2">
 				<TermUI />
-				<CreateOrderUI />
 				<AddressUI />
-				<CouterUI />
-				<UpdateWorkspaceUI />
+				{/* <CouterUI /> */}
+				{/* <UpdateWorkspaceUI /> */}
+				<CreateOrderUI />
 			</div>
 			{/* <PreviewJSON /> */}
 		</>

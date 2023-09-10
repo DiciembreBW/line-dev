@@ -13,7 +13,7 @@ export default function UpdateWorkspaceUI({}: Props) {
 	const rounter = useRouter();
 	function onsave() {
 		CallAPI.updateItem({...app, user: global.user});
-		rounter.refresh();
+		// rounter.refresh();
 	}
 	return (
 		<div className="px-3 py-2 flex justify-center">

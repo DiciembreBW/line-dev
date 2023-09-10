@@ -15,16 +15,12 @@ export default function useLiff({liffId}: Props) {
 	useEffect(() => {
 		liff.init({liffId, withLoginOnExternalBrowser: true}).then(() => {
 			liff.ready.then(async () => {
-				// window.alert(liffId);
-
 				const user = liff.getDecodedIDToken();
-
 				setUser({
 					id: user?.sub,
 					name: user?.name,
 					picture: user?.picture,
 				});
-				// window.alert(user?.name);
 			});
 		});
 	}, []);

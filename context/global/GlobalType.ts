@@ -5,7 +5,7 @@ export type UserProfile = {
 };
 
 export type GlobalType = {
-	user: UserProfile;
+	user?: UserProfile;
 };
 
 export type GlobalActionType = {};
