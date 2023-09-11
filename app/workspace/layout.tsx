@@ -1,23 +1,26 @@
 "use client";
 import GlobalProvider from "@/context/global/GlobalProvider";
 import useLiff from "@/libs/hooks/useLiff";
-// import {CircularProgress} from "@mui/material";
+import liff from "@line/liff";
+import {CircularProgress} from "@mui/material";
+import {useEffect} from "react";
 
 type Props = {children: React.ReactNode};
 
 export default function Layout({children}: Props) {
-	const {user, loading} = useLiff({liffId: "2000394306-EVnwMxlm"});
+	// const {user} = useLiff({liffId: "2000394306-EVnwMxlm"});
 
-	// if (loading) {
+	// initla liff app
+	useEffect(() => {
+		liff.init({liffId: "2000394306-EVnwMxlm"});
+	}, []);
+
+	// if (user == undefined)
 	// 	return (
 	// 		<div className="h-screen grid justify-items-center items-center touch-none">
-	// 			{/* <CircularProgress className="text-zinc-400" color="inherit" size={100} /> */}
-	// 			loading...
+	// 			<CircularProgress className="text-zinc-400" color="inherit" size={100} />
 	// 		</div>
 	// 	);
-	// } else {
-	// 	return <GlobalProvider init={{user}}>{children}</GlobalProvider>;
-	// }
 
-	return <GlobalProvider init={{user}}>{children}</GlobalProvider>;
+	return <GlobalProvider>{children}</GlobalProvider>;
 }

@@ -9,6 +9,7 @@ export default function WorkspaceNav({}: Props) {
 			<div className="flex gap-2">
 				{/* <Link href="/workspace">ค้นหา </Link> */}
 				<Link href="/workspace/create">สร้าง</Link>
+				<Link href="/workspace/login2">Login</Link>
 			</div>
 			<div className="">
 				<Link href="/">SNAP </Link>
