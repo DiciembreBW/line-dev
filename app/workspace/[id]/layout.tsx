@@ -11,14 +11,14 @@ export default async function WorkspaceItemPageLayout({
 }: Props) {
 	const item = await CallAPI.getItem(params.id);
 
-	// if no item
-	if (item == null) {
+	// return <>{params.id}</>;
+	if (params.id == "create")
 		return (
 			<>
 				<AppProvider
 					value={{
 						counter: 0,
-						id: Random.id(),
+						id: "create",
 						init: false,
 						address: "",
 					}}>
@@ -26,7 +26,9 @@ export default async function WorkspaceItemPageLayout({
 				</AppProvider>
 			</>
 		);
-	}
+
+	if (item == null) return <>no value</>;
+
 	return (
 		<>
 			<AppProvider value={item}>{children}</AppProvider>

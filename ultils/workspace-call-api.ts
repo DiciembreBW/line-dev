@@ -1,9 +1,6 @@
 import {AppType} from "@/context/app/type";
 const URL = "https://line-dev-smoky.vercel.app"; // production
-// const URL = "http://localhost:3000"; // dev
-// const URL = "https://a982-182-52-231-195.ngrok-free.app";
-// const URL = "https://1999-182-52-231-195.ngrok-free.app";
-
+// const URL = "https://b22f-182-52-231-138.ngrok-free.app";
 const CallAPI = {
 	//  create workspace item
 	async createItem(value: AppType) {
