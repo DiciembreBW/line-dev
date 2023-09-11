@@ -1,7 +1,7 @@
 "use client";
 import GlobalProvider from "@/context/global/GlobalProvider";
 import useLiff from "@/libs/hooks/useLiff";
-import {CircularProgress} from "@mui/material";
+// import {CircularProgress} from "@mui/material";
 
 type Props = {children: React.ReactNode};
 
@@ -14,7 +14,8 @@ export default function Layout({children}: Props) {
 	if (loading) {
 		return (
 			<div className="h-screen grid justify-items-center items-center touch-none">
-				<CircularProgress className="text-zinc-400" color="inherit" size={100} />
+				{/* <CircularProgress className="text-zinc-400" color="inherit" size={100} /> */}
+				loading...
 			</div>
 		);
 	} else {
