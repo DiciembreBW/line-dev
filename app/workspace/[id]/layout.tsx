@@ -17,10 +17,13 @@ export default async function WorkspaceItemPageLayout({
 			<>
 				<AppProvider
 					value={{
+						name: "",
 						counter: 0,
+						status: 0,
 						id: "create",
 						init: false,
 						address: "",
+						items: [],
 					}}>
 					{children}
 				</AppProvider>

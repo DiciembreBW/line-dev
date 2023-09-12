@@ -8,9 +8,7 @@ import {useEffect} from "react";
 type Props = {children: React.ReactNode};
 
 export default function Layout({children}: Props) {
-	// const {user} = useLiff({liffId: "2000394306-EVnwMxlm"});
-
-	// initla liff app
+	// 1.initla liff app
 	useEffect(() => {
 		liff.init({liffId: "2000394306-EVnwMxlm"});
 	}, []);

@@ -54,9 +54,9 @@ export default function CreateOrder({}: Props) {
 	//
 
 	function handleLogin() {
-		if (user == undefined) {
-			return login();
-		}
+		// if (user == undefined) {
+		// 	return login();
+		// }
 
 		const value: AppType = {
 			...app,
@@ -65,13 +65,18 @@ export default function CreateOrder({}: Props) {
 			user: user,
 		};
 
-		// console.log(value);
-
-		// setUser(value)
-
-		CallAPI.createItem(value).then(() => {
-			router.replace("/workspace");
+		CallAPI.createItem(value).then((id) => {
+			line.sendText([
+				{
+					type: "text",
+					text: `
+		order name : ${value.user?.name}
+		link : https://liff.line.me/2000394306-EVnwMxlm/${id}/lists`,
+				},
+			]);
 		});
+
+		// console.log("save data");
 	}
 
 	// if (user == undefined) return <> loading ...</>;
@@ -79,6 +84,7 @@ export default function CreateOrder({}: Props) {
 	// if (user) {
 	return (
 		<div className="flex flex-col justify-center items-center pt-2 pb-6 gap-1">
+			<div>Hi : {user?.name}</div>
 			<div className="rounded-full bg-zinc-800 text-zinc-100 p-2 flex items-center gap-6">
 				<div className="gap-2 items-center pl-2">
 					<div className="text-2xl font-bold">฿2,560.00</div>

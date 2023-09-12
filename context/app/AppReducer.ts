@@ -35,6 +35,41 @@ function HandleReducer(app: AppType, action: AppActionType): AppType {
 			return {...app, counter: 0};
 		}
 	}
+
+	// item
+	switch (action.items?.type) {
+		case "create": {
+			// console.log(action.items.value);
+
+			return {...app, items: [action.items.value, ...app.items]};
+		}
+	}
+
+	switch (action.items_counter?.type) {
+		case "up": {
+			return {
+				...app,
+				items: app.items.map((item) => {
+					if (item.id == action.items_counter?.id) {
+						item.conter = item.conter + 1;
+					}
+					return item;
+				}),
+			};
+		}
+		case "down": {
+			return {
+				...app,
+				items: app.items.map((item) => {
+					if (item.id == action.items_counter?.id) {
+						item.conter = item.conter < 1 ? item.conter : item.conter - 1;
+					}
+					return item;
+				}),
+			};
+		}
+	}
+
 	return app;
 }
 

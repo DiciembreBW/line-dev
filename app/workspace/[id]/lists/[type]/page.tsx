@@ -1,14 +1,44 @@
 "use client";
 import ListNav from "@/components/app/Navbar/ListNav";
-import {useAppContext} from "@/context/app/AppReducer";
+import Button from "@/components/ui/Button";
+import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
 import Link from "next/link";
+import {useRouter} from "next/navigation";
 import React from "react";
 
 type Props = {params: {type: string}};
 
 export default function Page({params}: Props) {
 	const app = useAppContext();
-	const {id} = app;
+	const router = useRouter();
+	const dispatch = useAppDispatchContext();
+	const item = app.items.filter((item) => item.id == params.type)[0];
+
+	if (item == undefined) return <>ไม่พบข้อมูล</>;
+
+	const {conter, id, lists, material, neck, sleeve} = item;
+
+	function handleUp() {
+		dispatch({
+			items_counter: {
+				type: "up",
+				id: params.type,
+			},
+		});
+	}
+	function handleDown() {
+		dispatch({
+			items_counter: {
+				type: "down",
+				id: params.type,
+			},
+		});
+	}
+
+	function handle() {
+		router.back();
+	}
+
 	return (
 		<div className="flex flex-col h-screen">
 			{/* <ListNav /> */}
@@ -31,14 +61,20 @@ export default function Page({params}: Props) {
 					{/* amont */}
 					<div className="flex">
 						<div className="m-1">
-							<button className="w-8 h-8 border rounded bg-zinc-50">-</button>
+							<button
+								className="w-8 h-8 border rounded bg-zinc-50"
+								onClick={handleDown}>
+								-
+							</button>
 						</div>
 						<div className="m-1 flex justify-center items-center">
-							<div className="text-xl">123</div>
+							<div className="text-xl">{conter}</div>
 						</div>
 
 						<div className="m-1">
-							<button className="w-8 h-8 border rounded bg-zinc-50">+</button>
+							<button className="w-8 h-8 border rounded bg-zinc-50" onClick={handleUp}>
+								+
+							</button>
 						</div>
 					</div>
 
@@ -85,9 +121,14 @@ export default function Page({params}: Props) {
 				<div className="flex gap-6 justify-center items-center ">
 					<div className="text-2xl">฿9,560.00</div>
 					<div className="">
-						<button className="px-3 py-2 rounded-xl bg-zinc-800 text-zinc-300">
-							<Link href={`/workspace/${id}/lists`}>ตกลง</Link>
+						<button
+							className="px-3 py-2 rounded-xl bg-zinc-800 text-zinc-300"
+							onClick={handle}>
+							ตกลง
 						</button>
+						{/* <Button primary onclick={handle}>
+							Save
+						</Button> */}
 					</div>
 				</div>
 			</div>
