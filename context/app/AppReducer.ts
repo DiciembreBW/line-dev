@@ -1,3 +1,5 @@
+import ItemConterReducer from "./reducer/ItemConterReducer";
+import ItemsListsReducer from "./reducer/ItemsListsReducer";
 import {AppType, AppActionType, init} from "./type";
 import {CreateContext} from "@/context/Context";
 // import CallAPI from "@/ultils/workspace-call-api";
@@ -39,8 +41,6 @@ function HandleReducer(app: AppType, action: AppActionType): AppType {
 	// item
 	switch (action.items?.type) {
 		case "create": {
-			// console.log(action.items.value);
-
 			return {...app, items: [action.items.value, ...app.items]};
 		}
 		case "remove": {
@@ -51,30 +51,9 @@ function HandleReducer(app: AppType, action: AppActionType): AppType {
 		}
 	}
 
-	switch (action.items_counter?.type) {
-		case "up": {
-			return {
-				...app,
-				items: app.items.map((item) => {
-					if (item.id == action.items_counter?.id) {
-						item.conter = item.conter + 1;
-					}
-					return item;
-				}),
-			};
-		}
-		case "down": {
-			return {
-				...app,
-				items: app.items.map((item) => {
-					if (item.id == action.items_counter?.id) {
-						item.conter = item.conter < 1 ? item.conter : item.conter - 1;
-					}
-					return item;
-				}),
-			};
-		}
-	}
+	// Reducer fn
+	if (action.items_counter) return ItemConterReducer(app, action);
+	if (action.items_lists) return ItemsListsReducer(app, action);
 
 	return app;
 }

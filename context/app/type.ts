@@ -10,6 +10,7 @@ export type AppType = {
 	name: string;
 	items: ItemType[];
 };
+
 export type AppActionType = {
 	app?: {
 		type: "create" | "update";
@@ -29,6 +30,12 @@ export type AppActionType = {
 		type: "up" | "down";
 		id: string;
 	};
+
+	items_lists?: {
+		type: "up" | "down" | "reset" | "setzero";
+		id: string;
+		value?: ListType;
+	};
 };
 
 // ********************************************************
@@ -47,6 +54,8 @@ export const init: AppType = {
 		picture: "",
 	},
 };
+
+// ********************************************************
 
 export type ItemType = {
 	id: string;

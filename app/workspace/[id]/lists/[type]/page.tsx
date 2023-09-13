@@ -2,6 +2,7 @@
 import ListNav from "@/components/app/Navbar/ListNav";
 import Button from "@/components/ui/Button";
 import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
+import {ListType} from "@/context/app/type";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import React from "react";
@@ -106,13 +107,8 @@ export default function Page({params}: Props) {
 
 				{/* items detail */}
 				<div className="p-4 flex flex-wrap gap-2 justify-center">
-					<Label />
-					<Label />
-					<Label />
-					<Label />
-					<Label />
-					<Label />
-					<Label />
+					{/* <pre>{JSON.stringify(item.lists, null, 3)}</pre> */}
+					<Lists value={item.lists} id={item.id} />
 				</div>
 
 				<div className="p-4 flex flex-wrap gap-2 justify-center">Total 36 ตัว</div>
@@ -136,12 +132,53 @@ export default function Page({params}: Props) {
 	);
 }
 
-function Label() {
+function Lists({value, id}: {value: ListType[]; id: string}) {
+	const dispatch = useAppDispatchContext();
+	function up(value: ListType) {
+		dispatch({
+			items_lists: {
+				type: "up",
+				id,
+				value,
+			},
+		});
+	}
+
+	function handleReset() {
+		dispatch({
+			items_lists: {
+				type: "reset",
+				id,
+			},
+		});
+	}
+	return (
+		<>
+			{/* <pre>{JSON.stringify(value[0], null, 3)}</pre> */}
+			{/* <Button onclick={handleReset} primary>
+				Reset
+			</Button> */}
+			{value.map((item, index) => (
+				<div
+					className="h-12 w-12 border rounded-full flex justify-center items-center"
+					key={index}
+					onClick={() => up(item)}>
+					{/* label */}
+					<div>
+						<div>{item.label}</div>
+						<div className="xs">{item.amont}</div>
+						{/* {item.name} */}
+					</div>
+				</div>
+			))}
+		</>
+	);
+}
+
+function List({value}: {value: ListType}) {
 	// return <div className="px-3 py-2">dada</div>;
 
 	return (
-		<div className="h-12 w-12 border rounded-full flex justify-center items-center">
-			0
-		</div>
+		<div className="h-12 w-12 border rounded-full flex justify-center items-center"></div>
 	);
 }

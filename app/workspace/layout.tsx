@@ -9,9 +9,9 @@ type Props = {children: React.ReactNode};
 
 export default function Layout({children}: Props) {
 	// 1.initla liff app
-	// useEffect(() => {
-	// 	liff.init({liffId: "2000394306-EVnwMxlm"});
-	// }, []);
+	useEffect(() => {
+		liff.init({liffId: "2000394306-EVnwMxlm"});
+	}, []);
 
 	// if (user == undefined)
 	// 	return (
