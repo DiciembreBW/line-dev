@@ -4,7 +4,7 @@ import ItemNav from "@/components/app/Navbar/ItemNav";
 import Preview from "@/components/app/Preview";
 import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
 import Link from "next/link";
-import React, {useState} from "react";
+import React, {ReactElement, useState} from "react";
 import AddressUI from "@/components/app/ui/AddressUI";
 import TermUI from "@/components/app/ui/TermUI";
 import CreateOrderUI from "@/components/app/ui/CreateOrderUI";
@@ -13,6 +13,8 @@ import CouterUI from "@/components/app/ui/CouterUI";
 import UserUI from "@/components/global/ui/UserUI";
 import PreviewJSON from "@/components/app/PreviewJSON";
 import {ItemType} from "@/context/app/type";
+import MenuUI from "@/ultils/mui/MenuUI";
+import {MenuItem} from "@mui/base";
 
 type Props = {};
 
@@ -25,16 +27,12 @@ export default function page({}: Props) {
 			<div className="px-3 py-2">
 				<div className="grid gap-2">
 					<Items />
-					{/* <Item name="T-shirt" /> */}
-					{/* <Item name="Tangtop" /> */}
 				</div>
 			</div>
 
 			<div className="px-3 py-2">
 				<TermUI />
 				<AddressUI />
-				{/* <CouterUI /> */}
-				{/* <UpdateWorkspaceUI /> */}
 				<CreateOrderUI />
 			</div>
 		</>
@@ -63,31 +61,39 @@ function Item({value}: {value: ItemType}) {
 				{/* <Preview Content={Label(name)}>image</Preview> */}
 			</div>
 
-			<Link href={`/workspace/${id}/lists/${item_id}`} className="basis-6/12">
-				<div className="">
-					<div>
+			<div className="basis-6/12">
+				<div>
+					<div className="flex justify-between">
 						<div className="text-xl">
-							{sleeve.name}
-							{neck.name} {item_id}
+							<Link href={`/workspace/${id}/lists/${item_id}`}>
+								{sleeve.name}
+								{neck.name} {item_id}
+							</Link>
 						</div>
-						{/* material */}
-
-						{/* <pre className="text-sm">{JSON.stringify(value, null, 3)}</pre> */}
-						<div>ผ้า Dry-tech</div>
-						<div className="text-sm">
-							Lorem ipsum, dolor sit amet consectetur adipisicing{" "}
+						<div className="">
+							<MenuUI item={value}>...</MenuUI>
 						</div>
 					</div>
+					{/* material */}
 
-					{/*  */}
-					<div className="flex justify-between items-center">
-						<div className="m-1 p-2 bg-zinc-800 text-zinc-300 rounded-lg">
-							{value.conter} ตัว
-						</div>
-						<div>฿5,056.00</div>
+					{/* <pre className="text-sm">{JSON.stringify(value, null, 3)}</pre> */}
+					<div className="flex justify-between">
+						<div>ผ้า Dry-tech</div>
+						<div className="">o</div>
+					</div>
+					<div className="text-xs">
+						Lorem ipsum, dolor sit amet consectetur adipisicing{" "}
 					</div>
 				</div>
-			</Link>
+
+				{/*  */}
+				<div className="flex justify-between items-center">
+					<div className="m-1 p-2 bg-zinc-800 text-zinc-300 rounded-lg">
+						{value.conter} ตัว
+					</div>
+					<div>฿5,056.00</div>
+				</div>
+			</div>
 		</div>
 	);
 }

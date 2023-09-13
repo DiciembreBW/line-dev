@@ -66,14 +66,16 @@ export default function CreateOrder({}: Props) {
 		};
 
 		CallAPI.createItem(value).then((id) => {
-			line.sendText([
-				{
-					type: "text",
-					text: `
-		order name : ${value.user?.name}
-		link : https://liff.line.me/2000394306-EVnwMxlm/${id}/lists`,
-				},
-			]);
+			// 	line.sendText([
+			// 		{
+			// 			type: "text",
+			// 			text: `
+			// order name : ${value.user?.name}
+			// link : https://liff.line.me/2000394306-EVnwMxlm/${id}/lists`,
+			// 		},
+			// 	]);
+
+			console.log(id);
 		});
 
 		// console.log("save data");

@@ -43,6 +43,12 @@ function HandleReducer(app: AppType, action: AppActionType): AppType {
 
 			return {...app, items: [action.items.value, ...app.items]};
 		}
+		case "remove": {
+			return {
+				...app,
+				items: app.items.filter((item) => item.id !== action.items?.value.id),
+			};
+		}
 	}
 
 	switch (action.items_counter?.type) {

@@ -21,7 +21,7 @@ export type AppActionType = {
 	};
 
 	items?: {
-		type: "create" | "remove" | "counter";
+		type: "create" | "remove";
 		value: ItemType;
 	};
 
