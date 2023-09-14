@@ -88,11 +88,11 @@ function Item({value}: {value: ItemType}) {
 
 				{/*  */}
 				<div className="flex justify-between items-center">
-					<div className="m-1 p-2 bg-zinc-800 text-zinc-300 rounded-lg">
+					<div className="">
 						{value.lists.reduce((period, present) => {
 							return period + present.amont;
 						}, 0)}
-						ตัว
+						{` ตัว`}
 					</div>
 					<div>฿5,056.00</div>
 				</div>
