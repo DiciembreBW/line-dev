@@ -3,7 +3,7 @@ import ListNav from "@/components/app/Navbar/ListNav";
 import Button from "@/components/ui/Button";
 import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
 import {ListType} from "@/context/app/type";
-import {SwipeableDrawer} from "@mui/material";
+import {Drawer, SwipeableDrawer} from "@mui/material";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import React, {useState} from "react";
@@ -173,12 +173,16 @@ function List({value, id}: {value: ListType; id: string}) {
 					)}
 				</div>
 			</div>
-			<SwipeableDrawer
+			<Drawer
 				open={state}
 				anchor="bottom"
 				onClose={swipeClose}
-				onOpen={swipeOpen}
-				hideBackdrop={true}
+				// onOpen={swipeOpen}
+				// variant="temporary"
+				// hideBackdrop={true}
+				ModalProps={{
+					slotProps: {backdrop: {invisible: true}},
+				}}
 				PaperProps={{
 					sx: {
 						borderTopRightRadius: 16,
@@ -218,7 +222,7 @@ function List({value, id}: {value: ListType; id: string}) {
 					{/* price Per each */}
 					<div className="text-center text-xl">฿259.00</div>
 				</div>
-			</SwipeableDrawer>
+			</Drawer>
 		</>
 	);
 }
