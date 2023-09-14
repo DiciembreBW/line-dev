@@ -1,5 +1,6 @@
 import ItemConterReducer from "./reducer/ItemConterReducer";
 import ItemsListsReducer from "./reducer/ItemsListsReducer";
+import MaterialReducer from "./reducer/MaterialReducer";
 import {AppType, AppActionType, init} from "./type";
 import {CreateContext} from "@/context/Context";
 // import CallAPI from "@/ultils/workspace-call-api";
@@ -54,6 +55,7 @@ function HandleReducer(app: AppType, action: AppActionType): AppType {
 	// Reducer fn
 	if (action.items_counter) return ItemConterReducer(app, action);
 	if (action.items_lists) return ItemsListsReducer(app, action);
+	if (action.material) return MaterialReducer(app, action);
 
 	return app;
 }

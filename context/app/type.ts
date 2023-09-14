@@ -36,6 +36,12 @@ export type AppActionType = {
 		id: string;
 		value?: ListType;
 	};
+
+	material?: {
+		type: "create" | "remove";
+		id: string;
+		value: MaterialType;
+	};
 };
 
 // ********************************************************

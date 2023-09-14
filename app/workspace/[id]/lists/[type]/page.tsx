@@ -1,5 +1,6 @@
 "use client";
 import ListNav from "@/components/app/Navbar/ListNav";
+import SelectMaterial from "@/components/app/TypePage/SelectMaterial";
 import Button from "@/components/ui/Button";
 import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
 import {ListType} from "@/context/app/type";
@@ -56,17 +57,10 @@ export default function Page({params}: Props) {
 					</div>
 
 					{/* material */}
-					<div className="my-2">
-						<div className="flex justify-between">
-							<div>ผ้า Dry-tech</div>
-							<div>O</div>
-						</div>
-						<div className="text-sm">
-							<p className="indent-6">
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos
-								consequatur obcaecati fugiat facilis earum
-							</p>
-						</div>
+					<div className="my-2 ">
+						<SelectMaterial id={id} value={item.material}>
+							กรุณาเลือกเนื้อผ้า{" "}
+						</SelectMaterial>
 					</div>
 
 					{/* items detail */}
@@ -84,6 +78,8 @@ export default function Page({params}: Props) {
 					</div>
 				</div>
 			</div>
+
+			{/* <pre>{JSON.stringify(item.material, null, 3)}</pre> */}
 
 			{/* Description */}
 			<div className="grid content-end  px-5 py-4">
@@ -191,36 +187,50 @@ function List({value, id}: {value: ListType; id: string}) {
 					},
 				}}>
 				{/* handle */}
-				<div className="grid content-center justify-center gap-2 h-full ">
-					{/* label */}
-					<div className="text-center">
-						<div className="text-3xl font-bold">{value.label}</div>
-						<div className="text-sm text-zinc-400">
-							<div>รอบออก {value.chest} นิ้ว</div>
-							<div>ความยาว {value.length} นิ้ว</div>
+
+				{/* amont */}
+				<div className="flex justify-center items-center gap-6 relative">
+					{/* close */}
+					<button
+						className="absolute top-0 right-0 w-6 h-6 rounded-full flex justify-center items-center border"
+						onClick={swipeClose}>
+						x
+					</button>
+					{/* left */}
+					<div className="m-1">
+						<button
+							className="w-16 h-16 border-2 border-zinc-400 rounded-full text-2xl text-zinc-400"
+							onClick={down}>
+							-
+						</button>
+					</div>
+					{/* center */}
+					<div className="m-1 flex justify-center items-center">
+						<div className="grid content-center justify-center gap-2 h-full ">
+							{/* label */}
+							<div className="text-center">
+								<div className="text-3xl font-bold">{value.label}</div>
+								<div className="text-sm text-zinc-400">
+									<div>รอบออก {value.chest} นิ้ว</div>
+									<div>ความยาว {value.length} นิ้ว</div>
+								</div>
+							</div>
+
+							<div className="text-3xl text-center">{value.amont}</div>
+
+							{/* price Per each */}
+							<div className="text-center text-xl">฿259.00</div>
 						</div>
 					</div>
 
-					{/* amont */}
-					<div className="flex">
-						<div className="m-1">
-							<button className="w-8 h-8 border rounded bg-zinc-50" onClick={down}>
-								-
-							</button>
-						</div>
-						<div className="m-1 flex justify-center items-center">
-							<div className="text-xl">{value.amont}</div>
-						</div>
-
-						<div className="m-1">
-							<button className="w-8 h-8 border rounded bg-zinc-50" onClick={up}>
-								+
-							</button>
-						</div>
+					{/* right */}
+					<div className="m-1">
+						<button
+							className="w-16 h-16 border-2 border-zinc-400 rounded-full text-2xl text-zinc-400"
+							onClick={up}>
+							+
+						</button>
 					</div>
-
-					{/* price Per each */}
-					<div className="text-center text-xl">฿259.00</div>
 				</div>
 			</Drawer>
 		</>

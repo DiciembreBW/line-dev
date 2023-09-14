@@ -15,6 +15,7 @@ import PreviewJSON from "@/components/app/PreviewJSON";
 import {ItemType} from "@/context/app/type";
 import MenuUI from "@/ultils/mui/MenuUI";
 import {MenuItem} from "@mui/base";
+import SelectMaterial from "@/components/app/TypePage/SelectMaterial";
 
 type Props = {};
 
@@ -67,7 +68,9 @@ function Item({value}: {value: ItemType}) {
 						<div className="text-xl">
 							<Link href={`/workspace/${id}/lists/${item_id}`}>
 								{sleeve.name}
-								{neck.name} {item_id}
+								{neck.name}
+
+								{/* {item_id} */}
 							</Link>
 						</div>
 						<div className="">
@@ -77,13 +80,9 @@ function Item({value}: {value: ItemType}) {
 					{/* material */}
 
 					{/* <pre className="text-sm">{JSON.stringify(value, null, 3)}</pre> */}
-					<div className="flex justify-between">
-						<div>ผ้า Dry-tech</div>
-						<div className="">o</div>
-					</div>
-					<div className="text-xs">
-						Lorem ipsum, dolor sit amet consectetur adipisicing{" "}
-					</div>
+					<SelectMaterial id={value.id} value={value.material}>
+						เลือกเนื้อผ้า
+					</SelectMaterial>
 				</div>
 
 				{/*  */}
