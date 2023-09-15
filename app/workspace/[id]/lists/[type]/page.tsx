@@ -3,7 +3,10 @@ import ListNav from "@/components/app/Navbar/ListNav";
 import SelectMaterial from "@/components/app/TypePage/SelectMaterial";
 import Button from "@/components/ui/Button";
 import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
-import {ListType} from "@/context/app/type";
+import {PriceLists} from "@/context/app/app.value";
+import {ItemType, ListType} from "@/context/app/type";
+import {Pricecalculator} from "@/libs/pricecalculator/Pricecalculator";
+import MenuUI from "@/ultils/mui/MenuUI";
 import {Drawer, SwipeableDrawer} from "@mui/material";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
@@ -16,6 +19,8 @@ export default function Page({params}: Props) {
 	const router = useRouter();
 	const dispatch = useAppDispatchContext();
 	const item = app.items.filter((item) => item.id == params.type)[0];
+	const totalitems = Pricecalculator.totalOfItem({items: app.items});
+	const rate = Pricecalculator.get({amont: totalitems, price_list: PriceLists});
 
 	if (item == undefined) return <>ไม่พบข้อมูล</>;
 
@@ -51,9 +56,15 @@ export default function Page({params}: Props) {
 				{/* list */}
 				<div className="px-3 py-2">
 					{/* title */}
-					<div className="text-xl font-bold">
-						{neck.name}
-						{sleeve.name} | id :{id}
+					<div className="flex justify-between">
+						<div className="text-xl font-bold">
+							{neck.name}
+							{sleeve.name} | id :{id}
+						</div>
+
+						<div className="">
+							<MenuUI item={item}>...</MenuUI>
+						</div>
 					</div>
 
 					{/* material */}
@@ -66,7 +77,7 @@ export default function Page({params}: Props) {
 					{/* items detail */}
 					<div className="p-4 flex flex-wrap gap-2 justify-center">
 						{/* <pre>{JSON.stringify(item.lists, null, 3)}</pre> */}
-						<Lists value={item.lists} id={item.id} />
+						<Lists item={item} id={item.id} />
 					</div>
 
 					<div className="p-4 flex flex-wrap gap-2 justify-center">
@@ -76,10 +87,35 @@ export default function Page({params}: Props) {
 						}, 0)}{" "}
 						ตัว
 					</div>
+					{/* 
+					<div className="flex justify-between px-3 py-2 rounded shadow">
+						<div>Total</div>
+						<div>{totalitems}</div>
+					</div>
+
+					<div className="flex justify-between px-3 py-2 rounded shadow">
+						<div>CurrentPrice</div>
+						{rate.current && <div>{rate.current.price}</div>}
+					</div>
+
+					<div className="flex justify-between px-3 py-2 rounded shadow">
+						<div>Neck Price</div>
+						<div>{item.neck.price}</div>
+					</div>
+
+					<div className="flex justify-between px-3 py-2 rounded shadow">
+						<div>Sleeve Price</div>
+						<div>{item.sleeve.price}</div>
+					</div>
+
+					<div className="flex justify-between px-3 py-2 rounded shadow">
+						<div>Material Price</div>
+						<div>{item.material.price}</div>
+					</div> */}
 				</div>
 			</div>
 
-			{/* <pre>{JSON.stringify(item.material, null, 3)}</pre> */}
+			{/* <pre>{JSON.stringify(item, null, 3)}</pre> */}
 
 			{/* Description */}
 			<div className="grid content-end  px-5 py-4">
@@ -99,25 +135,44 @@ export default function Page({params}: Props) {
 	);
 }
 
-function Lists({value, id}: {value: ListType[]; id: string}) {
+function Lists({item, id}: {id: string; item: ItemType}) {
 	return (
 		<>
 			{/* <pre>{JSON.stringify(value[0], null, 3)}</pre> */}
 			{/* <Button onclick={handleReset} primary>
 				Reset
 			</Button> */}
-			{value.map((item, index) => (
-				<List key={index} id={id} value={item} />
+			{item.lists.map((list, index) => (
+				<List key={index} id={id} value={list} item={item} />
 			))}
 		</>
 	);
 }
 
-function List({value, id}: {value: ListType; id: string}) {
+function List({
+	value,
+	id,
+	item,
+}: {
+	value: ListType;
+	id: string;
+	item: ItemType;
+}) {
 	// return <div className="px-3 py-2">dada</div>;
-	const dispatch = useAppDispatchContext();
 
+	const app = useAppContext();
+	const dispatch = useAppDispatchContext();
 	const [state, setState] = useState<boolean>(false);
+	const totalitems = Pricecalculator.totalOfItem({items: app.items});
+	const rate = Pricecalculator.get({amont: totalitems, price_list: PriceLists});
+	const price = rate.current == undefined ? 0 : rate.current.price;
+	const PPE =
+		price +
+		value.addOn +
+		item.neck.price +
+		item.sleeve.price +
+		item.material.price;
+
 	function swipeOpen() {
 		setState(true);
 	}
@@ -173,9 +228,6 @@ function List({value, id}: {value: ListType; id: string}) {
 				open={state}
 				anchor="bottom"
 				onClose={swipeClose}
-				// onOpen={swipeOpen}
-				// variant="temporary"
-				// hideBackdrop={true}
 				ModalProps={{
 					slotProps: {backdrop: {invisible: true}},
 				}}
@@ -219,7 +271,7 @@ function List({value, id}: {value: ListType; id: string}) {
 							<div className="text-3xl text-center">{value.amont}</div>
 
 							{/* price Per each */}
-							<div className="text-center text-xl">฿259.00</div>
+							<div className="text-center text-xl">฿{PPE}</div>
 						</div>
 					</div>
 

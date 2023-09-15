@@ -1,135 +1,31 @@
 "use client";
-import {UserProfile} from "@/context/global/GlobalType";
-import useLiffV2 from "@/libs/hooks/useLiffV2";
-import {Liff} from "@/libs/utilities/Liff";
-import {line} from "@/ultils/line";
-import liff from "@line/liff";
-import {SwipeableDrawer} from "@mui/material";
-import React, {useEffect, useState} from "react";
+import {PriceLists} from "@/context/app/app.value";
+import {Pricecalculator} from "@/libs/pricecalculator/Pricecalculator";
+import React, {useState} from "react";
 
 type Props = {};
 
 export default function TestPage({}: Props) {
+	const [amont, setAmont] = useState<number>(0);
+	const rate = Pricecalculator.get({amont, price_list: PriceLists});
+	function handleAmont(e: string) {
+		const amontInt = parseInt(e);
+
+		const amont = isNaN(amontInt) ? 0 : amontInt;
+		setAmont(amont);
+	}
 	return (
 		<>
-			<Button type="primary">Priamry</Button>
-			<Button type="secondary">Priamry</Button>
-			<Button type="">Priamry</Button>
-			{/* <Button type="">Test01</Button> */}
-			{/* <Button disable primary>
-				Button Primary Disable
-			</Button>
+			<div>
+				<input
+					type="text"
+					value={amont}
+					onChange={(e) => handleAmont(e.target.value)}
+					className="ring p-1"
+				/>
+			</div>
 
-			<Button>Button Primary</Button>
-			<Button disable>Button disable</Button> */}
+			<pre>{JSON.stringify(rate, null, 3)}</pre>
 		</>
 	);
 }
-
-function Button({
-	children,
-	disable,
-	type,
-}: {
-	children: React.ReactNode;
-	disable?: boolean;
-	type?: VarianType;
-}) {
-	// is primary
-	if (type == "primary")
-		return (
-			<div className="m-1">
-				<button
-					className={`px-3 py-2 rounded bordera ${PrimaryVariant.bg(
-						type
-					)} ${PrimaryVariant.text(type)} `}
-					disabled={disable}>
-					{children}
-				</button>
-			</div>
-		);
-
-	// // is seccondary
-	// if (type == "secondary")
-	// 	return (
-	// 		<div className="m-1">
-	// 			<button
-	// 				className={`px-3 py-2 rounded bordera ${SeccondaryVariant.bg(
-	// 					type
-	// 				)} ${SeccondaryVariant.text(type)} `}
-	// 				disabled={disable}>
-	// 				{children}
-	// 			</button>
-	// 		</div>
-	// 	);
-
-	// is default
-	return (
-		<div className="m-1">
-			<button className={`px-3 py-2 rounded border `} disabled={disable}>
-				{children}
-			</button>
-		</div>
-	);
-}
-
-type VarianType = "primary" | "secondary" | "";
-
-const PrimaryVariant = {
-	bg: (type: VarianType) => {
-		switch (type) {
-			case "primary": {
-				return "bg-zinc-900";
-			}
-			default: {
-				return "bg-zinc-200";
-			}
-		}
-	},
-	text: (type: VarianType) => {
-		switch (type) {
-			case "primary": {
-				return "text-zinc-200";
-			}
-			default: {
-				return "text-zinc-900";
-			}
-		}
-	},
-};
-
-// const SeccondaryVariant = {
-// 	bg: (type: VarianType) => {
-// 		switch (type) {
-// 			case "primary": {
-// 				return "bg-zinc-900";
-// 			}
-// 			default: {
-// 				return "bg-zinc-200";
-// 			}
-// 		}
-// 	},
-// 	text: (type: VarianType) => {
-// 		switch (type) {
-// 			case "primary": {
-// 				return "text-zinc-200";
-// 			}
-// 			default: {
-// 				return "text-zinc-900";
-// 			}
-// 		}
-// 	},
-// };
-
-const DisableVariant = {
-	bg: (type: boolean) => {
-		type ? "bg-zinc-500" : "";
-	},
-	text: (type: VarianType) => {
-		switch (type) {
-			case "primary": {
-				return "bg-zinc-600";
-			}
-		}
-	},
-};

@@ -2,11 +2,13 @@ import Button from "@/components/ui/Button";
 import {useAppDispatchContext} from "@/context/app/AppReducer";
 import {ItemType} from "@/context/app/type";
 import {Menu, MenuItem} from "@mui/material";
+import {useRouter} from "next/navigation";
 import React from "react";
 
 type Props = {children: React.ReactNode; item: ItemType};
 
 export default function MenuUI({children, item}: Props) {
+	const router = useRouter();
 	const dispatch = useAppDispatchContext();
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
@@ -26,6 +28,7 @@ export default function MenuUI({children, item}: Props) {
 		});
 
 		handleClose();
+		router.back();
 	}
 
 	return (

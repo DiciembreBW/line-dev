@@ -96,3 +96,16 @@ export type ListType = {
 	addOn: number;
 	amont: number;
 };
+
+export type TableOfSizeType = {
+	// name: string;
+	// lists: ListType[];
+	short: ListType[];
+	long: ListType[];
+};
+
+export type PriceListType = {
+	quantity: number;
+	price: number;
+	get: number;
+};
