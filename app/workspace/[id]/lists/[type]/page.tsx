@@ -4,7 +4,7 @@ import SelectMaterial from "@/components/app/TypePage/SelectMaterial";
 import Button from "@/components/ui/Button";
 import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
 import {PriceLists} from "@/context/app/app.value";
-import {ItemType, ListType} from "@/context/app/type";
+import {ItemType, ListType, PriceListType} from "@/context/app/type";
 import {Pricecalculator} from "@/libs/pricecalculator/Pricecalculator";
 import MenuUI from "@/ultils/mui/MenuUI";
 import {Drawer, SwipeableDrawer} from "@mui/material";
@@ -26,30 +26,17 @@ export default function Page({params}: Props) {
 
 	const {conter, id, lists, material, neck, sleeve} = item;
 
-	function handleUp() {
-		dispatch({
-			items_counter: {
-				type: "up",
-				id: params.type,
-			},
-		});
-	}
-	function handleDown() {
-		dispatch({
-			items_counter: {
-				type: "down",
-				id: params.type,
-			},
-		});
-	}
+	const total = lists.reduce((period, present) => {
+		return period + present.amont;
+	}, 0);
 
 	function handle() {
 		router.back();
 	}
 	return (
-		<div className="flex flex-col h-screen">
+		<div className="flex flex-col h-screen bg-zinc-50">
 			{/* <ListNav /> */}
-			<div className="basis-full flex flex-col ">
+			<div className="basis-3/6 flex flex-col">
 				{/* Navbar */}
 				<ListNav />
 
@@ -80,13 +67,9 @@ export default function Page({params}: Props) {
 						<Lists item={item} id={item.id} />
 					</div>
 
-					<div className="p-4 flex flex-wrap gap-2 justify-center">
-						Total{" "}
-						{lists.reduce((period, present) => {
-							return period + present.amont;
-						}, 0)}{" "}
-						ตัว
-					</div>
+					{/* <div className="p-4 flex flex-wrap gap-2 justify-center">
+						Total 
+					</div> */}
 					{/* 
 					<div className="flex justify-between px-3 py-2 rounded shadow">
 						<div>Total</div>
@@ -114,14 +97,36 @@ export default function Page({params}: Props) {
 					</div> */}
 				</div>
 			</div>
+			<div className="h-1/2 flex flex-col ">
+				<div className="basis-full p-2 overflow-y-scroll flex justify-center items-center">
+					{/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque provident,
+					exercitationem natus dolorem dignissimos sapiente est animi quam. Eveniet
+					odit di */}
+					status
+				</div>
+				{/* control */}
+				<div className="shrink-0 flex justify-between gap-1  bg-zinc-50 ">
+					<div className="w-20 border flex justify-center items-center text-3xl">
+						+
+					</div>
+					<div className="basis-full  p-2 border flex items-center">
+						<input
+							type="text"
+							value="dadada"
+							className="h-full w-full text-zinc-600 p-1 focus:outline-none"
+							onChange={() => {}}
+						/>
+					</div>
+					<div className="w-20 border flex justify-center items-center">send</div>
+				</div>
+			</div>
 
 			{/* <pre>{JSON.stringify(item, null, 3)}</pre> */}
 
 			{/* Description */}
-			<div className="grid content-end  px-5 py-4">
-				{/* action */}
+			{/* <div className="grid content-end  px-5 py-4">
 				<div className="flex gap-6 justify-center items-center ">
-					<div className="text-2xl">฿9,560.00</div>
+					<div className="text-2xl">{total} ตัว</div>
 					<div className="">
 						<button
 							className="px-3 py-2 rounded-xl bg-zinc-800 text-zinc-300"
@@ -130,7 +135,9 @@ export default function Page({params}: Props) {
 						</button>
 					</div>
 				</div>
-			</div>
+			</div> */}
+
+			{/*  */}
 		</div>
 	);
 }
@@ -138,10 +145,6 @@ export default function Page({params}: Props) {
 function Lists({item, id}: {id: string; item: ItemType}) {
 	return (
 		<>
-			{/* <pre>{JSON.stringify(value[0], null, 3)}</pre> */}
-			{/* <Button onclick={handleReset} primary>
-				Reset
-			</Button> */}
 			{item.lists.map((list, index) => (
 				<List key={index} id={id} value={list} item={item} />
 			))}
@@ -165,13 +168,25 @@ function List({
 	const [state, setState] = useState<boolean>(false);
 	const totalitems = Pricecalculator.totalOfItem({items: app.items});
 	const rate = Pricecalculator.get({amont: totalitems, price_list: PriceLists});
-	const price = rate.current == undefined ? 0 : rate.current.price;
-	const PPE =
-		price +
-		value.addOn +
-		item.neck.price +
-		item.sleeve.price +
-		item.material.price;
+	// const price = rate.current == undefined ? 0 : rate.current.price;
+
+	// // ppe current
+	// const PPE =
+	// 	price +
+	// 	value.addOn +
+	// 	item.neck.price +
+	// 	item.sleeve.price +
+	// 	item.material.price;
+
+	function ppeCalculator(price: number | undefined): number {
+		const p = price == undefined ? 0 : price;
+		return (
+			p + value.addOn + item.neck.price + item.sleeve.price + item.material.price
+		);
+	}
+
+	const PPE = ppeCalculator(rate.current?.price);
+	const PPE_NEXT = ppeCalculator(rate.next?.price);
 
 	function swipeOpen() {
 		setState(true);
@@ -214,8 +229,10 @@ function List({
 		// <div className="h-12 w-12 border rounded-full flex justify-center items-center"></div>
 
 		<>
-			<div className="h-12 w-12 border rounded-full flex justify-center items-center bg-zinc-50 relative">
-				<div onClick={swipeOpen} className="">
+			<div
+				className="h-14 w-14 border rounded-full flex justify-center items-center bg-zinc-50 relative hover:cursor-pointer"
+				onClick={swipeOpen}>
+				<div className="">
 					<div>{value.label}</div>
 					{value.amont > 0 && (
 						<div className="text-xs absolute -top-2 right-0 rounded-full bg-zinc-800 text-zinc-300 p-0.5">
@@ -226,16 +243,31 @@ function List({
 			</div>
 			<Drawer
 				open={state}
-				anchor="bottom"
+				anchor="top"
 				onClose={swipeClose}
 				ModalProps={{
-					slotProps: {backdrop: {invisible: true}},
+					// slotProps: {backdrop: {invisible: true}},
+					slotProps: {
+						backdrop: {
+							invisible: true,
+							// className: "bg-red-200",
+							// sx: {
+							// 	// backgroundColor: "transparent",
+							// },
+						},
+					},
 				}}
 				PaperProps={{
 					sx: {
-						borderTopRightRadius: 16,
-						borderTopLeftRadius: 16,
-						padding: 2,
+						// borderTopRightRadius: 16,
+						// borderTopLeftRadius: 16,
+						borderBottomLeftRadius: 16,
+						borderBottomRightRadius: 16,
+						paddingTop: 8,
+						paddingLeft: 2,
+						paddingRight: 2,
+						paddingBottom: 4,
+						// padding: 3,
 					},
 				}}>
 				{/* handle */}
@@ -243,11 +275,11 @@ function List({
 				{/* amont */}
 				<div className="flex justify-center items-center gap-6 relative">
 					{/* close */}
-					<button
+					{/* <button
 						className="absolute top-0 right-0 w-6 h-6 rounded-full flex justify-center items-center border"
 						onClick={swipeClose}>
 						x
-					</button>
+					</button> */}
 					{/* left */}
 					<div className="m-1">
 						<button
@@ -261,14 +293,10 @@ function List({
 						<div className="grid content-center justify-center gap-2 h-full ">
 							{/* label */}
 							<div className="text-center">
-								<div className="text-3xl font-bold">{value.label}</div>
-								<div className="text-sm text-zinc-400">
-									<div>รอบออก {value.chest} นิ้ว</div>
-									<div>ความยาว {value.length} นิ้ว</div>
-								</div>
+								<div className="text-3xl">{value.label}</div>
 							</div>
 
-							<div className="text-3xl text-center">{value.amont}</div>
+							<div className="text-4xl text-center font-bold">{value.amont}</div>
 
 							{/* price Per each */}
 							<div className="text-center text-xl">฿{PPE}</div>
@@ -284,6 +312,31 @@ function List({
 						</button>
 					</div>
 				</div>
+
+				<hr className="my-2" />
+
+				<div className="flex justify-center my-2">
+					<div className="text-sm text-zinc-400">
+						<div>รอบออก {value.chest} นิ้ว</div>
+						<div>ความยาว {value.length} นิ้ว</div>
+					</div>
+				</div>
+
+				<hr className="my-2" />
+				<div className="flex justify-center">รวมทั้งหมด {totalitems} ตัว</div>
+
+				{/* <div className="flex justify-center">
+					<Button primary onclick={swipeClose}>
+						x
+					</Button>
+				</div> */}
+
+				{/* <div className="text-zinc-400">
+					<div>เรทถัดไป</div>
+					<div>
+						{rate.next?.quantity} ตัวๆละ {PPE_NEXT}
+					</div>
+				</div> */}
 			</Drawer>
 		</>
 	);
