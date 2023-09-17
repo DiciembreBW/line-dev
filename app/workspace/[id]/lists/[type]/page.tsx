@@ -33,6 +33,10 @@ export default function Page({params}: Props) {
 	function handle() {
 		router.back();
 	}
+
+	const resault = Pricecalculator.orderPrice({item, rate: rate.current});
+	console.log(resault);
+
 	return (
 		<div className="flex flex-col h-screen bg-zinc-50">
 			{/* <ListNav /> */}
@@ -168,6 +172,7 @@ function List({
 	const [state, setState] = useState<boolean>(false);
 	const totalitems = Pricecalculator.totalOfItem({items: app.items});
 	const rate = Pricecalculator.get({amont: totalitems, price_list: PriceLists});
+
 	// const price = rate.current == undefined ? 0 : rate.current.price;
 
 	// // ppe current
