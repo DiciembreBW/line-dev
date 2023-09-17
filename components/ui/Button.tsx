@@ -26,7 +26,9 @@ export default function Button({primary, children, disalbe, onclick}: Props) {
 
 	return (
 		<div className="m-1">
-			<button className="px-3 py-2 border rounded text-zinc-800" onClick={onclick}>
+			<button
+				className="px-3 py-2 border rounded bg-zinc-50 text-zinc-800"
+				onClick={onclick}>
 				{children}
 			</button>
 		</div>

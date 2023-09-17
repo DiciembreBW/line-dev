@@ -34,7 +34,9 @@ export default function SelectMaterial({id, value, children}: Props) {
 		<>
 			{/* {material} */}
 			{value.name == "" && (
-				<div className="flex justify-center p-6" onClick={onopen}>
+				<div
+					className="flex justify-center p-6 hover:cursor-pointer"
+					onClick={onopen}>
 					{children}
 				</div>
 			)}
@@ -42,7 +44,9 @@ export default function SelectMaterial({id, value, children}: Props) {
 				<>
 					<div className="flex justify-between">
 						<div>{value.name}</div>
-						<div onClick={onopen}>o</div>
+						<div onClick={onopen} className="hover:cursor-pointer hover:bg-zinc-200">
+							o
+						</div>
 					</div>
 					<div className="text-sm">
 						<p className="">{value.description}</p>
@@ -54,16 +58,16 @@ export default function SelectMaterial({id, value, children}: Props) {
 				{/* <div className="px-3 py-2">Material</div> */}
 				<DialogTitle className="flex justify-between">
 					<div>ชนิดผ้า</div>
-					<div>
+					{/* <div>
 						<button onClick={onclose}>x</button>
-					</div>
+					</div> */}
 				</DialogTitle>
 				<DialogContent>
 					<div className="grid grid-cols-1 gap-2">
 						{materialvalue.map((item, index) => (
 							<div
-								className={`flex gap-2 p-2 border rounded shadow ${
-									item.name == value.name && "ring"
+								className={`flex gap-2 p-2 border rounded shadow hover:cursor-pointer hover:bg-zinc-200 ${
+									item.name == value.name && "bg-zinc-200"
 								}`}
 								key={index}
 								ref={(ref: HTMLDivElement) => {

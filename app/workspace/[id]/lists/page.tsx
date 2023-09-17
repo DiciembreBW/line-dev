@@ -17,6 +17,7 @@ import MenuUI from "@/ultils/mui/MenuUI";
 import {MenuItem} from "@mui/base";
 import SelectMaterial from "@/components/app/TypePage/SelectMaterial";
 import {Pricecalculator} from "@/libs/pricecalculator/Pricecalculator";
+import {PriceLists} from "@/context/app/app.value";
 
 type Props = {};
 
@@ -44,9 +45,8 @@ export default function page({}: Props) {
 function Items() {
 	const app = useAppContext();
 	const {items} = app;
-	// return <pre>{JSON.stringify(app.items, null, 3)}</pre>;
-
 	const total = Pricecalculator.totalOfItem({items});
+
 	return (
 		<>
 			{items.map((item, index) => (
@@ -64,32 +64,28 @@ function Item({value}: {value: ItemType}) {
 	const app = useAppContext();
 	const {id} = app;
 	const {neck, sleeve, material, lists, id: item_id} = value;
+
+	const totals = Pricecalculator.totalOfItem({items: app.items});
+	const rate = Pricecalculator.get({amont: totals, price_list: PriceLists});
+	const {items, price, total} = Pricecalculator.orderPrice({
+		item: value,
+		rate: rate.current,
+	});
 	return (
 		<div className="p-2 border rounded-lg shadow flex gap-2 justify-between">
-			<div className="basis-6/12 h-40 rounded-lg bg-zinc-200/50 flex justify-center items-center">
-				{/* <Preview Content={Label(name)}>image</Preview> */}
-			</div>
+			<div className="basis-6/12 h-40 rounded-lg bg-zinc-200/50 flex justify-center items-center"></div>
 
 			<Link
 				href={`/workspace/${id}/lists/${item_id}`}
 				className="basis-6/12 flex flex-col">
-				{/* <Link href={`/workspace/${id}/lists/${item_id}`}> */}
 				<div className="basis-full">
 					<div className="flex justify-between">
 						<div className="text-xl">
 							{sleeve.name}
 							{neck.name}
-
-							{/* {item_id} */}
 						</div>
 					</div>
 					{/* material */}
-
-					{/* <pre className="text-sm">{JSON.stringify(value, null, 3)}</pre> */}
-					{/* <SelectMaterial id={value.id} value={value.material}>
-						เลือกเนื้อผ้า
-					</SelectMaterial> */}
-
 					<div className="flex justify-between">
 						<div>{value.material.name}</div>
 					</div>
@@ -97,17 +93,14 @@ function Item({value}: {value: ItemType}) {
 						<p className="">{value.material.description}</p>
 					</div>
 				</div>
-				{/* </Link> */}
 
 				{/*  */}
 				<div className="flex justify-between items-center basis-1/6">
 					<div className="">
-						{value.lists.reduce((period, present) => {
-							return period + present.amont;
-						}, 0)}
+						{total}
 						{` ตัว`}
 					</div>
-					<div>฿5,056.00</div>
+					<div>฿{price}</div>
 				</div>
 			</Link>
 		</div>

@@ -26,16 +26,18 @@ export default function Page({params}: Props) {
 
 	const {conter, id, lists, material, neck, sleeve} = item;
 
-	const total = lists.reduce((period, present) => {
-		return period + present.amont;
-	}, 0);
+	// const total = lists.reduce((period, present) => {
+	// 	return period + present.amont;
+	// }, 0);
 
 	function handle() {
 		router.back();
 	}
 
-	const resault = Pricecalculator.orderPrice({item, rate: rate.current});
-	console.log(resault);
+	const {items, price, total} = Pricecalculator.orderPrice({
+		item,
+		rate: rate.current,
+	});
 
 	return (
 		<div className="flex flex-col h-screen bg-zinc-50">
@@ -66,97 +68,125 @@ export default function Page({params}: Props) {
 					</div>
 
 					{/* items detail */}
-					<div className="p-4 flex flex-wrap gap-2 justify-center">
-						{/* <pre>{JSON.stringify(item.lists, null, 3)}</pre> */}
+					<div className="p-4 ">
 						<Lists item={item} id={item.id} />
 					</div>
-
-					{/* <div className="p-4 flex flex-wrap gap-2 justify-center">
-						Total 
-					</div> */}
-					{/* 
-					<div className="flex justify-between px-3 py-2 rounded shadow">
-						<div>Total</div>
-						<div>{totalitems}</div>
-					</div>
-
-					<div className="flex justify-between px-3 py-2 rounded shadow">
-						<div>CurrentPrice</div>
-						{rate.current && <div>{rate.current.price}</div>}
-					</div>
-
-					<div className="flex justify-between px-3 py-2 rounded shadow">
-						<div>Neck Price</div>
-						<div>{item.neck.price}</div>
-					</div>
-
-					<div className="flex justify-between px-3 py-2 rounded shadow">
-						<div>Sleeve Price</div>
-						<div>{item.sleeve.price}</div>
-					</div>
-
-					<div className="flex justify-between px-3 py-2 rounded shadow">
-						<div>Material Price</div>
-						<div>{item.material.price}</div>
-					</div> */}
-				</div>
-			</div>
-			<div className="h-1/2 flex flex-col ">
-				<div className="basis-full p-2 overflow-y-scroll flex justify-center items-center">
-					{/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque provident,
-					exercitationem natus dolorem dignissimos sapiente est animi quam. Eveniet
-					odit di */}
-					status
-				</div>
-				{/* control */}
-				<div className="shrink-0 flex justify-between gap-1  bg-zinc-50 ">
-					<div className="w-20 border flex justify-center items-center text-3xl">
-						+
-					</div>
-					<div className="basis-full  p-2 border flex items-center">
-						<input
-							type="text"
-							value="dadada"
-							className="h-full w-full text-zinc-600 p-1 focus:outline-none"
-							onChange={() => {}}
-						/>
-					</div>
-					<div className="w-20 border flex justify-center items-center">send</div>
 				</div>
 			</div>
 
-			{/* <pre>{JSON.stringify(item, null, 3)}</pre> */}
-
-			{/* Description */}
-			{/* <div className="grid content-end  px-5 py-4">
-				<div className="flex gap-6 justify-center items-center ">
-					<div className="text-2xl">{total} ตัว</div>
-					<div className="">
-						<button
-							className="px-3 py-2 rounded-xl bg-zinc-800 text-zinc-300"
-							onClick={handle}>
-							ตกลง
-						</button>
-					</div>
-				</div>
-			</div> */}
-
-			{/*  */}
+			<div className="sticky bottom-0 p-2 bg-zinc-900 text-zinc-200 flex justify-center items-center gap-4">
+				<div>รวม {total} ตัว</div>
+				<div className="px-3 py-2 bg-zinc-50 text-zinc-800 rounded">฿{price}</div>
+			</div>
 		</div>
 	);
 }
 
 function Lists({item, id}: {id: string; item: ItemType}) {
 	return (
-		<>
+		<div className="grid grid-cols-1">
 			{item.lists.map((list, index) => (
 				<List key={index} id={id} value={list} item={item} />
 			))}
-		</>
+		</div>
 	);
 }
 
 function List({
+	value,
+	id,
+	item,
+}: {
+	value: ListType;
+	id: string;
+	item: ItemType;
+}) {
+	//  init
+	const app = useAppContext();
+	const dispatch = useAppDispatchContext();
+	const [state, setState] = useState<boolean>(false);
+	const totalitems = Pricecalculator.totalOfItem({items: app.items});
+	const rate = Pricecalculator.get({amont: totalitems, price_list: PriceLists});
+
+	// functions
+	function ppeCalculator(price: number | undefined): number {
+		const p = price == undefined ? 0 : price;
+		return (
+			p + value.addOn + item.neck.price + item.sleeve.price + item.material.price
+		);
+	}
+
+	const PPE = ppeCalculator(rate.current?.price);
+	const PPE_NEXT = ppeCalculator(rate.next?.price);
+
+	//
+	function up() {
+		dispatch({
+			items_lists: {
+				type: "up",
+				id,
+				value,
+			},
+		});
+	}
+
+	function down() {
+		dispatch({
+			items_lists: {
+				type: "down",
+				id,
+				value,
+			},
+		});
+	}
+
+	function handleReset() {
+		dispatch({
+			items_lists: {
+				type: "reset",
+				id,
+			},
+		});
+	}
+
+	// render
+	return (
+		<div
+			className={`p-2 border-b last:border-none rounded flex ${
+				value.amont > 0 && "bg-zinc-200/50"
+			}`}>
+			{/* left */}
+			<div className="basis-6/12 flex justify-center items-center">
+				<div className="text-2xl">{value.label}</div>
+			</div>
+			{/* center */}
+			<div className="basis-full flex flex-col justify-center items-start">
+				<div className=" text-zinc-500">
+					<div>รอบอก {value.chest} นิ้ว</div>
+					<div>ความยาว {value.length} นิ้ว</div>
+				</div>
+				<div className="font-bold">฿{PPE}</div>
+			</div>
+			{/* right */}
+			<div className="basis-5/12 text-center">
+				<div className="m-1 ">
+					<button className="rounded-full border w-6 h-6 bg-zinc-50" onClick={up}>
+						+
+					</button>
+				</div>
+
+				<div className="text-xl">{value.amont}</div>
+				<div className="m-1 ">
+					<button className="rounded-full border w-6 h-6 bg-zinc-50" onClick={down}>
+						-
+					</button>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+function List2({
 	value,
 	id,
 	item,
@@ -172,16 +202,6 @@ function List({
 	const [state, setState] = useState<boolean>(false);
 	const totalitems = Pricecalculator.totalOfItem({items: app.items});
 	const rate = Pricecalculator.get({amont: totalitems, price_list: PriceLists});
-
-	// const price = rate.current == undefined ? 0 : rate.current.price;
-
-	// // ppe current
-	// const PPE =
-	// 	price +
-	// 	value.addOn +
-	// 	item.neck.price +
-	// 	item.sleeve.price +
-	// 	item.material.price;
 
 	function ppeCalculator(price: number | undefined): number {
 		const p = price == undefined ? 0 : price;
