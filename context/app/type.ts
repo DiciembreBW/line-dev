@@ -109,3 +109,9 @@ export type PriceListType = {
 	price: number;
 	get: number;
 };
+
+export type DescirptionType = {
+	price: number;
+	total: number;
+	items: {price: number; list: ListType}[];
+};

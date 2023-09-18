@@ -1,6 +1,11 @@
-import {ItemType, ListType} from "@/context/app/type";
-import {PriceListType} from "../types/price_type";
-import {LabelType} from "../types/sleeve_type";
+import {
+	DescirptionType,
+	ItemType,
+	ListType,
+	PriceListType,
+} from "@/context/app/type";
+// import {PriceListType} from "../types/price_type";
+// import {LabelType} from "../types/sleeve_type";
 
 export const Pricecalculator = {
 	// amont: number | undefined, price_list: PriceListType[]
@@ -47,11 +52,13 @@ export const Pricecalculator = {
 		);
 	},
 
-	orderPrice({item, rate}: {item: ItemType; rate: PriceListType | undefined}): {
-		price: number;
-		total: number;
-		items: {price: number; list: ListType}[];
-	} {
+	orderPrice({
+		item,
+		rate,
+	}: {
+		item: ItemType;
+		rate: PriceListType | undefined;
+	}): DescirptionType {
 		// const materialprice = item.material.price
 		const {material, neck, sleeve, lists} = item;
 		const rateprice = rate?.price == undefined ? 0 : rate.price;

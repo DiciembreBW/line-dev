@@ -18,6 +18,7 @@ import {MenuItem} from "@mui/base";
 import SelectMaterial from "@/components/app/TypePage/SelectMaterial";
 import {Pricecalculator} from "@/libs/pricecalculator/Pricecalculator";
 import {PriceLists} from "@/context/app/app.value";
+import Description from "@/components/app/ui/DescriptionUI";
 
 type Props = {};
 
@@ -30,6 +31,7 @@ export default function page({}: Props) {
 			<div className="px-3 py-2">
 				<div className="grid gap-2">
 					<Items />
+					<Description />
 				</div>
 			</div>
 
@@ -53,10 +55,10 @@ function Items() {
 				<Item key={index} value={item} />
 			))}
 
-			<div className="flex justify-between px-3 py-2 rounded shadow border">
+			{/* <div className="flex justify-between px-3 py-2 rounded shadow border">
 				<div>รวมทั้งหมด:</div>
 				<div>{total} ตัว</div>
-			</div>
+			</div> */}
 		</>
 	);
 }
