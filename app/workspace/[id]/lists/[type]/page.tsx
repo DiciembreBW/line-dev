@@ -9,8 +9,8 @@ import {Pricecalculator} from "@/libs/pricecalculator/Pricecalculator";
 import MenuUI from "@/ultils/mui/MenuUI";
 import {Drawer, SwipeableDrawer} from "@mui/material";
 import Link from "next/link";
-import {useRouter} from "next/navigation";
-import React, {useState} from "react";
+import {useRouter, useSearchParams} from "next/navigation";
+import React, {useEffect, useRef, useState} from "react";
 
 type Props = {params: {type: string}};
 
@@ -108,6 +108,18 @@ function List({
 	const totalitems = Pricecalculator.totalOfItem({items: app.items});
 	const rate = Pricecalculator.get({amont: totalitems, price_list: PriceLists});
 
+	const ref = useRef<HTMLDivElement>(null);
+	useEffect(() => {
+		// console.log(ref);
+		// console.log();
+		const label = ref.current?.innerHTML;
+		if (label == pickLabel) {
+			ref.current?.scrollIntoView({behavior: "smooth", block: "center"});
+		}
+	}, []);
+	const search = useSearchParams();
+	const pickLabel = search.get("label");
+
 	// functions
 	function ppeCalculator(price: number | undefined): number {
 		const p = price == undefined ? 0 : price;
@@ -157,7 +169,9 @@ function List({
 			}`}>
 			{/* left */}
 			<div className="basis-6/12 flex justify-center items-center">
-				<div className="text-2xl">{value.label}</div>
+				<div className="text-2xl" ref={ref}>
+					{value.label}
+				</div>
 			</div>
 			{/* center */}
 			<div className="basis-full flex flex-col justify-center items-start">

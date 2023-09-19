@@ -18,7 +18,7 @@ export default function UpdateWorkspaceUI({}: Props) {
 	return (
 		<div className="px-3 py-2 flex justify-center">
 			<div className="m-1">
-				<button className="px-3 py-2 rounded border" onClick={onsave}>
+				<button className="px-3 py-2" onClick={onsave}>
 					<SnackUi message="สำเร็จ">บันทึก</SnackUi>
 				</button>
 			</div>
