@@ -32,9 +32,10 @@ export type AppActionType = {
 	};
 
 	items_lists?: {
-		type: "up" | "down" | "reset" | "setzero";
+		type: "up" | "down" | "set" | "reset" | "setzero";
 		id: string;
 		value?: ListType;
+		amont?: number;
 	};
 
 	material?: {

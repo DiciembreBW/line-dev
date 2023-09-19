@@ -1,6 +1,7 @@
 "use client";
 import ListNav from "@/components/app/Navbar/ListNav";
 import SelectMaterial from "@/components/app/TypePage/SelectMaterial";
+import AmontItemUI from "@/components/app/ui/AmontItemUI";
 import Button from "@/components/ui/Button";
 import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
 import {PriceLists} from "@/context/app/app.value";
@@ -74,9 +75,23 @@ export default function Page({params}: Props) {
 				</div>
 			</div>
 
-			<div className="sticky bottom-0 p-2 bg-zinc-900 text-zinc-200 flex justify-center items-center gap-4">
-				<div>รวม {total} ตัว</div>
-				<div className="px-3 py-2 bg-zinc-50 text-zinc-800 rounded">฿{price}</div>
+			<div className="sticky bottom-0 p-2 bg-zinc-900 rounded-t-2xl text-zinc-200 ">
+				<div className="flex justify-center items-center gap-4">
+					<div>
+						รวม {total} ตัว | ฿{price}
+					</div>
+					<div
+						className="px-3 py-2 bg-zinc-50 text-zinc-800 rounded cursor-pointer"
+						onClick={handle}>
+						ตกลง
+					</div>
+				</div>
+
+				{/* <div className="flex justify-center gap-2">
+					<Button primary onclick={handle}>
+						ตกลง
+					</Button>
+				</div> */}
 			</div>
 		</div>
 	);
@@ -189,7 +204,11 @@ function List({
 					</button>
 				</div>
 
-				<div className="text-xl">{value.amont}</div>
+				<div className="text-xl">
+					<AmontItemUI list={value} itemId={item.id}>
+						{value.amont}
+					</AmontItemUI>
+				</div>
 				<div className="m-1 ">
 					<button className="rounded-full border w-6 h-6 bg-zinc-50" onClick={down}>
 						-
@@ -197,186 +216,5 @@ function List({
 				</div>
 			</div>
 		</div>
-	);
-}
-
-function List2({
-	value,
-	id,
-	item,
-}: {
-	value: ListType;
-	id: string;
-	item: ItemType;
-}) {
-	// return <div className="px-3 py-2">dada</div>;
-
-	const app = useAppContext();
-	const dispatch = useAppDispatchContext();
-	const [state, setState] = useState<boolean>(false);
-	const totalitems = Pricecalculator.totalOfItem({items: app.items});
-	const rate = Pricecalculator.get({amont: totalitems, price_list: PriceLists});
-
-	function ppeCalculator(price: number | undefined): number {
-		const p = price == undefined ? 0 : price;
-		return (
-			p + value.addOn + item.neck.price + item.sleeve.price + item.material.price
-		);
-	}
-
-	const PPE = ppeCalculator(rate.current?.price);
-	const PPE_NEXT = ppeCalculator(rate.next?.price);
-
-	function swipeOpen() {
-		setState(true);
-	}
-	function swipeClose() {
-		setState(false);
-	}
-
-	//
-
-	function up() {
-		dispatch({
-			items_lists: {
-				type: "up",
-				id,
-				value,
-			},
-		});
-	}
-
-	function down() {
-		dispatch({
-			items_lists: {
-				type: "down",
-				id,
-				value,
-			},
-		});
-	}
-
-	function handleReset() {
-		dispatch({
-			items_lists: {
-				type: "reset",
-				id,
-			},
-		});
-	}
-	return (
-		// <div className="h-12 w-12 border rounded-full flex justify-center items-center"></div>
-
-		<>
-			<div
-				className="h-14 w-14 border rounded-full flex justify-center items-center bg-zinc-50 relative hover:cursor-pointer"
-				onClick={swipeOpen}>
-				<div className="">
-					<div>{value.label}</div>
-					{value.amont > 0 && (
-						<div className="text-xs absolute -top-2 right-0 rounded-full bg-zinc-800 text-zinc-300 p-0.5">
-							{value.amont}
-						</div>
-					)}
-				</div>
-			</div>
-			<Drawer
-				open={state}
-				anchor="top"
-				onClose={swipeClose}
-				ModalProps={{
-					// slotProps: {backdrop: {invisible: true}},
-					slotProps: {
-						backdrop: {
-							invisible: true,
-							// className: "bg-red-200",
-							// sx: {
-							// 	// backgroundColor: "transparent",
-							// },
-						},
-					},
-				}}
-				PaperProps={{
-					sx: {
-						// borderTopRightRadius: 16,
-						// borderTopLeftRadius: 16,
-						borderBottomLeftRadius: 16,
-						borderBottomRightRadius: 16,
-						paddingTop: 8,
-						paddingLeft: 2,
-						paddingRight: 2,
-						paddingBottom: 4,
-						// padding: 3,
-					},
-				}}>
-				{/* handle */}
-
-				{/* amont */}
-				<div className="flex justify-center items-center gap-6 relative">
-					{/* close */}
-					{/* <button
-						className="absolute top-0 right-0 w-6 h-6 rounded-full flex justify-center items-center border"
-						onClick={swipeClose}>
-						x
-					</button> */}
-					{/* left */}
-					<div className="m-1">
-						<button
-							className="w-16 h-16 border-2 border-zinc-400 rounded-full text-2xl text-zinc-400"
-							onClick={down}>
-							-
-						</button>
-					</div>
-					{/* center */}
-					<div className="m-1 flex justify-center items-center">
-						<div className="grid content-center justify-center gap-2 h-full ">
-							{/* label */}
-							<div className="text-center">
-								<div className="text-3xl">{value.label}</div>
-							</div>
-
-							<div className="text-4xl text-center font-bold">{value.amont}</div>
-
-							{/* price Per each */}
-							<div className="text-center text-xl">฿{PPE}</div>
-						</div>
-					</div>
-
-					{/* right */}
-					<div className="m-1">
-						<button
-							className="w-16 h-16 border-2 border-zinc-400 rounded-full text-2xl text-zinc-400"
-							onClick={up}>
-							+
-						</button>
-					</div>
-				</div>
-
-				<hr className="my-2" />
-
-				<div className="flex justify-center my-2">
-					<div className="text-sm text-zinc-400">
-						<div>รอบออก {value.chest} นิ้ว</div>
-						<div>ความยาว {value.length} นิ้ว</div>
-					</div>
-				</div>
-
-				<hr className="my-2" />
-				<div className="flex justify-center">รวมทั้งหมด {totalitems} ตัว</div>
-
-				{/* <div className="flex justify-center">
-					<Button primary onclick={swipeClose}>
-						x
-					</Button>
-				</div> */}
-
-				{/* <div className="text-zinc-400">
-					<div>เรทถัดไป</div>
-					<div>
-						{rate.next?.quantity} ตัวๆละ {PPE_NEXT}
-					</div>
-				</div> */}
-			</Drawer>
-		</>
 	);
 }

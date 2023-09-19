@@ -5,9 +5,23 @@ export default function ItemsListsReducer(
 	action: AppActionType
 ): AppType {
 	if (action.items_lists == undefined) return app;
-	const {type, id, value} = action.items_lists;
+	const {type, id, value, amont} = action.items_lists;
 
 	switch (type) {
+		case "set": {
+			// console.log(amont);
+			const items = StepAmont(app, id, (list) => {
+				if (list.label == value?.label) {
+					list.amont = amont || 0;
+
+					return list;
+				}
+
+				return list;
+			});
+
+			return {...app, items};
+		}
 		case "up": {
 			if (value == undefined) return app;
 

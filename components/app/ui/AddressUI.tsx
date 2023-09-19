@@ -14,14 +14,16 @@ export default function AddressUI() {
 	return (
 		<>
 			{/* <pre>{JSON.stringify(app, null, 3)}</pre> */}
-			<div className="p-2 border rounded-lg shadow flex gap-2 justify-between">
+			<div className="p-2 border rounded-lg flex gap-2 justify-between my-2">
 				{/* <div>dadas</div> */}
 				<div className="px-3 py-2">
 					<div>ที่อยู่</div>
 					<p className="text-sm">{address}</p>
 				</div>
 				<div>
-					<Address Content={AddressContent}>เปลี่ยน</Address>
+					<Address Content={AddressContent}>
+						<div className="text-sm text-zinc-500">เปลี่ยน</div>
+					</Address>
 				</div>
 			</div>
 		</>

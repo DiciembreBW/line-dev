@@ -82,9 +82,9 @@ function Items() {
 				))}
 			</div>
 			<div className="grid gap-2">
-				<ConditionTerm />
-				<AddressUI />
-				<div className="grid  gap-3 px-4 py-3 ">
+				{/* <ConditionTerm /> */}
+				{/* <AddressUI /> */}
+				<div className="grid  gap-3 px-4 py-3 my-4 bg-zinc-900 text-zinc-300 rounded-xl">
 					<div className="flex justify-between">
 						<div>จำนวนรวม</div>
 						<div>{totalItems} ตัว</div>
@@ -93,12 +93,12 @@ function Items() {
 						<div>ราคารวม</div>
 						<div>฿{totalPrice}</div>
 					</div>
-					<div className="flex justify-center">
+					{/* <div className="flex justify-center">
 						<Button onclick={() => {}}>ปิด</Button>
 						<Button onclick={() => {}} primary>
 							สังผลิต
 						</Button>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>
@@ -117,16 +117,18 @@ function ItemUI({
 		<>
 			<div className="p-4 rounded-xl border">
 				{/* row - 1 */}
-				<div className="flex gap-3">
-					<div className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-300">
-						3D Model
+				<div className="flex gap-3 ">
+					<div className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600">
+						<Link href={`${window.location.href}/model`} className="underline">
+							3D Model
+						</Link>
 					</div>
 					<div className="basis-4/6">
 						<div className="flex justify-between">
 							<div className="font-bold">
 								{item.neck.name} {item.sleeve.name}
 							</div>
-							<div className="text-zinc-300">
+							<div className="font-bold">
 								<MenuListItem value={item}>...</MenuListItem>
 							</div>
 						</div>

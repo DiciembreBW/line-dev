@@ -13,7 +13,7 @@ export default function ItemNav({}: Props) {
 		<div className="flex items-center px-3 py-2 justify-between">
 			<div className="flex gap-3">
 				<Link href={`/workspace/${id}`}> เพิ่ม </Link>
-				<Link href={`/workspace/${id}/lists`}> List </Link>
+				<Link href={`/workspace/${id}/lists`}> รายการ </Link>
 			</div>
 
 			<div className=""></div>

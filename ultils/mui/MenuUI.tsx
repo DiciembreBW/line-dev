@@ -31,6 +31,17 @@ export default function MenuUI({children, item}: Props) {
 		router.back();
 	}
 
+	function handleReset() {
+		dispatch({
+			items_lists: {
+				type: "reset",
+				id: item.id,
+			},
+		});
+
+		handleClose();
+	}
+
 	return (
 		<div>
 			<button onClick={handleClick}>{children}</button>
@@ -43,6 +54,7 @@ export default function MenuUI({children, item}: Props) {
 					"aria-labelledby": "basic-button",
 				}}>
 				<MenuItem onClick={handleRemove}>ลบ</MenuItem>
+				<MenuItem onClick={handleReset}>รีเซ็ต</MenuItem>
 				{/* <MenuItem onClick={handleClose}>My account</MenuItem>
 				<MenuItem onClick={handleClose}>Logout</MenuItem> */}
 			</Menu>
