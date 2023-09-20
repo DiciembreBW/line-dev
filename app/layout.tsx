@@ -23,7 +23,8 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
 						<Link href="/">RUN</Link>
 					</div>
 				</div> */}
-				{children}
+
+				<div className="bg-zinc-50 sm:w-1/2 mx-auto">{children}</div>
 			</body>
 		</html>
 	);
