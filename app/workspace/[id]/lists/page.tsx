@@ -95,9 +95,9 @@ function ItemUI({
 				{/* row - 1 */}
 				<ItemDialog item={item}>
 					<div className="flex gap-3">
-						<div className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600">
-							{/* 3D Model */}
-							<Model3D />
+						<div className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600 ">
+							3D Model
+							{/* <Model3D /> */}
 						</div>
 						<div className="basis-4/6">
 							<div className="flex justify-between">

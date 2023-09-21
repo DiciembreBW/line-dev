@@ -61,26 +61,30 @@ export default function ItemDialog({children, item, lists}: Props) {
 								},
 							}}
 							// transition={{type: "tween"}}
-							className="h-screen bg-slate-50 overflow-y-scroll">
+							className="h-screen bg-slate-200 overflow-y-scroll">
 							<DialogContent>
 								<div className="p-2 ">
-									<div className="rounded-lg aspect-[3/4]">
+									<div className="rounded-lg aspect-square mb-4">
 										<Model3D />
+										{/* Model3D */}
 									</div>
-									<div className="flex justify-between">
-										<TitleItem neck={item.neck} sleeve={item.sleeve} />
-										<MenuListItem value={item}>...</MenuListItem>
-									</div>
-
-									<MaterialUI id={item.id} material={item.material}>
-										เลือกผ้า
-									</MaterialUI>
 								</div>
-
-								<ListsUI lists={item.lists} item={item} />
 
 								{/* <pre>{JSON.stringify(item.lists, null, 3)}</pre> */}
 							</DialogContent>
+
+							<div className="p-6 rounded-t-2xl bg-zinc-50">
+								<div className="flex justify-between">
+									<TitleItem neck={item.neck} sleeve={item.sleeve} />
+									<MenuListItem value={item}>...</MenuListItem>
+								</div>
+
+								<MaterialUI id={item.id} material={item.material}>
+									เลือกผ้า
+								</MaterialUI>
+
+								<ListsUI lists={item.lists} item={item} />
+							</div>
 
 							<DialogActions className="justify-center sticky bottom-0 bg-zinc-100">
 								<div className="text-center w-full">

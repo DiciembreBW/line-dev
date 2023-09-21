@@ -77,8 +77,8 @@ export default function Model3D({}: Props) {
 					{/* <ModelCloth /> */}
 					{/* <ModelPillow /> */}
 					{/* <ModelShirt /> */}
-					<ModelZip />
-					{/* <Model4D /> */}
+					{/* <ModelZip /> */}
+					<Model4D />
 				</Stage>
 			</Canvas>
 		</div>
