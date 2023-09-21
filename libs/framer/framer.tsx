@@ -19,10 +19,8 @@ const Popup = React.forwardRef(
 	(
 		{
 			children,
-			event,
 		}: {
 			children: React.ReactNode;
-			event: null | React.MouseEvent<HTMLButtonElement>;
 		},
 		ref
 	) => (

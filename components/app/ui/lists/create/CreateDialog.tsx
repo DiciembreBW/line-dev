@@ -17,6 +17,7 @@ import LongDesign from "@/components/app/CreateDesign/LongDesign";
 import ShortDesign from "./ShortDesign";
 import {motion, AnimatePresence} from "framer-motion";
 import Random from "@/libs/utilities/Random";
+import {Framer} from "@/libs/framer/framer";
 
 type Props = {children: React.ReactNode};
 
@@ -40,35 +41,8 @@ export default function CreateDialog({children}: Props) {
 		setState(false);
 	}
 
-	function create() {
-		// console.log("create");
-		// console.log(app);
-		const value: ItemType = {
-			id: Random.id(),
-			conter: 0,
-			lists: [],
-			material: {
-				name: "",
-				description: "",
-				price: 0,
-			},
-			neck: {name: "", price: 0},
-			sleeve: {name: "", price: 0},
-		};
-		distpatch({
-			items: {
-				type: "create",
-				value,
-			},
-		});
-
-		closeDialog();
-	}
-
 	return (
 		<>
-			{/* <></> */}
-
 			<div
 				onClick={openDialog}
 				className="cursor-pointer w-12 h-12 rounded-full flex justify-center items-center bg-zinc-900 text-zinc-200
@@ -77,64 +51,66 @@ export default function CreateDialog({children}: Props) {
 			</div>
 
 			<Dialog open={state} onClose={closeDialog} fullScreen transitionDuration={0}>
-				<DialogContent>
-					<AnimatePresence mode="popLayout">
-						<div className="grid gap-2">
-							<motion.div
-								key={"tee"}
-								layout
-								initial={{opacity: 0, x: 50}}
-								animate={{opacity: 1, x: 0}}
-								transition={{type: "spring", delay: 0.2 * 0.05}}
-								className="p-2 rounded-lg h-96 border bg-zinc-50 flex flex-col justify-between cursor-pointer"
-								onClick={() =>
-									TeeShirtTemplate({necklabel: "คอกลม", sleevelabel: "แขนสั้น"})
-								}>
-								<div className="flex justify-center text-xl h-full items-center">
-									เสื้อคอกลมแขนสั้น
-								</div>
-							</motion.div>
+				{/* <DialogContent> */}
+				<div className="grid gap-2 p-2">
+					{/* <button
+						onClick={() => {
+							TeeShirtTemplate({necklabel: "คอกลม", sleevelabel: "แขนสั้น"});
+						}}>
+						เสื้อคอกลมแขนสั้น
+					</button> */}
 
+					<Framer.Animate2>
+						<motion.div
+							className="flex justify-between gap-3 border rounded p-1"
+							whileTap={{scale: 0.8, opacity: 0}}
+							onClick={() => {
+								TeeShirtTemplate({necklabel: "คอกลม", sleevelabel: "แขนสั้น"});
+							}}>
+							<div className="basis-3/6 aspect-square bg-zinc-200 rounded flex justify-center items-center">
+								img
+							</div>
+							<div className="basis-full bg-zinc-100 p-2 rounded-lg px-3 py-2">
+								เสื้อคอกลมแขนสั้น
+							</div>
+						</motion.div>
+					</Framer.Animate2>
+
+					<Framer.Animate2>
+						<motion.div
+							className="flex justify-between gap-3 border rounded p-1"
+							whileTap={{scale: 0.8, opacity: 0}}
+							onClick={() => {
+								PoloShirtTemplate({necklabel: "คอกลม", sleevelabel: "แขนยาว"});
+							}}>
+							<div className="basis-3/6 aspect-square bg-zinc-200 rounded flex justify-center items-center">
+								img
+							</div>
+							<div className="basis-full bg-zinc-100 p-2 rounded-lg px-3 py-2">
+								เสื้อโปโลแขนสั้น
+							</div>
+						</motion.div>
+					</Framer.Animate2>
+					{/* 
 							<motion.div
 								key={"polo"}
 								layout
 								initial={{opacity: 0, x: 50}}
 								animate={{opacity: 1, x: 0}}
 								transition={{type: "spring", delay: 4 * 0.05}}
-								className="p-2 rounded-lg h-96 border bg-zinc-50 flex flex-col justify-between cursor-pointer"
+								className="p-2 rounded-lg h-96 border bg-zinc-50 flex flex-col justify-between cursor-pointer active:bg-red-400"
 								onClick={() =>
 									PoloShirtTemplate({necklabel: "คอกลม", sleevelabel: "แขนยาว"})
 								}>
 								<div className="flex justify-center text-xl h-full items-center">
 									เสื้อโปโลแขนสั้น
 								</div>
-							</motion.div>
-						</div>
-						{/* <Animate2>
-							<Button onclick={PoloShirtTemplate}>เพื่มเสื้อโปโลแขนสั้น</Button>
-						</Animate2> */}
-
-						{/* <Animate time={0.2} name="cc"> */}
-
-						{/* <motion.div
-							layout
-							initial={{opacity: 0, x: 50}}
-							animate={{opacity: 1, x: 0}}
-							transition={{type: "tween", delay: 0.4 * 0.5}}>
-							<ShortDesign
-								name="เสื้อ โปโล"
-								neck="คอกลม"
-								sleeve="แขนสั้น"
-								key={"cc"}
-							/>
-						</motion.div> */}
-						{/* <ShortDesign name="เสื้อ โปโล" neck="คอโปโล" sleeve="แขนสั้น" /> */}
-					</AnimatePresence>
-					{/* <LongDesign name="เสื้อ t-shirt แขนยาว" neck="คอกลม" sleeve="แขนยาว" /> */}
-				</DialogContent>
+							</motion.div> */}
+				</div>
+				{/* </DialogContent> */}
 				<DialogActions>
 					<div className="flex justify-center w-full">
-						<Button primary onclick={close}>
+						<Button primary onclick={closeDialog}>
 							ปิด
 						</Button>
 					</div>
