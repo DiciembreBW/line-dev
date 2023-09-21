@@ -3,7 +3,7 @@
 // }
 
 "use client";
-import React, {useState} from "react";
+import React, {Suspense, useState} from "react";
 import {Canvas} from "@react-three/fiber";
 import {
 	Environment,
@@ -15,6 +15,7 @@ import {
 	CameraControls,
 	Grid,
 	OrbitControls,
+	PerformanceMonitor,
 	PresentationControls,
 	Stage,
 	TransformControls,
@@ -32,32 +33,45 @@ type Props = {};
 // https://www.youtube.com/watch?v=Nxd9L6X8quo
 
 export default function Model3D({}: Props) {
+	const [dpr, setDpr] = useState<number>(1);
 	return (
-		<div className="w-full h-full">
-			<Canvas shadows camera={{position: [0, 0, 15], fov: 35}}>
-				{/* <Environment /> */}
-				{/* <Shadow /> */}
+		<div className="h-full">
+			<Suspense
+				fallback={
+					<div className="flex justify-center items-center h-full">loading</div>
+				}>
+				<Canvas
+					// performance={{min: 0.1, max: 1, current: 1, debounce: 200}}
+					// frameloop="demand"
+					shadows
+					camera={{position: [0, 0, 1.5], fov: 35}}>
+					<PerformanceMonitor
+						flipflops={12}
+						onIncline={() => setDpr(2)}
+						onDecline={() => setDpr(1)}>
+						{/* <Environment /> */}
+						{/* <Shadow /> */}
 
-				{/* <CameraControls makeDefault /> */}
-				{/* <OrbitControls /> */}
-				{/* <Grid /> */}
-				{/* <TransformControls mode="translate"> */}
+						{/* <CameraControls makeDefault /> */}
+						{/* <OrbitControls /> */}
+						{/* <Grid /> */}
+						{/* <TransformControls mode="translate"> */}
 
-				<OrbitControls
-					// maxDistance={12}
-					rotateSpeed={1.25}
-					dampingFactor={0.2}
-					// autoRotate
-					// minAzimuthAngle={Math.PI / 4}
-					// maxAzimuthAngle={Math.PI / 2}
-					minPolarAngle={Math.PI / 2.5}
-					maxPolarAngle={Math.PI / 2}
-					autoRotate
-					autoRotateSpeed={1}
-				/>
-				{/* </TransformControls> */}
-				{/* <ambientLight intensity={0.5} /> */}
-				{/* <spotLight
+						<OrbitControls
+							// maxDistance={12}
+							rotateSpeed={1.25}
+							dampingFactor={0.2}
+							// autoRotate
+							// minAzimuthAngle={Math.PI / 4}
+							// maxAzimuthAngle={Math.PI / 2}
+							minPolarAngle={Math.PI / 2.5}
+							maxPolarAngle={Math.PI / 2}
+							autoRotate
+							autoRotateSpeed={1}
+						/>
+						{/* </TransformControls> */}
+						{/* <ambientLight intensity={0.5} /> */}
+						{/* <spotLight
 					position={[10, 10, 10]}
 					angle={0.15}
 					penumbra={1}
@@ -65,22 +79,24 @@ export default function Model3D({}: Props) {
 					castShadow
 				/> */}
 
-				{/* models */}
-				{/* <ModelSample /> */}
+						{/* models */}
+						{/* <ModelSample /> */}
 
-				<Stage
-					adjustCamera={0}
-					position={[0, 0, 0]}
-					intensity={0.5}
-					shadows={{type: "contact", colorBlend: 1, opacity: 0.5}}>
-					{/* <Model /> */}
-					{/* <ModelCloth /> */}
-					{/* <ModelPillow /> */}
-					{/* <ModelShirt /> */}
-					{/* <ModelZip /> */}
-					<Model4D />
-				</Stage>
-			</Canvas>
+						<Stage
+							adjustCamera={0}
+							position={[0, 0, 5]}
+							intensity={0.5}
+							shadows={{type: "contact", colorBlend: 1, opacity: 0.5}}>
+							{/* <Model /> */}
+							{/* <ModelCloth /> */}
+							{/* <ModelPillow /> */}
+							{/* <ModelShirt /> */}
+							<ModelZip />
+							{/* <Model4D /> */}
+						</Stage>
+					</PerformanceMonitor>
+				</Canvas>
+			</Suspense>
 		</div>
 	);
 }

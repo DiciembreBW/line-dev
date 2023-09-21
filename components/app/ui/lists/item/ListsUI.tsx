@@ -58,11 +58,6 @@ export default function ListsUI({lists, item}: Props) {
 
 	return (
 		<div>
-			{/* <pre>{JSON.stringify(neck, null, 3)}</pre>
-			<pre>{JSON.stringify(sleeve, null, 3)}</pre>
-			<pre>{JSON.stringify(material, null, 3)}</pre>
-			<pre>{JSON.stringify(rate, null, 3)}</pre> */}
-
 			{lists.map((item, index) => (
 				<div key={index}>
 					<div

@@ -86,12 +86,6 @@ export default function Page({params}: Props) {
 						ตกลง
 					</div>
 				</div>
-
-				{/* <div className="flex justify-center gap-2">
-					<Button primary onclick={handle}>
-						ตกลง
-					</Button>
-				</div> */}
 			</div>
 		</div>
 	);

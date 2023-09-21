@@ -45,6 +45,17 @@ export default function MenuListItem({children, value}: Props) {
 		router.push(`${pathname}/${value.id}`);
 	}
 
+	function resetItem() {
+		dispatch({
+			items_lists: {
+				type: "reset",
+				id: value.id,
+			},
+		});
+
+		handleClose();
+	}
+
 	return (
 		<div>
 			<button
@@ -63,10 +74,10 @@ export default function MenuListItem({children, value}: Props) {
 				MenuListProps={{
 					"aria-labelledby": "basic-button",
 				}}>
-				<MenuItem onClick={handleEditItem}>
+				<MenuItem onClick={resetItem}>
 					{/* <Link href={`/workspace/${appId}/lists/${value.id}`}>แก้ไข</Link> */}
 					{/* <Link href={`${window.location.href}/${value.id}`}>แก้ไข{value.id}</Link> */}
-					แก้ไข
+					รีเซ็ท
 				</MenuItem>
 				{/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
 				<MenuItem onClick={handleRemoveItem}>ลบ</MenuItem>

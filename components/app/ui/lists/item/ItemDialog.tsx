@@ -38,7 +38,7 @@ export default function ItemDialog({children, item, lists}: Props) {
 						onClose={closeDialog}
 						transitionDuration={0}
 						hideBackdrop={true}
-						PaperProps={{sx: {backgroundColor: "transparent", boxShadow: "none"}}}
+						PaperProps={{sx: {backgroundColor: "white", boxShadow: "none"}}}
 						fullScreen
 						className="">
 						{/* <Framer.AnimatePop> */}
@@ -61,17 +61,17 @@ export default function ItemDialog({children, item, lists}: Props) {
 								},
 							}}
 							// transition={{type: "tween"}}
-							className="h-screen bg-slate-200 overflow-y-scroll">
-							<DialogContent>
-								<div className="p-2 ">
-									<div className="rounded-lg aspect-square mb-4">
-										{/* <Model3D /> */}
-										{/* Model3D */}
-									</div>
+							className="h-screen bg-slate-200 overflow-y-scroll sm:w-1/2 mx-auto">
+							{/* <DialogContent> */}
+							<div className=" ">
+								<div className="rounded-lg aspect-square">
+									<Model3D />
+									{/* Model3D */}
 								</div>
+							</div>
 
-								{/* <pre>{JSON.stringify(item.lists, null, 3)}</pre> */}
-							</DialogContent>
+							{/* <pre>{JSON.stringify(item.lists, null, 3)}</pre> */}
+							{/* </DialogContent> */}
 
 							<div className="p-6 rounded-t-2xl bg-zinc-50">
 								<div className="pt-2 pb-8">

@@ -4,11 +4,13 @@ Command: npx gltfjsx@6.2.3 ../../../public/model/S/T_shirt_gltf.zip.gltf
 */
 
 import React, { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+import { Detailed, useGLTF } from '@react-three/drei'
 
 export function ModelZip(props) {
   const { nodes, materials } = useGLTF('/model/S/T_shirt_gltf.zip.gltf')
   return (
+    <Detailed distances={[0, 10, 20]}>
+
     <group {...props} dispose={null}>
       <mesh geometry={nodes.Ribbing.geometry} material={materials.Body_FRONT_2664} />
       <mesh geometry={nodes.Ribbing_1.geometry} material={materials.Body_FRONT_2664} />
@@ -29,6 +31,8 @@ export function ModelZip(props) {
       <mesh geometry={nodes.Sleeves_4.geometry} material={materials.Sleeves_FRONT_2669} />
       <mesh geometry={nodes.Sleeves_5.geometry} material={materials.Sleeves_FRONT_2669} />
     </group>
+
+    </Detailed>
   )
 }
 
