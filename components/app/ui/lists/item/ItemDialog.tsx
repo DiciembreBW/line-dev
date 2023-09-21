@@ -65,7 +65,7 @@ export default function ItemDialog({children, item, lists}: Props) {
 							<DialogContent>
 								<div className="p-2 ">
 									<div className="rounded-lg aspect-square mb-4">
-										<Model3D />
+										{/* <Model3D /> */}
 										{/* Model3D */}
 									</div>
 								</div>
@@ -74,14 +74,16 @@ export default function ItemDialog({children, item, lists}: Props) {
 							</DialogContent>
 
 							<div className="p-6 rounded-t-2xl bg-zinc-50">
-								<div className="flex justify-between">
-									<TitleItem neck={item.neck} sleeve={item.sleeve} />
-									<MenuListItem value={item}>...</MenuListItem>
-								</div>
+								<div className="pt-2 pb-8">
+									<div className="flex justify-between ">
+										<TitleItem neck={item.neck} sleeve={item.sleeve} />
+										<MenuListItem value={item}>...</MenuListItem>
+									</div>
 
-								<MaterialUI id={item.id} material={item.material}>
-									เลือกผ้า
-								</MaterialUI>
+									<MaterialUI id={item.id} material={item.material}>
+										เลือกผ้า
+									</MaterialUI>
+								</div>
 
 								<ListsUI lists={item.lists} item={item} />
 							</div>
