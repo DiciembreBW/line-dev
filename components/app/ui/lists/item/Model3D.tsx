@@ -35,7 +35,7 @@ type Props = {};
 export default function Model3D({}: Props) {
 	const [dpr, setDpr] = useState<number>(1);
 	return (
-		<div className="h-full">
+		<div className="h-full w-full">
 			<Suspense
 				fallback={
 					<div className="flex justify-center items-center h-full">loading</div>

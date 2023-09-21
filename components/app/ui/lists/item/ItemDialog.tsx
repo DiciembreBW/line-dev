@@ -9,6 +9,7 @@ import TitleItem from "./TitleItem";
 import ListsUI from "./ListsUI";
 import MenuListItem from "./MenuListItem";
 import {useAppContext} from "@/context/app/AppReducer";
+import Link from "next/link";
 
 type Props = {children: React.ReactNode; item: ItemType; lists?: ListType};
 
@@ -62,10 +63,14 @@ export default function ItemDialog({children, item, lists}: Props) {
 							// transition={{type: "tween"}}
 							className="h-screen bg-slate-200 overflow-y-scroll sm:w-1/2 sm:mx-auto ">
 							{/* <DialogContent> */}
-							<div className=" ">
-								<div className="rounded-lg aspect-square">
+							<div className="relative">
+								<div className="rounded-lg aspect-square ">
 									{/* <Model3D /> */}
-									Model3D
+									{/* Model3D */}
+								</div>
+
+								<div className="p-2 underline absolute top-0 right-0">
+									<Link href={`${window.location.href}/model`}>กดเพื่อดูแบบ</Link>
 								</div>
 							</div>
 
