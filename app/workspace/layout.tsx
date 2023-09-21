@@ -20,5 +20,9 @@ export default function Layout({children}: Props) {
 	// 		</div>
 	// 	);
 
-	return <GlobalProvider>{children}</GlobalProvider>;
+	return (
+		<div className="sm:w-1/2 mx-auto">
+			<GlobalProvider>{children}</GlobalProvider>
+		</div>
+	);
 }

@@ -14,7 +14,6 @@ import {motion, AnimatePresence} from "framer-motion";
 import CreateDialog from "@/components/app/ui/lists/create/CreateDialog";
 import {Framer} from "@/libs/framer/framer";
 import ItemDialog from "@/components/app/ui/lists/item/ItemDialog";
-import Model3D from "@/components/app/ui/lists/item/Model3D";
 import OrderSummary from "./OrderSummary";
 import OrderAction from "./OrderAction";
 
@@ -46,10 +45,7 @@ export default function ListItem({}: Props) {
 			<AnimatePresence mode="popLayout">
 				<div className="grid gap-2">
 					{items.map((item, index) => (
-						// item
-						<Framer.Animate2 key={item.id}>
-							<ItemUI item={item} rate={current} />
-						</Framer.Animate2>
+						<ItemUI item={item} key={item.id} rate={current} />
 					))}
 
 					{/* summary */}
@@ -73,43 +69,45 @@ function ItemUI({
 	const {items, price, total} = Pricecalculator.orderPrice({item, rate});
 	return (
 		<>
-			<motion.div
-				whileTap={{scale: 0.8, opacity: 0.5}}
-				className="p-4 rounded-xl border bg-zinc-50">
-				{/* row - 1 */}
-				<ItemDialog item={item}>
-					<div className="flex gap-3">
-						<div className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600 ">
-							3D Model
-							{/* <Model3D /> */}
-						</div>
-						<div className="basis-4/6">
-							<div className="flex justify-between">
-								<div className="font-bold">
-									{item.neck.name} {item.sleeve.name}
+			<Framer.Animate2>
+				<motion.div className="p-4 rounded-xl border bg-zinc-50">
+					{/* row - 1 */}
+					<ItemDialog item={item}>
+						<div className="flex gap-3">
+							<div className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600 ">
+								3D Model
+								{/* <Model3D /> */}
+							</div>
+							<div className="basis-4/6">
+								<div className="flex justify-between">
+									<div className="font-bold">
+										{item.neck.name} {item.sleeve.name}
+									</div>
+								</div>
+								{/* row material */}
+								<div className="px-3 py-2">
+									<div>ผ้า : {item.material.name}</div>
+									<p className="text-sm/tight">
+										คุณสมบัติ : {item.material.description}
+									</p>
 								</div>
 							</div>
-							{/* row material */}
-							<div className="px-3 py-2">
-								<div>ผ้า : {item.material.name}</div>
-								<p className="text-sm/tight">คุณสมบัติ : {item.material.description}</p>
-							</div>
 						</div>
-					</div>
 
-					{/* row item desciiption */}
-					<div className="grid gap-2 my-2">
-						{items.map((listItem, index) => (
-							<ListUI list={listItem.list} price={listItem.price} key={index} />
-						))}
-					</div>
-				</ItemDialog>
+						{/* row item desciiption */}
+						<div className="grid gap-2 my-2">
+							{items.map((listItem, index) => (
+								<ListUI list={listItem.list} price={listItem.price} key={index} />
+							))}
+						</div>
+					</ItemDialog>
 
-				{/* row price */}
-				<div className=" flex justify-end px-3">
-					<div className="bg-zinc-900 rounded-full text-zinc-300  text-xs px-3 py-1">{`${total} ตัว : ${price} บาท`}</div>
-				</div>
-			</motion.div>
+					{/* row price */}
+					<div className=" flex justify-end px-3">
+						<div className="bg-zinc-900 rounded-full text-zinc-300  text-xs px-3 py-1">{`${total} ตัว : ${price} บาท`}</div>
+					</div>
+				</motion.div>
+			</Framer.Animate2>
 		</>
 	);
 }
