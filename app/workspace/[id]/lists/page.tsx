@@ -12,6 +12,8 @@ import {usePathname, useRouter} from "next/navigation";
 import ListAnimate from "@/components/app/ui/ListAnimate";
 import {motion, AnimatePresence} from "framer-motion";
 import CreateDialog from "@/components/app/ui/lists/create/CreateDialog";
+import {Framer} from "@/libs/framer/framer";
+import ItemDialog from "@/components/app/ui/lists/item/ItemDialog";
 
 type Props = {};
 
@@ -31,10 +33,6 @@ export default function page({}: Props) {
 				<div className="grid gap-2">
 					<Items />
 				</div>
-			</div>
-
-			<div className="px-3 py-2">
-				<CreateOrderUI />
 			</div>
 		</>
 	);
@@ -72,35 +70,17 @@ function Items() {
 			<AnimatePresence mode="popLayout">
 				<div className="grid gap-2">
 					{items.map((item, index) => (
-						<motion.div
-							layout
-							variants={{
-								visible: () => ({
-									opacity: 0,
-									x: -50,
-									transition: {
-										delay: index * 0.05,
-									},
-								}),
-
-								animated: () => ({
-									opacity: 1,
-									x: 0,
-									transition: {
-										delay: index * 0.05,
-									},
-								}),
-							}}
-							initial="visible"
-							animate="animated"
-							exit="visible"
-							transition={{type: "tween"}}
-							key={item.id}>
+						<Framer.Animate2 key={item.id}>
 							<ItemUI item={item} rate={current} />
-						</motion.div>
+						</Framer.Animate2>
 					))}
 
+					{/* <MyComponent>Hello world</MyComponent> */}
+
 					<HandleOrderUI totalItems={totalItems} totalPrice={totalPrice} />
+					<Framer.Animate2>
+						<CreateOrderUI />
+					</Framer.Animate2>
 				</div>
 			</AnimatePresence>
 		</div>
@@ -121,9 +101,10 @@ function ItemUI({
 				{/* row - 1 */}
 				<div className="flex gap-3 ">
 					<div className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600">
-						<Link href={`${window.location.href}/model`} className="underline">
+						{/* <Link href={`${window.location.href}/model`} className="underline">
 							3D Model
-						</Link>
+						</Link> */}
+						<ItemDialog>Model</ItemDialog>
 					</div>
 					<div className="basis-4/6">
 						<div className="flex justify-between">
@@ -212,41 +193,20 @@ function HandleOrderUI({
 	totalPrice: number;
 }) {
 	return (
-		<motion.div
-			layout
-			variants={{
-				visible: () => ({
-					opacity: 0,
-					x: -50,
-					transition: {
-						delay: 0.05,
-					},
-				}),
-
-				animated: () => ({
-					opacity: 1,
-					x: 0,
-					transition: {
-						delay: 0.05,
-					},
-				}),
-			}}
-			initial="visible"
-			animate="animated"
-			exit="visible"
-			transition={{type: "tween"}}
-			className="grid gap-2">
-			<div className="grid  gap-3 px-4 py-3 my-4 bg-zinc-900 text-zinc-300 rounded-xl">
-				<div className="flex justify-between">
-					<div>จำนวนรวม</div>
-					<div>{totalItems} ตัว</div>
-				</div>
-				<div className="flex justify-between">
-					<div>ราคารวม</div>
-					<div>฿{totalPrice}</div>
+		<Framer.Animate2>
+			<div className="grid gap-2">
+				<div className="grid  gap-3 px-4 py-3 my-4 bg-zinc-900 text-zinc-300 rounded-xl">
+					<div className="flex justify-between">
+						<div>จำนวนรวม</div>
+						<div>{totalItems} ตัว</div>
+					</div>
+					<div className="flex justify-between">
+						<div>ราคารวม</div>
+						<div>฿{totalPrice}</div>
+					</div>
 				</div>
 			</div>
-		</motion.div>
+		</Framer.Animate2>
 	);
 }
 

@@ -10,6 +10,7 @@ export default function WorkspaceNav({}: Props) {
 				{/* <Link href="/workspace">ค้นหา </Link> */}
 				<Link href="/workspace/create/lists">+</Link>
 				<Link href="/workspace/test">Test</Link>
+				<Link href="/workspace/test2">Test2</Link>
 			</div>
 			<div className="">
 				<Link href="/">SNAP </Link>
