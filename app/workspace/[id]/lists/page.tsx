@@ -1,36 +1,43 @@
-// "use client";
-import ItemNav from "@/components/app/Navbar/ItemNav";
-import React from "react";
+// // "use client";
+// import ItemNav from "@/components/app/Navbar/ItemNav";
+// import React from "react";
+// // import ListItem from "@/components/app/ui/lists/home/ListItem";
+// import {useAppContext} from "@/context/app/AppReducer";
+// import {Pricecalculator} from "@/libs/pricecalculator/Pricecalculator";
+// import {PriceLists} from "@/context/app/app.value";
+// import {AnimatePresence, motion} from "framer-motion";
+// import OrderSummary from "@/components/app/ui/lists/home/OrderSummary";
+// import OrderAction from "@/components/app/ui/lists/home/OrderAction";
+// import {ItemType, ListType, PriceListType} from "@/context/app/type";
+// import {Framer} from "@/libs/framer/framer";
+// import MenuListItem from "@/components/app/ui/MenuListItem";
+// import {usePathname, useRouter} from "next/navigation";
 // import ListItem from "@/components/app/ui/lists/home/ListItem";
-import {useAppContext} from "@/context/app/AppReducer";
-import {Pricecalculator} from "@/libs/pricecalculator/Pricecalculator";
-import {PriceLists} from "@/context/app/app.value";
-import {AnimatePresence, motion} from "framer-motion";
-import OrderSummary from "@/components/app/ui/lists/home/OrderSummary";
-import OrderAction from "@/components/app/ui/lists/home/OrderAction";
-import {ItemType, ListType, PriceListType} from "@/context/app/type";
-import {Framer} from "@/libs/framer/framer";
-import MenuListItem from "@/components/app/ui/MenuListItem";
-import {usePathname, useRouter} from "next/navigation";
-import ListItem from "@/components/app/ui/lists/home/ListItem";
+
+// type Props = {};
+
+// export default function page({}: Props) {
+// 	return (
+// 		<>
+// 			{/* <AppNav /> */}
+
+// 			<ItemNav />
+
+// 			<div className="px-3 py-2">
+// 				<div className="grid gap-2">
+// 					<ListItem />
+// 				</div>
+// 			</div>
+// 		</>
+// 	);
+// }
+
+import React from "react";
 
 type Props = {};
 
 export default function page({}: Props) {
-	return (
-		<>
-			{/* <AppNav /> */}
-
-			<ItemNav />
-
-			<div className="px-3 py-2">
-				<div className="grid gap-2">
-					{/* <ListItem /> */}
-					xxx
-				</div>
-			</div>
-		</>
-	);
+	return <div>page</div>;
 }
 
 // function ListItem({}: Props) {
