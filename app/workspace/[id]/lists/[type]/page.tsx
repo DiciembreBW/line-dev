@@ -2,12 +2,13 @@
 import ListNav from "@/components/app/Navbar/ListNav";
 import SelectMaterial from "@/components/app/TypePage/SelectMaterial";
 import AmontItemUI from "@/components/app/ui/AmontItemUI";
+import Model3D from "@/components/app/ui/lists/item/Model3D";
 import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
 import {PriceLists} from "@/context/app/app.value";
 import {ItemType, ListType} from "@/context/app/type";
 import {Pricecalculator} from "@/libs/pricecalculator/Pricecalculator";
 import MenuUI from "@/ultils/mui/MenuUI";
-import {useRouter, useSearchParams} from "next/navigation";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import React, {useEffect, useRef, useState} from "react";
 
 type Props = {params: {type: string}};
@@ -15,6 +16,7 @@ type Props = {params: {type: string}};
 export default function Page({params}: Props) {
 	const app = useAppContext();
 	const router = useRouter();
+	const pathName = usePathname();
 	const dispatch = useAppDispatchContext();
 	const item = app.items.filter((item) => item.id == params.type)[0];
 	const totalitems = Pricecalculator.totalOfItem({items: app.items});
@@ -29,7 +31,16 @@ export default function Page({params}: Props) {
 	// }, 0);
 
 	function handle() {
-		router.back();
+		// router.back();
+		// console.log(pathName);
+		const listPath = pathName.split("/");
+
+		const path = listPath
+			.filter((item, index) => index !== listPath.length - 1)
+			.join("/");
+		// console.log(p);
+
+		router.push(path);
 	}
 
 	const {items, price, total} = Pricecalculator.orderPrice({
@@ -38,28 +49,44 @@ export default function Page({params}: Props) {
 	});
 
 	return (
-		<div className="flex flex-col h-screen bg-zinc-50">
+		<div className="flex flex-col h-screen">
 			{/* <ListNav /> */}
-			<div className="basis-3/6 flex flex-col">
+			<div className="basis-3/6 flex flex-col bg-slate-200">
 				{/* Navbar */}
 				<ListNav />
 
+				{/* top */}
+				<div className="">
+					{/* 3d */}
+					<div className="relative">
+						<div className="rounded-lg aspect-square ">
+							<Model3D />
+							{/* Model3D */}
+						</div>
+
+						<div className="p-2 underline absolute top-0 right-0 ">
+							{/* <Link href={`${window.location.href}/model`}>กดเพื่อดูแบบ</Link> */}
+							กดเพื่อดูแบบ
+						</div>
+					</div>
+				</div>
+
 				{/* list */}
-				<div className="px-3 py-2">
+				<div className="px-4 pt-6 pb-2 rounded-t-2xl bg-slate-50">
 					{/* title */}
-					<div className="flex justify-between">
+					<div className="flex justify-between ">
 						<div className="text-xl font-bold">
 							{neck.name}
 							{sleeve.name} | id :{id}
 						</div>
 
-						<div className="">
+						<div className=" ">
 							<MenuUI item={item}>...</MenuUI>
 						</div>
 					</div>
 
 					{/* material */}
-					<div className="my-2 ">
+					<div className="">
 						<SelectMaterial id={id} value={item.material}>
 							กรุณาเลือกเนื้อผ้า{" "}
 						</SelectMaterial>
@@ -72,7 +99,7 @@ export default function Page({params}: Props) {
 				</div>
 			</div>
 
-			<div className="sticky bottom-0 p-2 bg-zinc-900 rounded-t-2xl text-zinc-200 ">
+			<div className="sticky bottom-0 p-2 bg-zinc-900 rounded-t-2xl text-zinc-200">
 				<div className="flex justify-center items-center gap-4">
 					<div>
 						รวม {total} ตัว | ฿{price}

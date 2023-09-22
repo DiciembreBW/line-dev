@@ -41,8 +41,8 @@ export default function MenuListItem({children, value}: Props) {
 
 	// edit item
 	function handleEditItem() {
-		// router.push(`${window.location.href}/${value.id}`);
-		router.push(`${pathname}/${value.id}`);
+		router.push(`${window.location.href}/${value.id}`);
+		// router.push(`${pathname}/${value.id}`);
 	}
 
 	return (

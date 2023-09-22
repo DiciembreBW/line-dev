@@ -72,35 +72,43 @@ function ItemUI({
 			<Framer.Animate2>
 				<motion.div className="p-4 rounded-xl border bg-zinc-50">
 					{/* row - 1 */}
-					<ItemDialog item={item}>
-						<div className="flex gap-3">
-							<div className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600 ">
-								3D Model
-								{/* <Model3D /> */}
-							</div>
-							<div className="basis-4/6">
-								<div className="flex justify-between">
-									<div className="font-bold">
-										{item.neck.name} {item.sleeve.name}
-									</div>
-								</div>
-								{/* row material */}
-								<div className="px-3 py-2">
-									<div>ผ้า : {item.material.name}</div>
-									<p className="text-sm/tight">
-										คุณสมบัติ : {item.material.description}
-									</p>
-								</div>
-							</div>
+					{/* <ItemDialog item={item}> */}
+					<div className="flex gap-3">
+						<div className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600 ">
+							3D Model
+							{/* <Model3D /> */}
 						</div>
+						<div className="basis-4/6">
+							<div className="flex justify-between">
+								{/* name */}
+								<div className="font-bold">
+									{item.neck.name} {item.sleeve.name}
+								</div>
 
-						{/* row item desciiption */}
-						<div className="grid gap-2 my-2">
-							{items.map((listItem, index) => (
-								<ListUI list={listItem.list} price={listItem.price} key={index} />
-							))}
+								{/* menu */}
+
+								<MenuListItem value={item}>...</MenuListItem>
+							</div>
+							{/* row material */}
+							<div className="px-3 py-2">
+								<div>ผ้า : {item.material.name}</div>
+								<p className="text-sm/tight">คุณสมบัติ : {item.material.description}</p>
+							</div>
 						</div>
-					</ItemDialog>
+					</div>
+
+					{/* row item desciiption */}
+					<div className="grid gap-2 my-2">
+						{items.map((listItem, index) => (
+							<ListUI
+								list={listItem.list}
+								price={listItem.price}
+								key={index}
+								itemId={item.id}
+							/>
+						))}
+					</div>
+					{/* </ItemDialog> */}
 
 					{/* row price */}
 					<div className=" flex justify-end px-3">
@@ -112,10 +120,26 @@ function ItemUI({
 	);
 }
 
-function ListUI({list, price}: {list: ListType; price: number}) {
+function ListUI({
+	list,
+	price,
+	itemId,
+}: {
+	list: ListType;
+	price: number;
+	itemId: string;
+}) {
+	const router = useRouter();
+	const pathName = usePathname();
+	function goToItem() {
+		// console.log();
+		router.replace(`${pathName}/${itemId}?label=${list.label}`);
+	}
 	if (list.amont > 0)
 		return (
-			<div className="px-3 py-2  border-b last:border-none hover:bg-zinc-100 hover:cursor-pointer">
+			<div
+				className="px-3 py-2  border-b last:border-none hover:bg-zinc-100 hover:cursor-pointer"
+				onClick={goToItem}>
 				<div className="flex justify-center">
 					<div className="basis-4/12 text-2xl rigw">{list.label}</div>
 

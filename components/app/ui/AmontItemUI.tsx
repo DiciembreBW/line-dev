@@ -2,7 +2,7 @@ import Button from "@/components/ui/Button";
 import {useAppDispatchContext} from "@/context/app/AppReducer";
 import {ListType} from "@/context/app/type";
 import {Dialog, DialogActions, DialogContent} from "@mui/material";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 type Props = {children: React.ReactNode; list: ListType; itemId: string};
 
@@ -10,6 +10,9 @@ export default function AmontItemUI({children, list, itemId: id}: Props) {
 	const dispatch = useAppDispatchContext();
 	const [state, setState] = useState<boolean>(false);
 	const [amont, setAmont] = useState<string>(JSON.stringify(list.amont));
+	useEffect(() => {
+		setAmont(JSON.stringify(list.amont));
+	}, [list.amont]);
 
 	function handleOk() {
 		// console.log(amont);
