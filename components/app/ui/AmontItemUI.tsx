@@ -2,7 +2,7 @@ import Button from "@/components/ui/Button";
 import {useAppDispatchContext} from "@/context/app/AppReducer";
 import {ListType} from "@/context/app/type";
 import {Dialog, DialogActions, DialogContent} from "@mui/material";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 type Props = {children: React.ReactNode; list: ListType; itemId: string};
 
@@ -10,8 +10,10 @@ export default function AmontItemUI({children, list, itemId: id}: Props) {
 	const dispatch = useAppDispatchContext();
 	const [state, setState] = useState<boolean>(false);
 	const [amont, setAmont] = useState<string>(JSON.stringify(list.amont));
+	const inputRef = useRef<HTMLInputElement>(null);
 	useEffect(() => {
 		setAmont(JSON.stringify(list.amont));
+		// console.log(inputRef);
 	}, [list.amont]);
 
 	function handleOk() {
@@ -43,6 +45,15 @@ export default function AmontItemUI({children, list, itemId: id}: Props) {
 	function handleAmont(value: string) {
 		setAmont(value);
 	}
+
+	function handlerEnter(e: React.KeyboardEvent) {
+		if (e.key == "Enter") {
+			// console.log(amont);
+			handleOk();
+			close();
+			// close();
+		}
+	}
 	return (
 		<>
 			<div onClick={open} className="cursor-pointer">
@@ -60,9 +71,13 @@ export default function AmontItemUI({children, list, itemId: id}: Props) {
 						</div>
 						<input
 							type="number"
+							ref={(ref) => {
+								ref?.focus();
+							}}
 							className="text-3xl text-center border-b w-full focus:outline-none mt-4"
 							value={amont}
 							onChange={(e) => handleAmont(e.target.value)}
+							onKeyDown={handlerEnter}
 						/>
 					</div>
 				</DialogContent>
