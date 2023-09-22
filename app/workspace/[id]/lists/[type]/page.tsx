@@ -2,7 +2,6 @@
 import ListNav from "@/components/app/Navbar/ListNav";
 import SelectMaterial from "@/components/app/TypePage/SelectMaterial";
 import AmontItemUI from "@/components/app/ui/AmontItemUI";
-import Model3D from "@/components/app/ui/lists/item/Model3D";
 import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
 import {PriceLists} from "@/context/app/app.value";
 import {ItemType, ListType} from "@/context/app/type";
@@ -31,16 +30,16 @@ export default function Page({params}: Props) {
 	// }, 0);
 
 	function handle() {
-		// router.back();
-		// console.log(pathName);
-		const listPath = pathName.split("/");
+		router.back();
+		// // console.log(pathName);
+		// const listPath = pathName.split("/");
 
-		const path = listPath
-			.filter((item, index) => index !== listPath.length - 1)
-			.join("/");
-		// console.log(p);
+		// const path = listPath
+		// 	.filter((item, index) => index !== listPath.length - 1)
+		// 	.join("/");
+		// // console.log(p);
 
-		router.push(path);
+		// router.push(path);
 	}
 
 	const {items, price, total} = Pricecalculator.orderPrice({

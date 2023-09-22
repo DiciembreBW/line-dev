@@ -33,6 +33,8 @@ export default async function WorkspaceItemPageLayout({
 
 	return (
 		<>
+			{/* console.log(params.id); */}
+			{/* {params.id} */}
 			<AppProvider value={item}>{children}</AppProvider>
 		</>
 	);
