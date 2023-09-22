@@ -30,16 +30,16 @@ export default function Page({params}: Props) {
 	// }, 0);
 
 	function handle() {
-		router.back();
+		// router.back();
 		// // console.log(pathName);
-		// const listPath = pathName.split("/");
+		const listPath = pathName.split("/");
 
-		// const path = listPath
-		// 	.filter((item, index) => index !== listPath.length - 1)
-		// 	.join("/");
-		// // console.log(p);
+		const path = listPath
+			.filter((item, index) => index !== listPath.length - 1)
+			.join("/");
+		// console.log(p);
 
-		// router.push(path);
+		router.push(path);
 	}
 
 	const {items, price, total} = Pricecalculator.orderPrice({
