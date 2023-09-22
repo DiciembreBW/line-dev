@@ -60,7 +60,7 @@ export default function Page({params}: Props) {
 					{/* 3d */}
 					<div className="relative">
 						<div className="rounded-lg aspect-square ">
-							<Model3D />
+							{/* <Model3D /> */}
 							{/* Model3D */}
 						</div>
 
