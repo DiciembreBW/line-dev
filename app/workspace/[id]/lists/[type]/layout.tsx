@@ -3,7 +3,7 @@ import React from "react";
 
 type Props = {children: React.ReactNode};
 
-export default function layout({children}: Props) {
+export default function Layout({children}: Props) {
 	return (
 		<div className="bg-zinc-200/50 ">
 			{/* <div className="grid justify-between px-3 py-2">

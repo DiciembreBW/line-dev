@@ -25,8 +25,13 @@
 
 import React from "react";
 
-type Props = {};
+type Props = {params: {id: string}};
 
-export default function page({}: Props) {
-	return <div>page</div>;
+export default function page({params}: Props) {
+	return (
+		<div>
+			id page
+			<pre>{JSON.stringify(params, null, 3)}</pre>
+		</div>
+	);
 }

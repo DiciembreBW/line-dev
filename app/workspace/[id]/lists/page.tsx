@@ -23,8 +23,13 @@
 
 import React from "react";
 
-type Props = {};
+type Props = {params: {type: string}};
 
-export default function ListPage({}: Props) {
-	return <div>ListPage</div>;
+export default function ListPage({params}: Props) {
+	return (
+		<div>
+			ListPage
+			<pre>{JSON.stringify(params)}</pre>
+		</div>
+	);
 }
