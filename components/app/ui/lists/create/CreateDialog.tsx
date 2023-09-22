@@ -10,7 +10,7 @@ import {
 	DialogContent,
 	dividerClasses,
 } from "@mui/material";
-import {useRouter, useSearchParams} from "next/navigation";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import React, {useEffect, useRef, useState} from "react";
 import AmontItemUI from "../../AmontItemUI";
 import LongDesign from "@/components/app/CreateDesign/LongDesign";
@@ -22,6 +22,10 @@ import {Framer} from "@/libs/framer/framer";
 type Props = {children: React.ReactNode};
 
 export default function CreateDialog({children}: Props) {
+	// router
+	const router = useRouter();
+	const pathName = usePathname();
+
 	// state
 	const [state, setState] = useState<boolean>(false);
 
