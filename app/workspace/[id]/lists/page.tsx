@@ -13,7 +13,9 @@ export default function page({}: Props) {
 			<ItemNav />
 
 			<div className="px-3 py-2">
-				<div className="grid gap-2">{/* <ListItem /> */}</div>
+				<div className="grid gap-2">
+					<ListItem />
+				</div>
 			</div>
 		</>
 	);

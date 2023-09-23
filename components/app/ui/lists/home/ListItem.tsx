@@ -4,11 +4,7 @@ import React, {useState} from "react";
 import {ItemType, ListType, PriceListType} from "@/context/app/type";
 import {Pricecalculator} from "@/libs/pricecalculator/Pricecalculator";
 import {PriceLists} from "@/context/app/app.value";
-import MenuListItem from "@/components/app/ui/MenuListItem";
 import {usePathname, useRouter} from "next/navigation";
-import {motion, AnimatePresence} from "framer-motion";
-import {Framer} from "@/libs/framer/framer";
-import ItemDialog from "@/components/app/ui/lists/item/ItemDialog";
 import OrderSummary from "./OrderSummary";
 import OrderAction from "./OrderAction";
 import Link from "next/link";
@@ -38,19 +34,17 @@ export default function ListItem({}: Props) {
 	return (
 		<div className="px-3 py-2 ">
 			{/* items */}
-			<AnimatePresence mode="popLayout">
-				<div className="grid gap-2">
-					{items.map((item, index) => (
-						<ItemUI item={item} key={item.id} rate={current} />
-					))}
+			<div className="grid gap-2">
+				{items.map((item, index) => (
+					<ItemUI item={item} key={item.id} rate={current} />
+				))}
 
-					{/* summary */}
-					<OrderSummary totalItems={totalItems} totalPrice={totalPrice} />
+				{/* summary */}
+				<OrderSummary totalItems={totalItems} totalPrice={totalPrice} />
 
-					{/* action */}
-					<OrderAction />
-				</div>
-			</AnimatePresence>
+				{/* action */}
+				<OrderAction />
+			</div>
 		</div>
 	);
 }
