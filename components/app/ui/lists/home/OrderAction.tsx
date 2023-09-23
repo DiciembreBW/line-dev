@@ -11,16 +11,8 @@ export default function OrderAction({}: Props) {
 	const {init} = app;
 
 	if (init == false) {
-		return (
-			<Framer.Animate2>
-				<CreateOrder />
-			</Framer.Animate2>
-		);
+		return <CreateOrder />;
 	}
 
-	return (
-		<Framer.Animate2>
-			<UpdateWorkspaceUI />
-		</Framer.Animate2>
-	);
+	return <UpdateWorkspaceUI />;
 }

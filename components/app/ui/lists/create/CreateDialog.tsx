@@ -1,37 +1,17 @@
-import SelectMaterial from "@/components/app/TypePage/SelectMaterial";
 import Button from "@/components/ui/Button";
-import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
-import {PriceLists, neckvalue, sleevevalue} from "@/context/app/app.value";
+import {useAppDispatchContext} from "@/context/app/AppReducer";
+import {neckvalue, sleevevalue} from "@/context/app/app.value";
 import {ItemType, ListType} from "@/context/app/type";
-import {Pricecalculator} from "@/libs/pricecalculator/Pricecalculator";
-import {
-	Dialog,
-	DialogActions,
-	DialogContent,
-	dividerClasses,
-} from "@mui/material";
-import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import React, {useEffect, useRef, useState} from "react";
-import AmontItemUI from "../../AmontItemUI";
-import LongDesign from "@/components/app/CreateDesign/LongDesign";
-import ShortDesign from "./ShortDesign";
-import {motion, AnimatePresence} from "framer-motion";
+import {Dialog, DialogActions} from "@mui/material";
+import React, {useState} from "react";
+
 import Random from "@/libs/utilities/Random";
-import {Framer} from "@/libs/framer/framer";
 
 type Props = {children: React.ReactNode};
 
 export default function CreateDialog({children}: Props) {
-	// router
-	const router = useRouter();
-	const pathName = usePathname();
-
 	// state
 	const [state, setState] = useState<boolean>(false);
-
-	// dispatch
-	const distpatch = useAppDispatchContext();
-	const app = useAppContext();
 
 	// inital template
 	const {TeeShirtTemplate, PoloShirtTemplate} = Create(closeDialog);
@@ -55,63 +35,33 @@ export default function CreateDialog({children}: Props) {
 			</div>
 
 			<Dialog open={state} onClose={closeDialog} fullScreen transitionDuration={0}>
-				{/* <DialogContent> */}
 				<div className="grid gap-2 p-2">
-					{/* <button
+					<div
+						className="flex justify-between gap-3 border rounded p-1"
 						onClick={() => {
 							TeeShirtTemplate({necklabel: "คอกลม", sleevelabel: "แขนสั้น"});
 						}}>
-						เสื้อคอกลมแขนสั้น
-					</button> */}
+						<div className="basis-3/6 aspect-square bg-zinc-200 rounded flex justify-center items-center">
+							img
+						</div>
+						<div className="basis-full bg-zinc-100 p-2 rounded-lg px-3 py-2">
+							เสื้อคอกลมแขนสั้น
+						</div>
+					</div>
 
-					<Framer.Animate2>
-						<motion.div
-							className="flex justify-between gap-3 border rounded p-1"
-							whileTap={{scale: 0.8, opacity: 0}}
-							onClick={() => {
-								TeeShirtTemplate({necklabel: "คอกลม", sleevelabel: "แขนสั้น"});
-							}}>
-							<div className="basis-3/6 aspect-square bg-zinc-200 rounded flex justify-center items-center">
-								img
-							</div>
-							<div className="basis-full bg-zinc-100 p-2 rounded-lg px-3 py-2">
-								เสื้อคอกลมแขนสั้น
-							</div>
-						</motion.div>
-					</Framer.Animate2>
-
-					<Framer.Animate2>
-						<motion.div
-							className="flex justify-between gap-3 border rounded p-1"
-							whileTap={{scale: 0.8, opacity: 0}}
-							onClick={() => {
-								PoloShirtTemplate({necklabel: "คอกลม", sleevelabel: "แขนยาว"});
-							}}>
-							<div className="basis-3/6 aspect-square bg-zinc-200 rounded flex justify-center items-center">
-								img
-							</div>
-							<div className="basis-full bg-zinc-100 p-2 rounded-lg px-3 py-2">
-								เสื้อโปโลแขนสั้น
-							</div>
-						</motion.div>
-					</Framer.Animate2>
-					{/* 
-							<motion.div
-								key={"polo"}
-								layout
-								initial={{opacity: 0, x: 50}}
-								animate={{opacity: 1, x: 0}}
-								transition={{type: "spring", delay: 4 * 0.05}}
-								className="p-2 rounded-lg h-96 border bg-zinc-50 flex flex-col justify-between cursor-pointer active:bg-red-400"
-								onClick={() =>
-									PoloShirtTemplate({necklabel: "คอกลม", sleevelabel: "แขนยาว"})
-								}>
-								<div className="flex justify-center text-xl h-full items-center">
-									เสื้อโปโลแขนสั้น
-								</div>
-							</motion.div> */}
+					<div
+						className="flex justify-between gap-3 border rounded p-1"
+						onClick={() => {
+							PoloShirtTemplate({necklabel: "คอกลม", sleevelabel: "แขนยาว"});
+						}}>
+						<div className="basis-3/6 aspect-square bg-zinc-200 rounded flex justify-center items-center">
+							img
+						</div>
+						<div className="basis-full bg-zinc-100 p-2 rounded-lg px-3 py-2">
+							เสื้อโปโลแขนสั้น
+						</div>
+					</div>
 				</div>
-				{/* </DialogContent> */}
 				<DialogActions>
 					<div className="flex justify-center w-full">
 						<Button primary onclick={closeDialog}>

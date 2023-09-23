@@ -71,56 +71,56 @@ function ItemUI({
 
 	return (
 		<>
-			<Framer.Animate2>
-				<motion.div className="p-4 rounded-xl border bg-zinc-50">
-					{/* row - 1 */}
-					{/* <ItemDialog item={item}> */}
-					<div className="flex gap-3">
-						{/* image thumnail */}
-						<Link
-							href={`${pathName}/model`}
-							className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600 ">
-							3D Model
-							{/* <Model3D /> */}
-						</Link>
+			{/* <Framer.Animate2> */}
+			<div className="p-4 rounded-xl border bg-zinc-50">
+				{/* row - 1 */}
+				{/* <ItemDialog item={item}> */}
+				<div className="flex gap-3">
+					{/* image thumnail */}
+					<Link
+						href={`${pathName}/model`}
+						className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600 ">
+						3D Model
+						{/* <Model3D /> */}
+					</Link>
 
-						<Link href={`${pathName}/${item.id}`} className="basis-4/6">
-							<div className="flex justify-between">
-								{/* name */}
-								<div className="font-bold">
-									{item.neck.name} {item.sleeve.name}
-								</div>
-								{/* menu */}
-								{/* {pathName}/{item.id} */}
-								{/* <MenuListItem value={item}>...</MenuListItem> */}
+					<Link href={`${pathName}/${item.id}`} className="basis-4/6">
+						<div className="flex justify-between">
+							{/* name */}
+							<div className="font-bold">
+								{item.neck.name} {item.sleeve.name}
 							</div>
-							{/* row material */}
-							<div className="px-3 py-2">
-								<div>ผ้า : {item.material.name}</div>
-								<p className="text-sm/tight">คุณสมบัติ : {item.material.description}</p>
-							</div>
-						</Link>
-					</div>
+							{/* menu */}
+							{/* {pathName}/{item.id} */}
+							{/* <MenuListItem value={item}>...</MenuListItem> */}
+						</div>
+						{/* row material */}
+						<div className="px-3 py-2">
+							<div>ผ้า : {item.material.name}</div>
+							<p className="text-sm/tight">คุณสมบัติ : {item.material.description}</p>
+						</div>
+					</Link>
+				</div>
 
-					{/* row item desciiption */}
-					<div className="grid gap-2 my-2">
-						{items.map((listItem, index) => (
-							<ListUI
-								list={listItem.list}
-								price={listItem.price}
-								key={index}
-								itemId={item.id}
-							/>
-						))}
-					</div>
-					{/* </ItemDialog> */}
+				{/* row item desciiption */}
+				<div className="grid gap-2 my-2">
+					{items.map((listItem, index) => (
+						<ListUI
+							list={listItem.list}
+							price={listItem.price}
+							key={index}
+							itemId={item.id}
+						/>
+					))}
+				</div>
+				{/* </ItemDialog> */}
 
-					{/* row price */}
-					<div className=" flex justify-end px-3">
-						<div className="bg-zinc-900 rounded-full text-zinc-300  text-xs px-3 py-1">{`${total} ตัว : ${price} บาท`}</div>
-					</div>
-				</motion.div>
-			</Framer.Animate2>
+				{/* row price */}
+				<div className=" flex justify-end px-3">
+					<div className="bg-zinc-900 rounded-full text-zinc-300  text-xs px-3 py-1">{`${total} ตัว : ${price} บาท`}</div>
+				</div>
+			</div>
+			{/* </Framer.Animate2> */}
 		</>
 	);
 }

@@ -7,6 +7,10 @@ export default function WorkspacePage({}: Props) {
 	return (
 		<div className="h-screen flex flex-col">
 			<WorkspaceNav />
+
+			<div className="h-full flex justify-center items-center text-3xl font-bold">
+				Workspace page
+			</div>
 		</div>
 	);
 }

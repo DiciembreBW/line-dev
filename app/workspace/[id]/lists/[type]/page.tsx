@@ -21,7 +21,7 @@ export default function Page({params}: Props) {
 	const totalitems = Pricecalculator.totalOfItem({items: app.items});
 	const rate = Pricecalculator.get({amont: totalitems, price_list: PriceLists});
 
-	if (item == undefined) return <>ไม่พบข้อมูล</>;
+	if (item == undefined) return <></>;
 
 	const {conter, id, lists, material, neck, sleeve} = item;
 
@@ -146,7 +146,7 @@ function List({
 		// console.log();
 		const label = ref.current?.innerHTML;
 		if (label == pickLabel) {
-			ref.current?.scrollIntoView({behavior: "smooth", block: "center"});
+			ref.current?.scrollIntoView({behavior: "instant", block: "center"});
 		}
 	}, []);
 	const search = useSearchParams();
@@ -196,36 +196,39 @@ function List({
 	// render
 	return (
 		<div
-			className={`p-1 border-b last:border-none rounded flex ${
+			className={`px-8 py-2 border-b last:border-none rounded flex ${
 				value.amont > 0 && "bg-zinc-200/50"
 			}`}>
 			{/* left */}
-			<div className="basis-6/12 flex justify-center items-center">
-				<div className="text-2xl" ref={ref}>
-					{value.label}
+
+			{/* <div className="basis-full flex ring"> */}
+			<AmontItemUI list={value} itemId={item.id}>
+				<div className="basis-3/12 flex items-center">
+					{/* <AmontItemUI list={value} itemId={item.id}></AmontItemUI> */}
+					<div className="text-2xl" ref={ref}>
+						{value.label}
+					</div>
 				</div>
-			</div>
-			{/* center */}
-			<div className="basis-full flex flex-col justify-center items-start">
-				<div className=" text-zinc-500">
-					<div>รอบอก {value.chest} นิ้ว</div>
-					<div>ความยาว {value.length} นิ้ว</div>
+				{/* center */}
+				<div className="basis-full flex flex-col justify-center items-start">
+					<div className=" text-zinc-500">
+						<div>รอบอก {value.chest} นิ้ว</div>
+						<div>ความยาว {value.length} นิ้ว</div>
+					</div>
+					<div className="font-bold">฿{PPE}</div>
 				</div>
-				<div className="font-bold">฿{PPE}</div>
-			</div>
+			</AmontItemUI>
+			{/* </div> */}
+
 			{/* right */}
-			<div className="basis-5/12 text-center">
+			<div className="basis-2/12 text-center">
 				<div className="m-1 ">
 					<button className="rounded-full border w-6 h-6 bg-zinc-50" onClick={up}>
 						+
 					</button>
 				</div>
 
-				<div className="text-xl">
-					<AmontItemUI list={value} itemId={item.id}>
-						{value.amont}
-					</AmontItemUI>
-				</div>
+				<div className="text-xl">{value.amont}</div>
 				<div className="m-1 ">
 					<button className="rounded-full border w-6 h-6 bg-zinc-50" onClick={down}>
 						-

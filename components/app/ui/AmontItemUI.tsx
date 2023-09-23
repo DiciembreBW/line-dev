@@ -56,7 +56,7 @@ export default function AmontItemUI({children, list, itemId: id}: Props) {
 	}
 	return (
 		<>
-			<div onClick={open} className="cursor-pointer">
+			<div onClick={open} className="cursor-pointer basis-full flex">
 				{children}
 			</div>
 			<Dialog open={state} onClose={close} fullWidth={true}>

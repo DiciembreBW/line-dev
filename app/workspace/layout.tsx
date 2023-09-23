@@ -21,7 +21,7 @@ export default function Layout({children}: Props) {
 	// 	);
 
 	return (
-		<div className="sm:w-1/2 mx-auto">
+		<div className="sm:w-1/2 mx-auto bg-zinc-50">
 			<GlobalProvider>{children}</GlobalProvider>
 		</div>
 	);
