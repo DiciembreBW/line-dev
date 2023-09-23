@@ -9,7 +9,7 @@ const Component = React.forwardRef(
 			initial={{scale: 0.8, opacity: 0}}
 			animate={{scale: 1, opacity: 1}}
 			exit={{scale: 0.8, opacity: 0}}
-			transition={{type: "spring", duration: 0.4}}>
+			transition={{type: "spring", duration: 0.3}}>
 			{children}
 		</motion.div>
 	)
@@ -36,7 +36,7 @@ const Popup = React.forwardRef(
 				opacity: 1,
 			}}
 			exit={{scale: 0, opacity: 0}}
-			transition={{type: "spring", duration: 0.4}}>
+			transition={{type: "spring", duration: 0.3}}>
 			{children}
 		</motion.div>
 	)
