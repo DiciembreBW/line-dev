@@ -71,7 +71,7 @@ export default function Page({params}: Props) {
 				</div>
 
 				{/* list */}
-				<div className="px-4 pt-6 pb-2 rounded-t-2xl bg-slate-50">
+				<div className="pt-6 pb-2 rounded-t-2xl bg-slate-50">
 					{/* title */}
 					<div className="flex justify-between px-8">
 						<div className="text-xl font-bold">
@@ -92,7 +92,7 @@ export default function Page({params}: Props) {
 					</div>
 
 					{/* items detail */}
-					<div className="p-4 ">
+					<div className="my-4">
 						<Lists item={item} id={item.id} />
 					</div>
 				</div>
@@ -196,7 +196,7 @@ function List({
 	// render
 	return (
 		<div
-			className={`p-2 border-b last:border-none rounded flex ${
+			className={`p-1 border-b last:border-none rounded flex ${
 				value.amont > 0 && "bg-zinc-200/50"
 			}`}>
 			{/* left */}

@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import ItemNav from "@/components/app/Navbar/ItemNav";
 import React from "react";
 import ListItem from "@/components/app/ui/lists/home/ListItem";
