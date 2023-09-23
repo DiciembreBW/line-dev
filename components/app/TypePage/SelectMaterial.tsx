@@ -44,8 +44,10 @@ export default function SelectMaterial({id, value, children}: Props) {
 				<>
 					<div className="flex justify-between">
 						<div>{value.name}</div>
-						<div onClick={onopen} className="hover:cursor-pointer hover:bg-zinc-200">
-							o
+						<div
+							onClick={onopen}
+							className="hover:cursor-pointer hover:bg-zinc-200 text-zinc-400">
+							เปลี่ยน
 						</div>
 					</div>
 					<div className="text-sm">

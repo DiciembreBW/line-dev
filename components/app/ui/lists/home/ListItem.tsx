@@ -11,6 +11,7 @@ import {Framer} from "@/libs/framer/framer";
 import ItemDialog from "@/components/app/ui/lists/item/ItemDialog";
 import OrderSummary from "./OrderSummary";
 import OrderAction from "./OrderAction";
+import Link from "next/link";
 
 type Props = {};
 export default function ListItem({}: Props) {
@@ -61,7 +62,13 @@ function ItemUI({
 	item: ItemType;
 	rate: PriceListType | undefined;
 }) {
+	// price calculator
 	const {items, price, total} = Pricecalculator.orderPrice({item, rate});
+
+	// router
+	const router = useRouter();
+	const pathName = usePathname();
+
 	return (
 		<>
 			<Framer.Animate2>
@@ -69,27 +76,30 @@ function ItemUI({
 					{/* row - 1 */}
 					{/* <ItemDialog item={item}> */}
 					<div className="flex gap-3">
-						<div className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600 ">
+						{/* image thumnail */}
+						<Link
+							href={`${pathName}/model`}
+							className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600 ">
 							3D Model
 							{/* <Model3D /> */}
-						</div>
-						<div className="basis-4/6">
+						</Link>
+
+						<Link href={`${pathName}/${item.id}`} className="basis-4/6">
 							<div className="flex justify-between">
 								{/* name */}
 								<div className="font-bold">
 									{item.neck.name} {item.sleeve.name}
 								</div>
-
 								{/* menu */}
-
-								<MenuListItem value={item}>...</MenuListItem>
+								{/* {pathName}/{item.id} */}
+								{/* <MenuListItem value={item}>...</MenuListItem> */}
 							</div>
 							{/* row material */}
 							<div className="px-3 py-2">
 								<div>ผ้า : {item.material.name}</div>
 								<p className="text-sm/tight">คุณสมบัติ : {item.material.description}</p>
 							</div>
-						</div>
+						</Link>
 					</div>
 
 					{/* row item desciiption */}

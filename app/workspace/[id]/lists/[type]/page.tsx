@@ -2,7 +2,6 @@
 import ListNav from "@/components/app/Navbar/ListNav";
 import SelectMaterial from "@/components/app/TypePage/SelectMaterial";
 import AmontItemUI from "@/components/app/ui/AmontItemUI";
-import Model3D from "@/components/app/ui/lists/item/Model3D";
 import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
 import {PriceLists} from "@/context/app/app.value";
 import {ItemType, ListType} from "@/context/app/type";
@@ -59,8 +58,8 @@ export default function Page({params}: Props) {
 				<div className="">
 					{/* 3d */}
 					<div className="relative">
-						<div className="rounded-lg aspect-square ">
-							<Model3D />
+						<div className="rounded-lg aspect-[4/3] ">
+							{/* <Model3D /> */}
 							{/* Model3D */}
 						</div>
 
@@ -74,19 +73,19 @@ export default function Page({params}: Props) {
 				{/* list */}
 				<div className="px-4 pt-6 pb-2 rounded-t-2xl bg-slate-50">
 					{/* title */}
-					<div className="flex justify-between ">
+					<div className="flex justify-between px-8">
 						<div className="text-xl font-bold">
 							{neck.name}
 							{sleeve.name} | id :{id}
 						</div>
 
-						<div className=" ">
-							<MenuUI item={item}>...</MenuUI>
-						</div>
+						{/* <div className="px-8 text-right ring"> */}
+						<MenuUI item={item}>...</MenuUI>
+						{/* </div> */}
 					</div>
 
 					{/* material */}
-					<div className="">
+					<div className="px-8">
 						<SelectMaterial id={id} value={item.material}>
 							กรุณาเลือกเนื้อผ้า{" "}
 						</SelectMaterial>

@@ -27,7 +27,7 @@ export default function MenuUI({children, item}: Props) {
 			},
 		});
 
-		handleClose();
+		// handleClose();
 		router.back();
 	}
 
