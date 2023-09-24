@@ -131,8 +131,10 @@ function ListUI({
 	const router = useRouter();
 	const pathName = usePathname();
 	function goToItem() {
-		// console.log();
-		router.replace(`${pathName}/${itemId}?label=${list.label}`);
+		// go to item
+		// router.replace(`${pathName}/${itemId}?label=${list.label}`);
+
+		router.replace(`${pathName}/${itemId}`);
 	}
 	if (list.amont > 0)
 		return (

@@ -2,6 +2,7 @@
 import ListNav from "@/components/app/Navbar/ListNav";
 import SelectMaterial from "@/components/app/TypePage/SelectMaterial";
 import AmontItemUI from "@/components/app/ui/AmontItemUI";
+import Artwork from "@/components/app/ui/lists/item/Artwork";
 import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
 import {PriceLists} from "@/context/app/app.value";
 import {ItemType, ListType} from "@/context/app/type";
@@ -71,7 +72,7 @@ export default function Page({params}: Props) {
 				</div>
 
 				{/* list */}
-				<div className="pt-6 pb-2 rounded-t-2xl bg-slate-50">
+				<div className="pt-6 pb-2 grid gap-2 rounded-t-2xl bg-slate-50">
 					{/* title */}
 					<div className="flex justify-between px-8">
 						<div className="text-xl font-bold">
@@ -89,6 +90,11 @@ export default function Page({params}: Props) {
 						<SelectMaterial id={id} value={item.material}>
 							กรุณาเลือกเนื้อผ้า{" "}
 						</SelectMaterial>
+					</div>
+
+					{/* image upload */}
+					<div className="px-8">
+						<Artwork />
 					</div>
 
 					{/* items detail */}
