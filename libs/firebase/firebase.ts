@@ -16,10 +16,28 @@ import {
 	setDoc,
 	where,
 } from "firebase/firestore";
+
+import {
+	StorageReference,
+	UploadResult,
+	deleteObject,
+	getDownloadURL,
+	getStorage,
+	listAll,
+	ref,
+	uploadBytes,
+} from "firebase/storage";
 import app from "./init";
 import Chance from "chance";
+import {v4} from "uuid";
 
+// database
 const db = getFirestore(app);
+
+// storage
+const storage = getStorage(app);
+
+// random change
 const chance = new Chance();
 
 export function SetDoc({docName, data}: {docName: string; data: object}): void {
@@ -79,6 +97,79 @@ function getQueryDoc<T>(query: DocumentSnapshot): T {
 	return data;
 }
 
+async function getImageItems(items: StorageReference[]) {
+	const x = items.forEach(async (item, index) => {
+		const urls: string[] | null = [];
+		const url = await getDownloadURL(item);
+		// push
+		urls.push(url);
+
+		return urls;
+
+		// return when read all
+		// if (index == items.length - 1) {
+		// 	return urls;
+		// }
+	});
+
+	console.log(x);
+
+	// return [];
+}
+
+// storage
+export function myStorage(pathName: string) {
+	// path in google storage
+	const path = pathName || "images";
+
+	// path ref
+	const pathRef = ref(storage, `${path}/`);
+
+	// return
+	return {
+		upload: (image: File): Promise<UploadResult> => {
+			// file name + uuid
+			const name = image.name + v4();
+
+			// image ref
+			const imageRef = ref(storage, `${path}/${name}`);
+
+			// upload
+			return uploadBytes(imageRef, image).then((response) => {
+				// console.log(`${response}  uploaded`);
+				return response;
+			});
+		},
+
+		// list all item
+		getItems: async (PenddingCallback: (url: string) => void) => {
+			const response = await listAll(pathRef);
+
+			response.items.forEach(async (item) => {
+				const url = await getDownloadURL(item);
+
+				PenddingCallback(url);
+			});
+		},
+
+		// remove
+		removeItem: (fileName: string, PenddingCallback: () => void) => {
+			const imageRef = ref(storage, `${fileName}`);
+			// console.log(imageRef);
+			deleteObject(imageRef)
+				.then((r) => {
+					// console.log(`${fileName} removed`);
+					// console.log(r);
+					PenddingCallback();
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
+	};
+}
+
+// export default
 export default function Firebase<T>({colName}: {colName: string}) {
 	const colRef = collection(db, colName);
 

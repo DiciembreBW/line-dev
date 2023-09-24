@@ -1,10 +1,28 @@
 "use client";
-import React, {HtmlHTMLAttributes, useState} from "react";
+import {myStorage} from "@/libs/firebase/firebase";
+import Image from "next/image";
+import React, {HtmlHTMLAttributes, useEffect, useState} from "react";
+import {v4} from "uuid";
 
 type Props = {};
 
+const storage = myStorage("images");
+
+function x() {
+	const urls: string[] = [];
+	storage.getItems((url) => {
+		console.log(url);
+
+		urls.push(url);
+	});
+
+	return urls;
+}
+
 export default function Artwork({}: Props) {
 	const [images, setImage] = useState<File>();
+	const [url, setUrl] = useState<string[]>([]);
+
 	function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
 		const file = event.target.files;
 		if (file == null) return;
@@ -14,7 +32,35 @@ export default function Artwork({}: Props) {
 	function uploadImage() {
 		if (images == undefined) return;
 
-		console.log(images);
+		storage.upload(images).then((res) => {
+			// window.alert("uploaded");
+			setImage(undefined);
+			getItem();
+		});
+	}
+
+	async function getItem() {
+		// console.log(x());
+		setUrl([]);
+		storage.getItems((url) => {
+			setUrl((pre) => {
+				return [...pre, url];
+			});
+		});
+	}
+
+	function remove(name: string) {
+		storage.removeItem(name, () => {
+			// updateUrl();
+			getItem();
+		});
+	}
+
+	function updateUrl() {
+		setUrl([]);
+		storage.getItems((url) => {
+			setUrl((pre) => [...pre, url]);
+		});
 	}
 	return (
 		<>
@@ -29,12 +75,42 @@ export default function Artwork({}: Props) {
 					onChange={(e) => handleInput(e)}
 				/>
 			</div>
+
+			<div className="grid justify-items-center">
+				{images && (
+					<div className="w-full">
+						<Image
+							src={URL.createObjectURL(images)}
+							className="w-full rounded-xl border"
+							alt=""
+						/>
+					</div>
+				)}
+			</div>
 			<div className="m-1">
 				<button onClick={uploadImage} className="px-3 py-2 w-full border rounded">
 					Upload
 				</button>
 			</div>
-			<div>{/* <pre>{JSON.stringify(images, null, 3)}</pre> */}</div>
+
+			<div>get item</div>
+			<div>
+				<button className="border px-3 py-2 rounded w-full" onClick={getItem}>
+					get
+				</button>
+
+				<div className="grid grid-cols-4 gap-2">
+					{url.map((url, index) => (
+						<div
+							className="hover:cursor-pointer hover:ring"
+							key={index}
+							onClick={() => remove(url)}>
+							<Image src={url} className="rounded-lg" alt="" />
+						</div>
+					))}
+				</div>
+			</div>
+			<div>{/* <pre>{JSON.stringify(url, null, 3)}</pre> */}</div>
 		</>
 	);
 }
