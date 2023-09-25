@@ -80,8 +80,16 @@ function ItemUI({
 						href={`${pathName}/model`}
 						className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600 ">
 						{/* 3D Model */}
-						{/* <Image src={item.artwork.url} width={100} height={100} alt="'xx" /> */}
-						<img src={item.artwork.url} />
+						<Image
+							src={item.artwork.url}
+							width={500}
+							height={500}
+							quality={20}
+							className="w-auto h-auto rounded-xl"
+							loading="lazy"
+							alt="'xx"
+						/>
+						{/* <img src={item.artwork.url} /> */}
 						{/* <Model3D /> */}
 					</Link>
 
