@@ -1,13 +1,16 @@
 "use client";
+import {useAppDispatchContext} from "@/context/app/AppReducer";
 import {myStorage} from "@/libs/firebase/firebase";
 import React, {HtmlHTMLAttributes, useEffect, useState} from "react";
 import {v4} from "uuid";
 
-type Props = {};
+type Props = {itemId: string};
 
 const storage = myStorage("images");
 
-export default function Artwork({}: Props) {
+export default function Artwork({itemId}: Props) {
+	// app dispatch
+	const dispatch = useAppDispatchContext();
 	const [images, setImage] = useState<File>();
 	const [url, setUrl] = useState<string[]>([]);
 
@@ -18,13 +21,25 @@ export default function Artwork({}: Props) {
 	}
 
 	function uploadImage() {
+		// image is not emty
 		if (images == undefined) return;
 
-		storage.upload(images).then((res) => {
-			// window.alert("uploaded");
+		// upload to server
+		storage.upload(images).then((url) => {
+			// after uploaded
+			// set image == undesign
 			setImage(undefined);
+
+			//
+			// console.log(res.ref.bucket);
+			// console.log(url);
+			uploadToFirebaseServer({url});
+
+			// retive item
 			getItem();
 		});
+
+		// storage.takeUpload(images);
 	}
 
 	async function getItem() {
@@ -32,6 +47,8 @@ export default function Artwork({}: Props) {
 		setUrl([]);
 		storage.getItems((url) => {
 			setUrl((pre) => {
+				console.log(url);
+
 				return [...pre, url];
 			});
 		});
@@ -47,7 +64,19 @@ export default function Artwork({}: Props) {
 	function updateUrl() {
 		setUrl([]);
 		storage.getItems((url) => {
+			console.log(url);
+
 			setUrl((pre) => [...pre, url]);
+		});
+	}
+
+	function uploadToFirebaseServer({url}: {url: string}) {
+		dispatch({
+			artwork: {
+				type: "upload",
+				itemId,
+				value: {status: true, url},
+			},
 		});
 	}
 	return (
@@ -58,7 +87,6 @@ export default function Artwork({}: Props) {
 				<input
 					type="file"
 					className="w-full"
-					multiple
 					accept="image/*"
 					onChange={(e) => handleInput(e)}
 				/>

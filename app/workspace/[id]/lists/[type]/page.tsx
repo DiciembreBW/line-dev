@@ -94,7 +94,8 @@ export default function Page({params}: Props) {
 
 					{/* image upload */}
 					<div className="px-8">
-						<Artwork />
+						{/* <pre>{JSON.stringify(item.artwork, null, 3)}</pre> */}
+						<Artwork itemId={item.id} />
 					</div>
 
 					{/* items detail */}

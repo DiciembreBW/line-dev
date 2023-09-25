@@ -8,6 +8,7 @@ import {usePathname, useRouter} from "next/navigation";
 import OrderSummary from "./OrderSummary";
 import OrderAction from "./OrderAction";
 import Link from "next/link";
+import Image from "next/image";
 
 type Props = {};
 export default function ListItem({}: Props) {
@@ -69,12 +70,18 @@ function ItemUI({
 			<div className="p-4 rounded-xl border bg-zinc-50">
 				{/* row - 1 */}
 				{/* <ItemDialog item={item}> */}
+
+				{/* artowork */}
+				{/* <pre>{JSON.stringify(item.artwork, null, 3)}</pre> */}
+
 				<div className="flex gap-3">
 					{/* image thumnail */}
 					<Link
 						href={`${pathName}/model`}
 						className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600 ">
-						3D Model
+						{/* 3D Model */}
+						{/* <Image src={item.artwork.url} width={100} height={100} alt="'xx" /> */}
+						<img src={item.artwork.url} />
 						{/* <Model3D /> */}
 					</Link>
 

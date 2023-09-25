@@ -32,6 +32,11 @@ export default function LongDesign({
 				value: {
 					id: listId,
 					conter: 0,
+					artwork: {
+						status: false,
+						url: "",
+					},
+
 					neck,
 					sleeve,
 					material: {name: "", description: "", price: 0},

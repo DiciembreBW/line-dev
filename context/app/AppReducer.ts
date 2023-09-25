@@ -1,3 +1,4 @@
+import ArtworkReducer from "./reducer/ArtworkReducer";
 import ItemConterReducer from "./reducer/ItemConterReducer";
 import ItemsListsReducer from "./reducer/ItemsListsReducer";
 import MaterialReducer from "./reducer/MaterialReducer";
@@ -56,6 +57,7 @@ function HandleReducer(app: AppType, action: AppActionType): AppType {
 	if (action.items_counter) return ItemConterReducer(app, action);
 	if (action.items_lists) return ItemsListsReducer(app, action);
 	if (action.material) return MaterialReducer(app, action);
+	if (action.artwork) return ArtworkReducer(app, action);
 
 	return app;
 }

@@ -83,6 +83,10 @@ function Create(closeDialog: () => void) {
 		id: Random.id(),
 		conter: 0,
 		lists: [],
+		artwork: {
+			url: "",
+			status: false,
+		},
 		material: {
 			name: "",
 			description: "",

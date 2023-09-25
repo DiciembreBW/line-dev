@@ -127,7 +127,8 @@ export function myStorage(pathName: string) {
 
 	// return
 	return {
-		upload: (image: File): Promise<UploadResult> => {
+		// upload: (image: File): Promise<UploadResult> => {
+		upload: (image: File): Promise<string> => {
 			// file name + uuid
 			const name = image.name + v4();
 
@@ -137,8 +138,20 @@ export function myStorage(pathName: string) {
 			// upload
 			return uploadBytes(imageRef, image).then((response) => {
 				// console.log(`${response}  uploaded`);
-				return response;
+				return getDownloadURL(response.ref);
+				// return response;
 			});
+		},
+
+		// upload with take snapshot
+		takeUpload: (image: File) => {
+			// file name + uuid
+			const name = image.name + v4();
+
+			// image ref
+			const imageRef = ref(storage, `${path}/${name}`);
+
+			// take
 		},
 
 		// list all item
@@ -167,6 +180,8 @@ export function myStorage(pathName: string) {
 				});
 		},
 	};
+
+	// get signgle item
 }
 
 // export default

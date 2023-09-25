@@ -43,6 +43,12 @@ export type AppActionType = {
 		id: string;
 		value: MaterialType;
 	};
+
+	artwork?: {
+		type: "upload" | "remove";
+		itemId: string;
+		value: ArtworkType;
+	};
 };
 
 // ********************************************************
@@ -70,10 +76,15 @@ export type ItemType = {
 	neck: NeckType;
 	sleeve: SleeveType;
 	material: MaterialType;
+	artwork: ArtworkType;
 	lists: ListType[];
 };
 
 // dependencie type
+export type ArtworkType = {
+	url: string;
+	status: boolean;
+};
 export type NeckType = {
 	name: string;
 	price: number;
