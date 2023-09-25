@@ -1,23 +1,11 @@
 "use client";
 import {myStorage} from "@/libs/firebase/firebase";
-import Image from "next/image";
 import React, {HtmlHTMLAttributes, useEffect, useState} from "react";
 import {v4} from "uuid";
 
 type Props = {};
 
 const storage = myStorage("images");
-
-function x() {
-	const urls: string[] = [];
-	storage.getItems((url) => {
-		console.log(url);
-
-		urls.push(url);
-	});
-
-	return urls;
-}
 
 export default function Artwork({}: Props) {
 	const [images, setImage] = useState<File>();
@@ -79,8 +67,9 @@ export default function Artwork({}: Props) {
 			<div className="grid justify-items-center">
 				{images && (
 					<div className="w-full">
-						<Image
+						<img
 							src={URL.createObjectURL(images)}
+							width={150}
 							className="w-full rounded-xl border"
 							alt=""
 						/>
@@ -105,7 +94,7 @@ export default function Artwork({}: Props) {
 							className="hover:cursor-pointer hover:ring"
 							key={index}
 							onClick={() => remove(url)}>
-							<Image src={url} className="rounded-lg" alt="" />
+							<img src={url} className="rounded-lg" alt="" />
 						</div>
 					))}
 				</div>
