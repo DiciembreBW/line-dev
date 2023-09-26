@@ -44,7 +44,7 @@ export default function Model3D({}: Props) {
 					// performance={{min: 0.1, max: 1, current: 1, debounce: 200}}
 					// frameloop="demand"
 					shadows
-					camera={{position: [0, 0, 1.5], fov: 35}}>
+					camera={{position: [0, 0, 2], fov: 35}}>
 					<PerformanceMonitor
 						flipflops={12}
 						onIncline={() => setDpr(2)}
