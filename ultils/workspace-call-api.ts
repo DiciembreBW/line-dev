@@ -23,7 +23,7 @@ const CallAPI = {
 	},
 
 	//  get workspace item
-	async getItem(id: string) {
+	async getItem<T>(id: string): Promise<T> {
 		const response = await fetch(`${URL}/api/workspace?id=${id}`, {
 			cache: "no-cache",
 		});

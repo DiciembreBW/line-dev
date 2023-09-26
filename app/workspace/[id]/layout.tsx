@@ -1,4 +1,5 @@
 import AppProvider from "@/context/app/AppProvider";
+import {AppType} from "@/context/app/type";
 import CallAPI from "@/ultils/workspace-call-api";
 import React from "react";
 
@@ -8,7 +9,7 @@ export default async function WorkspaceItemPageLayout({
 	children,
 	params,
 }: Props) {
-	const item = await CallAPI.getItem(params.id);
+	const item = await CallAPI.getItem<AppType>(params.id);
 
 	// return <>{params.id}</>;
 	if (params.id == "create")
