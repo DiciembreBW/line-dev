@@ -47,10 +47,6 @@ export default function ItemList({id}: Props) {
 			{lists.map((item, index) => (
 				<List value={item} key={index} id={id} item={value} />
 			))}
-
-			{/* test framer motion */}
-
-			{/* <div></div> */}
 		</div>
 	);
 }

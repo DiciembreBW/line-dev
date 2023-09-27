@@ -1,9 +1,4 @@
-"use client";
 import GlobalProvider from "@/context/global/GlobalProvider";
-import useLiff from "@/libs/hooks/useLiff";
-import liff from "@line/liff";
-import {CircularProgress} from "@mui/material";
-import {useEffect} from "react";
 
 type Props = {children: React.ReactNode};
 
