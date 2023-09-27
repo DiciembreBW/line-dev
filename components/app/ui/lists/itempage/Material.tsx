@@ -46,9 +46,7 @@ export default function Material({id}: Props) {
 		<>
 			{/* {material} */}
 			{value?.name == "" && (
-				<div
-					className="flex justify-center p-6 hover:cursor-pointe"
-					onClick={onopen}>
+				<div className="flex justify-center hover:cursor-pointe" onClick={onopen}>
 					{/* {children} */}
 					กรุณาเลือกเนื้อผ้า
 				</div>
@@ -57,7 +55,7 @@ export default function Material({id}: Props) {
 			{/* <pre>{JSON.stringify(value, null, 3)}</pre> */}
 			{value !== null && (
 				<>
-					<div className="p-6 ">
+					<div className="">
 						<div className="flex justify-between">
 							<div>{value.name}</div>
 							<div

@@ -9,6 +9,8 @@ import {AppType, ItemType} from "@/context/app/type";
 import Item from "@/components/app/ui/lists/itempage/ItemList";
 import ItemList from "@/components/app/ui/lists/itempage/ItemList";
 import Toolsbar from "@/components/app/ui/lists/itempage/Toolsbar";
+import Json from "@/components/app/ui/lists/itempage/Json";
+import Title from "@/components/app/ui/lists/itempage/Title";
 
 type Props = {params: {type: string; id: string}};
 
@@ -17,14 +19,25 @@ export default async function page({params}: Props) {
 	// const item = await CallAPI.getItem<AppType>(id);
 
 	return (
-		<div className="flex  h-screen flex-col overflow-y-auto">
+		<div className="h-screen flex-col overflow-y-scroll">
 			<Navbar />
 			{/* <div className="relative ring"> */}
-			{/* <ItemList id={type} /> */}
-			<Model3D />
-			<Toolsbar />
+			{/* <Json itemId={id} /> */}
+			<div className="h-3/4">
+				<Model3D />
+			</div>
+			<div className="h-1/4 grid content-start p-4">
+				{/* <Toolsbar /> */}
+				<Title id={type} />
+				<Material id={type} />
+			</div>
 
-			<Material id={type} />
+			<div className="">
+				<ItemList id={type} />
+			</div>
+			{/* <div className="ring h-96">
+				<Toolsbar />
+			</div> */}
 		</div>
 	);
 }

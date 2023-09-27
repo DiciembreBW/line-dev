@@ -45,7 +45,7 @@ export default function Model3D({}: Props) {
 					// performance={{min: 0.1, max: 1, current: 1, debounce: 200}}
 					// frameloop="demand"
 					shadows
-					camera={{position: [0, 0, 2], fov: 35}}>
+					camera={{position: [0, 0, 1.5], fov: 35}}>
 					<PerformanceMonitor
 						flipflops={12}
 						onIncline={() => setDpr(2)}
@@ -67,8 +67,8 @@ export default function Model3D({}: Props) {
 							// maxAzimuthAngle={Math.PI / 2}
 							minPolarAngle={Math.PI / 2.5}
 							maxPolarAngle={Math.PI / 2}
-							autoRotate
-							autoRotateSpeed={1}
+							// autoRotate
+							// autoRotateSpeed={1}
 						/>
 						{/* </TransformControls> */}
 						{/* <ambientLight intensity={0.5} /> */}
