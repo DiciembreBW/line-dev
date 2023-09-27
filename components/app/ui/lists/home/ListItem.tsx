@@ -145,20 +145,15 @@ function ListUI({
 }) {
 	const router = useRouter();
 	const pathName = usePathname();
-	function goToItem() {
-		// go to item
-		// router.replace(`${pathName}/${itemId}?label=${list.label}`);
 
-		router.replace(`${pathName}/${itemId}`);
-	}
 	if (list.amont > 0)
 		return (
-			<div
+			<Link
 				className="px-3 py-2  border-b last:border-none hover:bg-zinc-100 hover:cursor-pointer"
-				onClick={goToItem}>
+				// onClick={goToItem}>
+				href={`${pathName}/${itemId}`}>
 				<div className="flex justify-center">
 					<div className="basis-4/12 text-2xl rigw">{list.label}</div>
-
 					<div className="basis-full">
 						<div className=" text-sm text-zinc-600">
 							<div>รอบออก {list.chest} นิ้ว</div>
@@ -172,6 +167,6 @@ function ListUI({
 					</div>
 				</div>
 				{/* </ItemDialog> */}
-			</div>
+			</Link>
 		);
 }
