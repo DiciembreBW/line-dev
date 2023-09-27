@@ -21,12 +21,12 @@ import {
 	TransformControls,
 } from "@react-three/drei";
 
-import {Model} from "@/libs/components/my_models/Po";
-import {ModelCloth} from "@/libs/components/my_models/Cloth";
+// import {Model} from "@/libs/components/my_models/Po";
+// import {ModelCloth} from "@/libs/components/my_models/Cloth";
 // import {ModelPillow} from "@/libs/components/my_models/Pillow";
-import {ModelShirt} from "@/libs/components/my_models/Shirt";
+// import {ModelShirt} from "@/libs/components/my_models/Shirt";
 import {ModelZip} from "@/libs/components/my_models/Zip";
-import {Model4D} from "@/libs/components/my_models/4d";
+// import {Model4D} from "@/libs/components/my_models/4d";
 
 type Props = {};
 // https://codesandbox.io/s/qyz5r?file=/src/App.js
@@ -36,6 +36,7 @@ export default function Model3D({}: Props) {
 	const [dpr, setDpr] = useState<number>(1);
 	return (
 		<div className="h-full w-full">
+			{/* // <div className="w-full aspect-[1/2]"> */}
 			<Suspense
 				fallback={
 					<div className="flex justify-center items-center h-full">loading</div>

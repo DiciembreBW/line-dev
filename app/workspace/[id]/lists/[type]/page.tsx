@@ -8,6 +8,7 @@ import React from "react";
 import {AppType, ItemType} from "@/context/app/type";
 import Item from "@/components/app/ui/lists/itempage/ItemList";
 import ItemList from "@/components/app/ui/lists/itempage/ItemList";
+import Toolsbar from "@/components/app/ui/lists/itempage/Toolsbar";
 
 type Props = {params: {type: string; id: string}};
 
@@ -19,8 +20,9 @@ export default async function page({params}: Props) {
 		<div className="flex  h-screen flex-col overflow-y-auto">
 			<Navbar />
 			{/* <div className="relative ring"> */}
-			<ItemList id={type} />
+			{/* <ItemList id={type} /> */}
 			<Model3D />
+			<Toolsbar />
 
 			<Material id={type} />
 		</div>

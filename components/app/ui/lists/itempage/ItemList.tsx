@@ -43,7 +43,7 @@ export default function ItemList({id}: Props) {
 	// });
 
 	return (
-		<div className="grid gap-1 absolute z-50 h-full content-center">
+		<div className="grid gap-1 h-full ring">
 			{lists.map((item, index) => (
 				<List value={item} key={index} id={id} item={value} />
 			))}
