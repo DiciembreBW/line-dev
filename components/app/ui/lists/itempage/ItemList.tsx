@@ -43,7 +43,7 @@ export default function ItemList({id}: Props) {
 	// });
 
 	return (
-		<div className="grid gap-1 h-full">
+		<div className="grid h-full p-2">
 			{lists.map((item, index) => (
 				<List value={item} key={index} id={id} item={value} />
 			))}
@@ -172,8 +172,8 @@ function List({
 		// 	</AnimatePresence>
 		// </div>
 		<div
-			className={`px-8 py-2 border-b last:border-none rounded flex ${
-				value.amont > 0 && "bg-zinc-200/50"
+			className={`px-8 py-2 flex border-b-2 last:border-none  ${
+				value.amont > 0 && "bg-zinc-300"
 			}`}>
 			{/* left */}
 

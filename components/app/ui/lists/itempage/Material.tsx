@@ -23,6 +23,8 @@ export default function Material({id}: Props) {
 		setOpen(false);
 	}
 	function onopen() {
+		console.log("open");
+
 		setOpen(true);
 	}
 
@@ -46,18 +48,20 @@ export default function Material({id}: Props) {
 		<>
 			{/* {material} */}
 			{value?.name == "" && (
-				<div className="flex justify-center hover:cursor-pointe" onClick={onopen}>
+				<div
+					className="flex justify-center items-center p-2 hover:cursor-point"
+					onClick={onopen}>
 					{/* {children} */}
 					กรุณาเลือกเนื้อผ้า
 				</div>
 			)}
 
 			{/* <pre>{JSON.stringify(value, null, 3)}</pre> */}
-			{value !== null && (
+			{value !== null && value.name !== "" && (
 				<>
 					<div className="">
 						<div className="flex justify-between">
-							<div>{value.name}</div>
+							<div>{value.name} name</div>
 							<div
 								onClick={onopen}
 								className="hover:cursor-pointer hover:bg-zinc-200 text-zinc-400">
@@ -68,39 +72,42 @@ export default function Material({id}: Props) {
 							<p className="">{value.description}</p>
 						</div>
 					</div>
-
-					<Dialog open={open} onClose={onclose} fullScreen transitionDuration={0}>
-						<DialogTitle className="flex justify-between">
-							<div>ชนิดผ้า</div>
-						</DialogTitle>
-						<DialogContent>
-							<div className="grid grid-cols-1 gap-2 p-2">
-								{materialvalue.map((item, index) => (
-									<div
-										className={`flex gap-2 p-2 border rounded shadow hover:cursor-pointer hover:bg-zinc-200 ${
-											item.name == value.name && "bg-zinc-200 ring ring-zinc-400"
-										}`}
-										key={index}
-										ref={(ref: HTMLDivElement) => {
-											// scroll to active
-											if (ref == null) return;
-											if (value.name == item.name)
-												return ref.scrollIntoView({behavior: "auto", block: "center"});
-										}}
-										// onChange={handleScroll}
-										onClick={() => handleMaterial(item)}>
-										<div className="basis-2/6 rounded aspect-square bg-zinc-100"></div>
-										<div className="basis-4/6">
-											<div className="text-xl">{item.name}</div>
-											<div className="text-xs">{item.description}</div>
-										</div>
-										{/* <pre>{JSON.stringify(item, null, 3)}</pre> */}
-									</div>
-								))}
-							</div>
-						</DialogContent>
-					</Dialog>
 				</>
+			)}
+
+			{/* dialog */}
+			{value !== null && (
+				<Dialog open={open} onClose={onclose} fullScreen transitionDuration={0}>
+					<DialogTitle className="flex justify-between">
+						<div>ชนิดผ้า</div>
+					</DialogTitle>
+					<DialogContent>
+						<div className="grid grid-cols-1 gap-2 p-2">
+							{materialvalue.map((item, index) => (
+								<div
+									className={`flex gap-2 p-2 border rounded shadow hover:cursor-pointer hover:bg-zinc-200 ${
+										item.name == value.name && "bg-zinc-200 ring ring-zinc-400"
+									}`}
+									key={index}
+									ref={(ref: HTMLDivElement) => {
+										// scroll to active
+										if (ref == null) return;
+										if (value.name == item.name)
+											return ref.scrollIntoView({behavior: "auto", block: "center"});
+									}}
+									// onChange={handleScroll}
+									onClick={() => handleMaterial(item)}>
+									<div className="basis-2/6 rounded aspect-square bg-zinc-100"></div>
+									<div className="basis-4/6">
+										<div className="text-xl">{item.name}</div>
+										<div className="text-xs">{item.description}</div>
+									</div>
+									{/* <pre>{JSON.stringify(item, null, 3)}</pre> */}
+								</div>
+							))}
+						</div>
+					</DialogContent>
+				</Dialog>
 			)}
 		</>
 	);

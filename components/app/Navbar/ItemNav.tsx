@@ -15,7 +15,7 @@ export default function ItemNav({}: Props) {
 			<div className="flex items-center gap-3">
 				{/* <Link href={`/workspace/${id}`}> เพิ่ม </Link> */}
 				<CreateDialog>+</CreateDialog>
-				<Link href={`/workspace/${id}/lists`}> รายการ </Link>
+				{/* <Link href={`/workspace/${id}/lists`}> รายการ </Link> */}
 			</div>
 
 			<div className=""></div>
@@ -24,9 +24,9 @@ export default function ItemNav({}: Props) {
 				<Link href={`/workspace/${id}/item`}>Item </Link>
 			</div> */}
 
-			<div className="">
+			{/* <div className="">
 				<Link href={`/workspace`}>Workspace</Link>
-			</div>
+			</div> */}
 		</div>
 	);
 }

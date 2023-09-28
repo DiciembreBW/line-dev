@@ -77,10 +77,10 @@ function ItemUI({
 				<div className="flex gap-3">
 					{/* image thumnail */}
 					<Link
-						href={`${pathName}/model`}
+						href={`${pathName}/model?item_id=${item.id}`}
 						className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600 ">
 						{/* 3D Model */}
-						{/* <Image
+						<Image
 							src={item.artwork.url}
 							width={500}
 							height={500}
@@ -88,7 +88,7 @@ function ItemUI({
 							className="w-auto h-auto rounded-xl"
 							loading="lazy"
 							alt="'xx"
-						/> */}
+						/>
 						{/* <img src={item.artwork.url} /> */}
 						{/* <Model3D /> */}
 					</Link>

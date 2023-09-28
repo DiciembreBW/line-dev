@@ -23,10 +23,10 @@ export default async function page({params}: Props) {
 			<Navbar />
 			{/* <div className="relative ring"> */}
 			{/* <Json itemId={id} /> */}
-			<div className="h-3/4">
+			{/* <div className="h-3/4">
 				<Model3D />
-			</div>
-			<div className="h-1/4 grid content-start p-4">
+			</div> */}
+			<div className="grid content-start p-4 border-b-2">
 				{/* <Toolsbar /> */}
 				<Title id={type} />
 				<Material id={type} />
