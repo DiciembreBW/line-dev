@@ -21,7 +21,7 @@ export function ModelZip(props) {
       <mesh geometry={nodes.Ribbing_4.geometry} material={materials.Body_FRONT_2664} />
       <mesh geometry={nodes.Ribbing_5.geometry} material={materials.Body_FRONT_2664} />
       <mesh geometry={nodes.Body_Front.geometry} material={materials.Body_FRONT_2664} >
-        <Decal debug map={colorMap} position={[0,1.3,0.08]} rotation={[0,0,0]}  scale={[0.7, 1, 0.2]}
+        <Decal map={colorMap} position={[0,1.3,0.08]} rotation={[0,0,0]}  scale={[0.7, 1, 0.2]}
         depthTest={true} />
       </mesh>
       <mesh geometry={nodes.Body_Front_1.geometry} material={materials.Body_FRONT_2664} />
