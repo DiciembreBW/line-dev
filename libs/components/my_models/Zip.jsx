@@ -4,13 +4,14 @@ Command: npx gltfjsx@6.2.3 ../../../public/model/S/T_shirt_gltf.zip.gltf
 */
 
 import React, { useRef } from 'react'
-import { Decal, Detailed, useGLTF } from '@react-three/drei'
+import { Decal, Detailed, RenderTexture, useGLTF } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber';
 import { TextureLoader } from 'three';
 
 export function ModelZip(props) {
   const { nodes, materials } = useGLTF('/model/S/T_shirt_gltf.zip.gltf')
-	const colorMap = useLoader(TextureLoader, "/pic/pic3.jpeg");
+	// const colorMap = useLoader(TextureLoader, "/pic/pic3.jpeg");
+	const colorMap = useLoader(TextureLoader, "/pic/landscape.avif");
   return (
 
     <group {...props} dispose={null}>
@@ -20,9 +21,24 @@ export function ModelZip(props) {
       <mesh geometry={nodes.Ribbing_3.geometry} material={materials.Body_FRONT_2664} />
       <mesh geometry={nodes.Ribbing_4.geometry} material={materials.Body_FRONT_2664} />
       <mesh geometry={nodes.Ribbing_5.geometry} material={materials.Body_FRONT_2664} />
-      <mesh geometry={nodes.Body_Front.geometry} material={materials.Body_FRONT_2664} >
-        <Decal map={colorMap} position={[0,1.3,0.08]} rotation={[0,0,0]}  scale={[0.7, 1, 0.2]}
-        depthTest={true} />
+      {/* <mesh geometry={nodes.Body_Front.geometry} material={materials.Body_FRONT_2664} > */}
+      <mesh geometry={nodes.Body_Front.geometry} material={materials.Body_FRONT_2664}  >
+        {/* <Decal debug position={[0,1.2,0.015]} rotation={[0,0.5,0]} 
+        scale={1}
+        visible={true}
+        depthTest={true}> */}
+          {/* <meshStandardMaterial  map={colorMap}/> */}
+          {/* <meshNormalMaterial   map={colorMap}/> */}
+          {/* </Decal> */}
+
+          <Decal position={[0,1.3,0]}
+          rotation={[0,0,0]}
+          scale={0.7} >
+            <meshStandardMaterial roughness={16} map={colorMap} />
+          </Decal>
+
+          {/* <meshPhongMaterial attach="material" map={colorMap} /> */}
+
       </mesh>
       <mesh geometry={nodes.Body_Front_1.geometry} material={materials.Body_FRONT_2664} />
       <mesh geometry={nodes.Body_Front_2.geometry} material={materials.Body_FRONT_2664}> </mesh>

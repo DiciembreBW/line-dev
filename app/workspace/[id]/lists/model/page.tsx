@@ -24,7 +24,7 @@ export default function ModelPage({}: Props) {
 		<div className="flex h-screen flex-col ">
 			<div className="basis-full flex justify-center items-center text-zinc-400 ">
 				{/* Model 3d */}
-				<Model3D />
+				<Model3D url={item.artwork.url} />
 				{/* <div className="absolute bottom-0 left-0 p-2 text-zinc-800 text-xl">
 					{item.sleeve.name}
 					{item.neck.name} | {item.id}

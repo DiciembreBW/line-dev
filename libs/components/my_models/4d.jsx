@@ -8,7 +8,7 @@ import { Decal, useGLTF, useTexture } from '@react-three/drei'
 
 export function Model4D(props) {
   const { nodes, materials } = useGLTF('/model/4/4d.gltf')
-	const myTexture = useTexture("/pic/pic.png");
+	const myTexture = useTexture("/pic/pic2.jpeg");
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.Plane.geometry} material={nodes.Plane.material}>

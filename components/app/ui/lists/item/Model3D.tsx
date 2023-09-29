@@ -34,11 +34,11 @@ import {BoxGeometry, SphereGeometry, TextureLoader} from "three";
 import {Model4D} from "@/libs/components/my_models/4d";
 // import {Model4D} from "@/libs/components/my_models/4d";
 
-type Props = {};
+type Props = {url: string};
 // https://codesandbox.io/s/qyz5r?file=/src/App.js
 // https://www.youtube.com/watch?v=Nxd9L6X8quo
 
-export default function Model3D({}: Props) {
+export default function Model3D({url}: Props) {
 	const [dpr, setDpr] = useState<number>(1);
 	return (
 		<div className="h-full w-full">
@@ -98,13 +98,9 @@ export default function Model3D({}: Props) {
 							{/* <ModelCloth /> */}
 							{/* <ModelPillow /> */}
 							{/* <ModelShirt /> */}
-							{/* <Center> */}
 							{/* <Model4D /> */}
 							<ModelZip />
-							{/* </Center> */}
-							{/* <Center>
-								<Box />
-							</Center> */}
+							{/* <Box /> */}
 						</Stage>
 					</PerformanceMonitor>
 				</Canvas>
@@ -115,28 +111,11 @@ export default function Model3D({}: Props) {
 
 function Box() {
 	const colorMap = useLoader(TextureLoader, "/pic/pic.png");
-	const myTexture = useTexture("/pic/pic.png");
+	const myTexture = useTexture("/pic/pic2.jpeg");
 	return (
 		<mesh>
-			<boxGeometry />
-			{/* <Plane args={[10, 12]}>
-				<meshStandardMaterial map={myTexture} />
-			</Plane> */}
-			{/* <Decal debug map={myTexture} /> */}
-			{/* <Decal debug>
-				<meshStandardMaterial
-					map={myTexture}
-					transparent
-					depthWrite={false}
-					wireframe={true}
-				/>
-			</Decal> */}
-			<Decal
-				map={myTexture}
-				position={[1, 0.014, 0]}
-				rotation={[1, 0, Math.PI]}
-				scale={1}
-			/>
+			<sphereGeometry args={[1, 32, 32]} />
+			<meshStandardMaterial map={myTexture} />
 		</mesh>
 	);
 }
