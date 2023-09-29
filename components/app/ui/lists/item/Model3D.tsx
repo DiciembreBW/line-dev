@@ -4,7 +4,7 @@
 
 "use client";
 import React, {Suspense, useState} from "react";
-import {Canvas} from "@react-three/fiber";
+import {Canvas, useLoader} from "@react-three/fiber";
 import {
 	Environment,
 	ModelSample,
@@ -13,12 +13,16 @@ import {
 } from "@/libs/components/Model";
 import {
 	CameraControls,
+	Center,
+	Decal,
 	Grid,
 	OrbitControls,
 	PerformanceMonitor,
+	Plane,
 	PresentationControls,
 	Stage,
 	TransformControls,
+	useTexture,
 } from "@react-three/drei";
 
 // import {Model} from "@/libs/components/my_models/Po";
@@ -26,6 +30,8 @@ import {
 // import {ModelPillow} from "@/libs/components/my_models/Pillow";
 // import {ModelShirt} from "@/libs/components/my_models/Shirt";
 import {ModelZip} from "@/libs/components/my_models/Zip";
+import {BoxGeometry, SphereGeometry, TextureLoader} from "three";
+import {Model4D} from "@/libs/components/my_models/4d";
 // import {Model4D} from "@/libs/components/my_models/4d";
 
 type Props = {};
@@ -45,7 +51,7 @@ export default function Model3D({}: Props) {
 					// performance={{min: 0.1, max: 1, current: 1, debounce: 200}}
 					// frameloop="demand"
 					shadows
-					camera={{position: [0, 0, 1.5], fov: 35}}>
+					camera={{position: [0, 1.5, 0], fov: 35}}>
 					<PerformanceMonitor
 						flipflops={12}
 						onIncline={() => setDpr(2)}
@@ -92,12 +98,45 @@ export default function Model3D({}: Props) {
 							{/* <ModelCloth /> */}
 							{/* <ModelPillow /> */}
 							{/* <ModelShirt /> */}
-							<ModelZip />
+							{/* <Center> */}
 							{/* <Model4D /> */}
+							<ModelZip />
+							{/* </Center> */}
+							{/* <Center>
+								<Box />
+							</Center> */}
 						</Stage>
 					</PerformanceMonitor>
 				</Canvas>
 			</Suspense>
 		</div>
+	);
+}
+
+function Box() {
+	const colorMap = useLoader(TextureLoader, "/pic/pic.png");
+	const myTexture = useTexture("/pic/pic.png");
+	return (
+		<mesh>
+			<boxGeometry />
+			{/* <Plane args={[10, 12]}>
+				<meshStandardMaterial map={myTexture} />
+			</Plane> */}
+			{/* <Decal debug map={myTexture} /> */}
+			{/* <Decal debug>
+				<meshStandardMaterial
+					map={myTexture}
+					transparent
+					depthWrite={false}
+					wireframe={true}
+				/>
+			</Decal> */}
+			<Decal
+				map={myTexture}
+				position={[1, 0.014, 0]}
+				rotation={[1, 0, Math.PI]}
+				scale={1}
+			/>
+		</mesh>
 	);
 }

@@ -4,12 +4,14 @@ Command: npx gltfjsx@6.2.3 ../../../public/model/S/T_shirt_gltf.zip.gltf
 */
 
 import React, { useRef } from 'react'
-import { Detailed, useGLTF } from '@react-three/drei'
+import { Decal, Detailed, useGLTF } from '@react-three/drei'
+import { useLoader } from '@react-three/fiber';
+import { TextureLoader } from 'three';
 
 export function ModelZip(props) {
   const { nodes, materials } = useGLTF('/model/S/T_shirt_gltf.zip.gltf')
+	const colorMap = useLoader(TextureLoader, "/pic/pic3.jpeg");
   return (
-    <Detailed distances={[0, 10, 20]}>
 
     <group {...props} dispose={null}>
       <mesh geometry={nodes.Ribbing.geometry} material={materials.Body_FRONT_2664} />
@@ -18,9 +20,12 @@ export function ModelZip(props) {
       <mesh geometry={nodes.Ribbing_3.geometry} material={materials.Body_FRONT_2664} />
       <mesh geometry={nodes.Ribbing_4.geometry} material={materials.Body_FRONT_2664} />
       <mesh geometry={nodes.Ribbing_5.geometry} material={materials.Body_FRONT_2664} />
-      <mesh geometry={nodes.Body_Front.geometry} material={materials.Body_FRONT_2664} />
+      <mesh geometry={nodes.Body_Front.geometry} material={materials.Body_FRONT_2664} >
+        <Decal debug map={colorMap} position={[0,1.3,0.08]} rotation={[0,0,0]}  scale={[0.7, 1, 0.2]}
+        depthTest={true} />
+      </mesh>
       <mesh geometry={nodes.Body_Front_1.geometry} material={materials.Body_FRONT_2664} />
-      <mesh geometry={nodes.Body_Front_2.geometry} material={materials.Body_FRONT_2664} />
+      <mesh geometry={nodes.Body_Front_2.geometry} material={materials.Body_FRONT_2664}> </mesh>
       <mesh geometry={nodes.Body_Back.geometry} material={materials.Body_FRONT_2664} />
       <mesh geometry={nodes.Body_Back_1.geometry} material={materials.Body_FRONT_2664} />
       <mesh geometry={nodes.Body_Back_2.geometry} material={materials.Body_FRONT_2664} />
@@ -29,10 +34,11 @@ export function ModelZip(props) {
       <mesh geometry={nodes.Sleeves_2.geometry} material={materials.Sleeves_FRONT_2669} />
       <mesh geometry={nodes.Sleeves_3.geometry} material={materials.Sleeves_FRONT_2669} />
       <mesh geometry={nodes.Sleeves_4.geometry} material={materials.Sleeves_FRONT_2669} />
-      <mesh geometry={nodes.Sleeves_5.geometry} material={materials.Sleeves_FRONT_2669} />
+      <mesh geometry={nodes.Sleeves_5.geometry} material={materials.Sleeves_FRONT_2669}>
+
+      </mesh>
     </group>
 
-    </Detailed>
   )
 }
 
