@@ -7,7 +7,8 @@ const nextConfig = {
         hostname: "**.googleapis.com",
       }
     ]
-  }
+  },
+ 
 }
 
 module.exports = nextConfig

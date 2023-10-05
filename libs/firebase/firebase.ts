@@ -21,8 +21,12 @@ import {
 	StorageReference,
 	UploadResult,
 	deleteObject,
+	getBlob,
+	getBytes,
 	getDownloadURL,
 	getStorage,
+	getStream,
+	list,
 	listAll,
 	ref,
 	uploadBytes,
@@ -118,7 +122,7 @@ async function getImageItems(items: StorageReference[]) {
 }
 
 // storage
-export function myStorage(pathName: string) {
+export function myStorage(pathName?: string) {
 	// path in google storage
 	const path = pathName || "images";
 
@@ -161,8 +165,21 @@ export function myStorage(pathName: string) {
 			response.items.forEach(async (item) => {
 				const url = await getDownloadURL(item);
 
+				// const xhr = new XMLHttpRequest();
+				// console.log(xhr);
+
+				// console.log(item.bucket);
+
 				PenddingCallback(url);
 			});
+		},
+
+		// getBlob
+		getBlob: async ({url}: {url: string}) => {
+			const pathRef = ref(storage, url);
+			const blob = await getBlob(pathRef);
+
+			return blob;
 		},
 
 		// remove

@@ -4,14 +4,18 @@ Command: npx gltfjsx@6.2.3 ../../../public/model/S/T_shirt_gltf.zip.gltf
 */
 
 import React, { useRef } from 'react'
-import { Decal, Detailed, RenderTexture, useGLTF } from '@react-three/drei'
+import { Decal, Detailed, useGLTF } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber';
-import { TextureLoader } from 'three';
+import { SphereGeometry, TextureLoader } from 'three';
+import * as THREE from 'three'
+import { RenderTexture, OrbitControls, PerspectiveCamera, Text, ContactShadows, Dodecahedron } from '@react-three/drei'
 
 export function ModelZip(props) {
   const { nodes, materials } = useGLTF('/model/S/T_shirt_gltf.zip.gltf')
+  const materialX = new THREE.MeshBasicMaterial({color: "yellow"})
 	// const colorMap = useLoader(TextureLoader, "/pic/pic3.jpeg");
 	const colorMap = useLoader(TextureLoader, "/pic/landscape.avif");
+  const materialImg = new THREE.MeshStandardMaterial({wireframe: true})
   return (
 
     <group {...props} dispose={null}>
@@ -31,21 +35,33 @@ export function ModelZip(props) {
           {/* <meshNormalMaterial   map={colorMap}/> */}
           {/* </Decal> */}
 
-          <Decal position={[0,1.3,0]}
+          <Decal debug  position={[0,1.3,0]}
           rotation={[0,0,0]}
-          scale={0.7} >
-            <meshStandardMaterial roughness={16} map={colorMap} />
+          scale={[1.2,0.7 ,0.7]} 
+          map={colorMap}
+          >
+            {/* <meshStandardMaterial roughness={16} map={colorMap}  /> */}
           </Decal>
+          
 
           {/* <meshPhongMaterial attach="material" map={colorMap} /> */}
 
       </mesh>
       <mesh geometry={nodes.Body_Front_1.geometry} material={materials.Body_FRONT_2664} />
       <mesh geometry={nodes.Body_Front_2.geometry} material={materials.Body_FRONT_2664}> </mesh>
-      <mesh geometry={nodes.Body_Back.geometry} material={materials.Body_FRONT_2664} />
-      <mesh geometry={nodes.Body_Back_1.geometry} material={materials.Body_FRONT_2664} />
+      <mesh geometry={nodes.Body_Back.geometry} material={materials.Body_FRONT_2664} >
+
+          <Decal  position={[0, 1.3, 0]} rotation={[0,90,0]} scale={[0.5, 1, 1]}>
+            <meshStandardMaterial map={colorMap}  />
+          </Decal>
+
+      </mesh>
+      <mesh geometry={nodes.Body_Back_1.geometry} material={materials.Body_FRONT_2664} > </mesh>
       <mesh geometry={nodes.Body_Back_2.geometry} material={materials.Body_FRONT_2664} />
-      <mesh geometry={nodes.Sleeves.geometry} material={materials.Sleeves_FRONT_2669} />
+
+      {/* <mesh geometry={nodes.Sleeves.geometry} material={materials.Sleeves_FRONT_2669} /> */}
+      <mesh geometry={nodes.Sleeves.geometry} material={materialImg} />
+
       <mesh geometry={nodes.Sleeves_1.geometry} material={materials.Sleeves_FRONT_2669} />
       <mesh geometry={nodes.Sleeves_2.geometry} material={materials.Sleeves_FRONT_2669} />
       <mesh geometry={nodes.Sleeves_3.geometry} material={materials.Sleeves_FRONT_2669} />
