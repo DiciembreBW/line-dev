@@ -82,11 +82,11 @@ export default function ModelPage({}: Props) {
 			{/* <Model item={item} appId={app.id} />
 			<Description item={item} appId={app.id} /> */}
 
-			<div className="basis-3/6 flex justify-center items-center text-zinc-400 ">
+			<div className="basis-5/6 flex justify-center items-center text-zinc-400 ">
 				<Model3D blob={blob} />
 			</div>
 
-			<div className="basis-3/6 rounded-t-2xl bg-zinc-200 p-4 shadow-xl grid justify-items-center">
+			<div className="basis-1/6 rounded-t-2xl bg-zinc-200 p-4 shadow-xl grid justify-items-center">
 				<div className="p-2 text-zinc-800 text-xl">
 					{sleeve.name}
 					{neck.name} | {id}
