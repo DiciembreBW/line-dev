@@ -1,117 +1,143 @@
 "use client";
-import {useAppDispatchContext} from "@/context/app/AppReducer";
+import {useAppContext, useAppDispatchContext} from "@/context/app/AppReducer";
+import {ItemType} from "@/context/app/type";
 import {myStorage} from "@/libs/firebase/firebase";
+import CallAPI from "@/ultils/workspace-call-api";
 import React, {HtmlHTMLAttributes, useEffect, useState} from "react";
 import {v4} from "uuid";
 
-type Props = {itemId: string};
+type Props = {
+	item: ItemType;
+	appId: string;
+	PenddingCallback: ({file}: {file: File}) => void;
+};
 
-const storage = myStorage("images");
-
-export default function Artwork({itemId}: Props) {
+export default function Artwork({item, appId, PenddingCallback}: Props) {
 	// app dispatch
 	const dispatch = useAppDispatchContext();
+	const app = useAppContext();
+
+	// const [{id: itemId}] = item;
+	const {id: itemId} = item;
 	const [images, setImage] = useState<File>();
 	const [url, setUrl] = useState<string[]>([]);
+
+	// get item
+
+	const storage = myStorage(appId);
 
 	function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
 		const file = event.target.files;
 		if (file == null) return;
 		setImage(file[0]);
+
+		// const blob = URL.createObjectURL(file[0]);
+		// PenddingCallback({blob});
+		PenddingCallback({file: file[0]});
+		// dispatch({
+		// 	artwork: {
+		// 		type: "update",
+		// 		itemId: itemId,
+		// 		value: {
+		// 			url: URL.createObjectURL(file[0]),
+		// 			status: true,
+		// 		},
+		// 	},
+		// });
 	}
 
-	function uploadImage() {
-		// image is not emty
-		if (images == undefined) return;
+	// function uploadImage() {
+	// 	// image is not emty
+	// 	if (images == undefined) return;
 
-		// upload to server
-		storage.upload(images).then((url) => {
-			// after uploaded
-			// set image == undesign
-			setImage(undefined);
+	// 	// upload to server
+	// 	storage.upload({file: images, fileName: itemId}).then((url) => {
+	// 		// after uploaded
+	// 		// set image == undesign
+	// 		setImage(undefined);
 
-			//
-			// console.log(res.ref.bucket);
-			// console.log(url);
-			uploadToFirebaseServer({url});
+	// 		//
+	// 		// dispatch
+	// 		dispatch({
+	// 			artwork: {
+	// 				type: "upload",
+	// 				value: {url, status: false},
+	// 				itemId,
+	// 			},
+	// 		});
+	// 	});
+	// }
 
-			// retive item
-			getItem();
-		});
+	// async function getItem() {
+	// 	// console.log(x());
+	// 	setUrl([]);
+	// 	storage.getItems((url) => {
+	// 		setUrl((pre) => {
+	// 			console.log(url);
 
-		// storage.takeUpload(images);
-	}
+	// 			return [...pre, url];
+	// 		});
+	// 	});
+	// }
 
-	async function getItem() {
-		// console.log(x());
-		setUrl([]);
-		storage.getItems((url) => {
-			setUrl((pre) => {
-				console.log(url);
+	// function remove(name: string) {
+	// 	storage.removeItem(name, () => {
+	// 		// updateUrl();
+	// 		getItem();
+	// 	});
+	// }
 
-				return [...pre, url];
-			});
-		});
-	}
+	// function updateUrl() {
+	// 	setUrl([]);
+	// 	storage.getItems((url) => {
+	// 		console.log(url);
 
-	function remove(name: string) {
-		storage.removeItem(name, () => {
-			// updateUrl();
-			getItem();
-		});
-	}
+	// 		setUrl((pre) => [...pre, url]);
+	// 	});
+	// }
 
-	function updateUrl() {
-		setUrl([]);
-		storage.getItems((url) => {
-			console.log(url);
-
-			setUrl((pre) => [...pre, url]);
-		});
-	}
-
-	function uploadToFirebaseServer({url}: {url: string}) {
-		dispatch({
-			artwork: {
-				type: "upload",
-				itemId,
-				value: {status: true, url},
-			},
-		});
-	}
+	// function uploadToFirebaseServer({url}: {url: string}) {
+	// 	dispatch({
+	// 		artwork: {
+	// 			type: "upload",
+	// 			itemId,
+	// 			value: {status: true, url},
+	// 		},
+	// 	});
+	// }
 	return (
-		<>
-			<div>upload image</div>
-			<div>
-				{/* step 1 */}
+		<div className="w-full p-2">
+			{/* button */}
+			<div className="p-2">
 				<input
 					type="file"
-					className="w-full"
+					className="w-full file:w-full file:border-none file:px-3 file:py-2 file:rounded-full file:bg-none"
 					accept="image/*"
 					onChange={(e) => handleInput(e)}
 				/>
 			</div>
 
-			<div className="grid justify-items-center">
-				{images && (
-					<div className="w-full">
-						<img
-							src={URL.createObjectURL(images)}
-							width={150}
-							className="w-full rounded-xl border"
-							alt=""
-						/>
-					</div>
-				)}
-			</div>
-			<div className="m-1">
-				<button onClick={uploadImage} className="px-3 py-2 w-full border rounded">
-					Upload
-				</button>
-			</div>
+			{/* image preview */}
+			{images && (
+				<div>
+					{/* image preview */}
+					{/* <img
+						src={URL.createObjectURL(images)}
+						width={150}
+						className="w-full aspect-square object-none rounded-xl"
+						alt=""
+					/> */}
 
-			<div>get item</div>
-			<div>
+					{/* upload button */}
+					{/* <div className="m-1">
+						<button onClick={uploadImage} className="px-3 py-2 w-full border rounded">
+							Upload
+						</button>
+					</div> */}
+				</div>
+			)}
+
+			{/* <div>
 				<button className="border px-3 py-2 rounded w-full" onClick={getItem}>
 					get
 				</button>
@@ -126,8 +152,7 @@ export default function Artwork({itemId}: Props) {
 						</div>
 					))}
 				</div>
-			</div>
-			<div>{/* <pre>{JSON.stringify(url, null, 3)}</pre> */}</div>
-		</>
+			</div> */}
+		</div>
 	);
 }

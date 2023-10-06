@@ -9,7 +9,7 @@ export default function WorkspacePage({}: Props) {
 			<WorkspaceNav />
 
 			<div className="h-full flex justify-center items-center text-3xl font-bold">
-				Workspace page
+				Snap
 			</div>
 		</div>
 	);

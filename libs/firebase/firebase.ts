@@ -132,15 +132,22 @@ export function myStorage(pathName?: string) {
 	// return
 	return {
 		// upload: (image: File): Promise<UploadResult> => {
-		upload: (image: File): Promise<string> => {
+		upload: ({
+			file,
+			fileName,
+		}: {
+			file: File;
+			fileName: string;
+		}): Promise<string> => {
 			// file name + uuid
-			const name = image.name + v4();
+			// const name = fileName + v4();
+			const name = fileName;
 
-			// image ref
+			// file ref
 			const imageRef = ref(storage, `${path}/${name}`);
 
 			// upload
-			return uploadBytes(imageRef, image).then((response) => {
+			return uploadBytes(imageRef, file).then((response) => {
 				// console.log(`${response}  uploaded`);
 				return getDownloadURL(response.ref);
 				// return response;
@@ -176,6 +183,7 @@ export function myStorage(pathName?: string) {
 
 		// getBlob
 		getBlob: async ({url}: {url: string}) => {
+			if (url === "") return undefined;
 			const pathRef = ref(storage, url);
 			const blob = await getBlob(pathRef);
 

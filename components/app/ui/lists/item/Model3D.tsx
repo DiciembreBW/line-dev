@@ -57,7 +57,6 @@ type Props = {blob?: string};
 export default function Model3D({blob}: Props) {
 	const [dpr, setDpr] = useState<number>(1);
 
-	const app = useAppContext();
 	return (
 		<div className="h-full w-full">
 			{/* <div></div> */}
@@ -84,8 +83,9 @@ export default function Model3D({blob}: Props) {
 							position={[0, 0, 5]}
 							intensity={0.5}
 							shadows={{type: "contact", colorBlend: 1, opacity: 0.5}}>
-							<Center>{blob && <ModelMat blob={blob} />}</Center>
-							{/* <ModelZip /> */}
+							<Center>
+								{blob !== "" && blob !== undefined && <ModelMat blob={blob} />}
+							</Center>
 						</Stage>
 					</PerformanceMonitor>
 				</Canvas>

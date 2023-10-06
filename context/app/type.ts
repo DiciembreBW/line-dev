@@ -22,7 +22,7 @@ export type AppActionType = {
 	};
 
 	items?: {
-		type: "create" | "remove";
+		type: "create" | "remove" | "update";
 		value: ItemType;
 	};
 
@@ -45,7 +45,7 @@ export type AppActionType = {
 	};
 
 	artwork?: {
-		type: "upload" | "remove";
+		type: "upload" | "remove" | "update";
 		itemId: string;
 		value: ArtworkType;
 	};

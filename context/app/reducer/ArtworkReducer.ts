@@ -1,3 +1,4 @@
+import CallAPI from "@/ultils/workspace-call-api";
 import {AppActionType, AppType} from "../type";
 
 export default function ArtworkReducer(
@@ -12,12 +13,21 @@ export default function ArtworkReducer(
 		case "upload": {
 			const items = app.items.map((item) => {
 				if (item.id == itemId) {
-					// console.log(item);
+					item.artwork = value;
+				}
 
-					return {
-						...item,
-						artwork: value,
-					};
+				return item;
+			});
+
+			CallAPI.updateItem({...app, items});
+			return {...app, items};
+		}
+		case "update": {
+			// console.log("update");
+
+			const items = app.items.map((item) => {
+				if (item.id == itemId) {
+					item.artwork = value;
 				}
 
 				return item;

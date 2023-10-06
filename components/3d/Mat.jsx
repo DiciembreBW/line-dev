@@ -10,23 +10,10 @@ import { useAppContext } from '@/context/app/AppReducer';
 export function ModelMat(props) {
   const {blob} = props
   const { nodes, materials } = useGLTF('/model/mat/mat.gltf')
-  const texture = useTexture("/model/mat/pic.png")
+  // const texture = useTexture("/model/mat/pic.png")
   const textureArtwork = useTexture(blob)
 
-
-  if (blob === null) return (
-    <>
-    <group {...props} dispose={null}>
-      <mesh geometry={nodes.Cube.geometry} material={materials['Material.001']} position={[0, 0.627, 0]}>
-    {/* <meshStandardMaterial   /> */}
-        </mesh>
-    </group>
-    </>
-  )
-
-
     return (<>
-    
     <group {...props} dispose={null}>
       <mesh geometry={nodes.Cube.geometry} material={materials['Material.001']} position={[0, 0.627, 0]}>
           <meshStandardMaterial map={textureArtwork}  />

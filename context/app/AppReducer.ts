@@ -1,5 +1,6 @@
 import ArtworkReducer from "./reducer/ArtworkReducer";
 import ItemConterReducer from "./reducer/ItemConterReducer";
+import ItemReducer from "./reducer/ItemReducer";
 import ItemsListsReducer from "./reducer/ItemsListsReducer";
 import MaterialReducer from "./reducer/MaterialReducer";
 import {AppType, AppActionType, init} from "./type";
@@ -40,21 +41,9 @@ function HandleReducer(app: AppType, action: AppActionType): AppType {
 		}
 	}
 
-	// item
-	switch (action.items?.type) {
-		case "create": {
-			return {...app, items: [action.items.value, ...app.items]};
-		}
-		case "remove": {
-			return {
-				...app,
-				items: app.items.filter((item) => item.id !== action.items?.value.id),
-			};
-		}
-	}
-
 	// Reducer fn
 	if (action.items_counter) return ItemConterReducer(app, action);
+	if (action.items) return ItemReducer(app, action);
 	if (action.items_lists) return ItemsListsReducer(app, action);
 	if (action.material) return MaterialReducer(app, action);
 	if (action.artwork) return ArtworkReducer(app, action);

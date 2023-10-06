@@ -78,14 +78,14 @@ function ItemUI({
 					{/* image thumnail */}
 					<Link
 						href={`${pathName}/model?item_id=${item.id}`}
-						className="basis-2/6 h-32 aspect-square rounded-lg flex items-center justify-center bg-zinc-100 text-zinc-600 ">
+						className="basis-2/6 h-32 aspect-square  flex items-center justify-center bg-zinc-100 text-zinc-600">
 						{/* 3D Model */}
 						<Image
 							src={item.artwork.url}
 							width={500}
 							height={500}
 							quality={20}
-							className="w-auto h-auto rounded-xl"
+							className="object-cover w-full h-full rounded-lg"
 							loading="lazy"
 							alt="'xx"
 						/>
