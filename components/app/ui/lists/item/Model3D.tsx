@@ -47,6 +47,7 @@ import {ModelNew} from "@/components/3d/New";
 import {BModel} from "@/components/3d/Bmodel";
 import {ModelUntitle} from "@/components/3d/Untitled";
 import {ModelMat} from "@/components/3d/Mat";
+import {ModelShirt} from "@/components/3d/Shirt";
 import {useAppContext} from "@/context/app/AppReducer";
 import Image from "next/image";
 
@@ -65,7 +66,7 @@ export default function Model3D({blob}: Props) {
 				fallback={
 					<div className="flex justify-center items-center h-full">loading</div>
 				}>
-				<Canvas shadows camera={{position: [0, 1.5, 0], fov: 35}}>
+				<Canvas shadows camera={{position: [0, 5, 0], fov: 35}}>
 					<PerformanceMonitor
 						flipflops={12}
 						onIncline={() => setDpr(2)}
@@ -84,7 +85,9 @@ export default function Model3D({blob}: Props) {
 							intensity={0.5}
 							shadows={{type: "contact", colorBlend: 1, opacity: 0.5}}>
 							<Center>
-								{blob !== "" && blob !== undefined && <ModelMat blob={blob} />}
+								{/* {blob !== "" && blob !== undefined && <ModelMat blob={blob} />} */}
+								{/* {blob !== "" && blob !== undefined && <ModelShirt blob={blob} />} */}
+								<ModelShirt />
 							</Center>
 						</Stage>
 					</PerformanceMonitor>
