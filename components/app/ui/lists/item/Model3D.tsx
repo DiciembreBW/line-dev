@@ -48,6 +48,7 @@ import {BModel} from "@/components/3d/Bmodel";
 import {ModelUntitle} from "@/components/3d/Untitled";
 import {ModelMat} from "@/components/3d/Mat";
 import {ModelShirt} from "@/components/3d/Shirt";
+import {ModelTeeShirt} from "@/components/3d/TeeShirt";
 import {useAppContext} from "@/context/app/AppReducer";
 import Image from "next/image";
 
@@ -87,7 +88,8 @@ export default function Model3D({blob}: Props) {
 							<Center>
 								{/* {blob !== "" && blob !== undefined && <ModelMat blob={blob} />} */}
 								{/* {blob !== "" && blob !== undefined && <ModelShirt blob={blob} />} */}
-								<ModelShirt />
+								{/* <ModelShirt /> */}
+								<ModelTeeShirt />
 							</Center>
 						</Stage>
 					</PerformanceMonitor>
